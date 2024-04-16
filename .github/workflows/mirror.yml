@@ -4,6 +4,9 @@ on:
   push:
   pull_request:
 
+env:
+  MIRROR_URL: "git@github.com:EpitechPromo2028/B-MUL-200-LYN-2-1-myrpg-nathan.deleger.git"
+
 jobs:
   repo_check:
     runs-on: ubuntu-latest

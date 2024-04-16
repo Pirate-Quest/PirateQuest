@@ -1,3 +1,13 @@
+amazed
+better_tester.sh
+shell_tests
+build
+lib/commons/libcommons.a
+uwu.c
+
+# IntelliJ IDEA
+.idea
+
 # Prerequisites
 *.d
 

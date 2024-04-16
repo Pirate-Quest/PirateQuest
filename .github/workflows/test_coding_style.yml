@@ -1,0 +1,31 @@
+name: check coding style
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  coding_style_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install coding style checker
+        run: git clone https://github.com/Epitech/coding-style-checker.git
+      - name: check coding style
+        run: |
+          ./coding-style-checker/coding-style.sh . .
+          NB_ERRORS=$(cat coding-style-reports.log | wc -l)
+          if [ $NB_ERRORS -ge 3 ]; then
+             while IFS= read -r line
+              do
+                if [[ $line == *".git"* ]]; then
+                  continue
+                fi
+                ERROR=(`echo "$line" | sed 's/:/\n/g'`)
+                echo "::error title=${ERROR[2]} coding style error,file=${ERROR[0]},line=${ERROR[1]}::${ERROR[3]}"
+            done < coding-style-reports.log
+              exit 1
+          fi
+            exit 0

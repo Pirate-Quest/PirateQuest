@@ -6,7 +6,7 @@
 */
 
 #ifndef PIRATE_QUEST_H
-#define PIRATE_QUEST_H
+    #define PIRATE_QUEST_H
 
     #include <stddef.h>
     #include "commons.h"

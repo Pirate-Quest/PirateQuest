@@ -8,6 +8,6 @@
 #ifndef ASSETS_H
     #define ASSETS_H
 
-#define MAP_BG "assets/map.png"
+    #define MAP_BG "assets/map.png"
 
 #endif /* !ASSETS_H */

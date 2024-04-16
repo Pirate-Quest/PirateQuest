@@ -33,3 +33,4 @@ jobs:
             ${{ env.MIRROR_URL }}
           ssh_private_key:
             ${{ secrets.GIT_SSH_PRIVATE_KEY }}
+          refs: refs/heads/feature/* refs/tags/*

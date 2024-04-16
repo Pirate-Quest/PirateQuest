@@ -2,9 +2,7 @@ name: check coding style
 
 on:
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
 
 jobs:
   coding_style_check:

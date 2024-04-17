@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** my_rpg
+** PirateQuest
 ** File description:
 ** rect_from_id.c
 */

@@ -24,18 +24,20 @@ void my_putchar(char c)
     write(1, &c, 1);
 }
 
-void my_putstr(char const *str)
+int my_putstr(char const *str)
 {
     if (str == NULL)
-        return;
+        return 0;
     write(1, str, my_strlen(str));
+    return 0;
 }
 
-void my_puterr(char const *str)
+int my_puterr(char const *str)
 {
     if (str == NULL)
-        return;
+        return 84;
     write(2, str, my_strlen(str));
+    return 84;
 }
 
 static void append_char(char *result, int *j, char c)

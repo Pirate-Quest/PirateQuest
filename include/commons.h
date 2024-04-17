@@ -10,10 +10,13 @@
 
     #include "hashtable.h"
 
+    #define TRUE 1
+    #define FALSE 0
+
 int my_strlen(char const *str);
 void my_putchar(char c);
-void my_putstr(char const *str);
-void my_puterr(char const *str);
+int my_putstr(char const *str);
+int my_puterr(char const *str);
 void my_put_nbr(int nb);
 char *my_strdup(char *str);
 int my_strcmp(char const *s1, char const *s2);

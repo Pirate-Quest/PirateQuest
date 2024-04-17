@@ -19,9 +19,9 @@ static int free_value(int hash_key, values_node_t *prev,
             prev->next = current->next;
         }
         free(current);
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 void remove_value(table_entry_t *entry, char *key, int hash_key)
@@ -53,5 +53,5 @@ int ht_delete(hashtable_t *ht, char *key)
         free(ht->entries[hash_key % ht->len]);
         ht->entries[hash_key % ht->len] = NULL;
     }
-    return 0;
+    return FALSE;
 }

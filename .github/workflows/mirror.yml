@@ -9,17 +9,23 @@ env:
 jobs:
   repo_check:
     runs-on: ubuntu-latest
+    outputs:
+      run_check: ${{ steps.check.outputs.run_check }}
     steps:
       - uses: actions/checkout@v4
-      - name: Check if the repository is the mirror
+      - id: check
+        name: Check if the repository is the mirror
         run: |
           if [[ "${{ github.repository }}" == "${{ env.MIRROR_REPOSITORY }}" ]]; then
             echo "Test jobs are disabled for the mirror repository"
+            echo "::set-output name=run_check::false"
             exit 1
+          else
+            echo "::set-output name=run_check::true"
           fi
   push_to_mirror:
     needs: repo_check
-    if: github.event_name == 'push' && steps.repo_check.outputs.run_check == 'true'
+    if: github.event_name == 'push' && needs.repo_check.outputs.run_check == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout GH repository

@@ -60,3 +60,14 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+#CMake
+CMakeFiles
+CMakeCache.txt
+CMakeScripts
+cmake-build-debug
+CMakeLists.txt
+cmake_install.cmake
+
+.DS_Store
+norminette.sh

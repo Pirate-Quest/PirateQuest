@@ -5,19 +5,24 @@
 ## Makefile
 ##
 
-CC	=	gcc -g3
+TARGET			=	my_rpg
+CC				=	gcc
+CXXFLAGS		=	-g3 -Wall -Werror -Wextra
+
+HSRC			=	-lcsfml-graphics -lcsfml-audio -lcsfml-system		\
+					-lcsfml-window -lm
+HRCS			=	include
+
+LDFLAGS			=	-L/opt/homebrew/Cellar/csfml/2.5.2_1/lib/ ${HSRC}	\
+					-Llib/commons/ -lcommons -I $(HRCS)
+CPPFLAGS		=	-I/opt/homebrew/Cellar/csfml/2.5.2_1/include/
+
+BUILD_DIR 		=	build
+OBJS			=	$(addprefix $(BUILD_DIR)/, $(SRCS_FILE:.c=.o))
 
 SRCS_FILE	=	src/main.c				\
 				src/assets.c			\
 				src/map/rect_from_id.c	\
-
-HRCS	=	include
-
-TARGET	=	my_rpg
-
-BUILD_DIR = build
-
-OBJS	=	$(addprefix $(BUILD_DIR)/, $(SRCS_FILE:.c=.o))
 
 all:	$(BUILD_DIR) $(TARGET)
 
@@ -30,9 +35,7 @@ $(BUILD_DIR)/%.o: %.c
 
 $(TARGET):	$(OBJS)
 	@make -C lib/commons
-	$(CC) -o $(TARGET) $(OBJS) $(LIB)									\
-	-Llib/commons/ -lcommons -I $(HRCS)									\
-	-lm -lcsfml-graphics -lcsfml-audio -lcsfml-system -lcsfml-window	\
+	${CC} ${CXXFLAGS} -o $(TARGET) ${OBJS} ${LDFLAGS} ${CPPFLAGS}
 
 re:	fclean all
 
@@ -43,3 +46,5 @@ clean:
 fclean:	clean
 	@make -C lib/commons fclean
 	rm -f $(TARGET)
+
+.PHONY: all re clean fclean

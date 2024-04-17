@@ -1,8 +1,6 @@
 name: push to mirror repository
 
-on:
-  push:
-  pull_request:
+on: [push, pull_request]
 
 env:
   MIRROR_REPOSITORY: "EpitechPromo2028/B-MUL-200-LYN-2-1-myrpg-nathan.deleger"
@@ -18,12 +16,10 @@ jobs:
           if [[ "${{ github.repository }}" == "${{ env.MIRROR_REPOSITORY }}" ]]; then
             echo "Test jobs are disabled for the mirror repository"
             exit 1
-          else
-            exit 0
           fi
   push_to_mirror:
     needs: repo_check
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && steps.repo_check.outputs.run_check == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout GH repository

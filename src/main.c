@@ -1,11 +1,13 @@
 /*
 ** EPITECH PROJECT, 2024
-** my_rpg
+** PirateQuest
 ** File description:
 ** main.c
 */
 
-int main(int argc, char **argv)
+#include <SFML/Graphics.h>
+
+int main(void)
 {
     return 0;
 }

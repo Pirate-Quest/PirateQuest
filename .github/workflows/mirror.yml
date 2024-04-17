@@ -16,9 +16,7 @@ jobs:
       - name: Check if the repository is the mirror
         run: |
           if [[ "${{ github.repository }}" == "${{ env.MIRROR_REPOSITORY }}" ]]; then
-            echo "Test jobs are disabled for the mirror repository"
-            exit 1
-          else
+            echo "All jobs are stopped for the mirror repository"
             exit 0
           fi
   push_to_mirror:

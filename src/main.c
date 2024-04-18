@@ -10,6 +10,7 @@
 #include "../include/commons.h"
 #include "../include/render.h"
 #include "../include/event.h"
+#include "../include/map.h"
 
 void free_window(render_window_t *window)
 {
@@ -55,6 +56,7 @@ int main(void)
             "due to a lack of memory. Or incompatible hardware.\n");
     }
     init_icon(game.window);
+    init_layers();
     while (sfRenderWindow_isOpen(game.window->window)) {
         update_listeners(&game);
         sfRenderWindow_clear(game.window->window, sfBlack);

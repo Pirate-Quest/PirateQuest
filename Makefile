@@ -31,7 +31,7 @@ $(BUILD_DIR):
 
 $(BUILD_DIR)/%.o: %.c
 	mkdir -p $(dir $@)
-	$(CC) -c $< -o $@
+	${CC} -c $< -o $@ ${LDFLAGS} ${CPPFLAGS}
 
 $(TARGET):	$(OBJS)
 	@make -C lib/commons

@@ -24,6 +24,7 @@ SRCS_FILE	=	src/main.c					\
 				src/assets.c				\
 				src/event/close_event.c		\
 				src/event/event_handler.c	\
+				src/map/map_layers.c		\
 				src/map/map_reader.c		\
 				src/map/rect_from_id.c		\
 				src/render/camera.c			\

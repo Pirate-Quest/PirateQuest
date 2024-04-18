@@ -43,6 +43,13 @@ render_window_t *init_window(void)
     return window;
 }
 
+static void update(pirate_quest_t *game)
+{
+    update_listeners(game);
+    sfRenderWindow_clear(game->window->window, sfBlack);
+    sfRenderWindow_display(game->window->window);
+}
+
 int main(void)
 {
     pirate_quest_t game;
@@ -57,11 +64,8 @@ int main(void)
     }
     init_icon(game.window);
     init_layers();
-    while (sfRenderWindow_isOpen(game.window->window)) {
-        update_listeners(&game);
-        sfRenderWindow_clear(game.window->window, sfBlack);
-        sfRenderWindow_display(game.window->window);
-    }
+    while (sfRenderWindow_isOpen(game.window->window))
+        update(&game);
     free_window(game.window);
     return FALSE;
 }

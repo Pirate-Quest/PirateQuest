@@ -21,7 +21,7 @@
  * y = id / 20 * 32
  */
 
-sfVector2u rect_from_id(int id)
+sfIntRect rect_from_id(int id)
 {
-    return (sfVector2u) {id % 20 * 32, id / 20 * 32};
+    return (sfIntRect){(id % 20) * 32, (id / 20) * 32, 32, 32};
 }

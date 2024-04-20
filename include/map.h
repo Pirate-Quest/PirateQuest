@@ -14,13 +14,21 @@
     #define MAP_WIDTH 200
     #define MAP_HEIGHT 200
 
+    #define RENDER_WIDTH 18
+    #define RENDER_HEIGHT 11
+
+    #define LAYER_COUNT 1
+
 typedef struct layer_s {
     char *filepath;
     char *tileset_path;
     int tiles[MAP_WIDTH][MAP_HEIGHT];
-    int render_distance;
 } layer_t;
 
 void init_layers(void);
+
+layer_t *get_layers(void);
+
+int get_tile_id(int i, int y, int x);
 
 #endif /* !MAP_H */

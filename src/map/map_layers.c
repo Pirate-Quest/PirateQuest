@@ -9,15 +9,12 @@
 #include "../../include/commons.h"
 #include <stdio.h>
 
-layer_t layers[1] = {
+layer_t layers[LAYER_COUNT] = {
     {
         .filepath = "assets/map/background_layer.csv",
-        .tileset_path = "assets/map/background_layer_tiles.png",
-        .render_distance = 10
+        .tileset_path = "assets/map/background_layer_tiles.png"
     }
 };
-const int layer_count = sizeof(layers) / sizeof(layer_t);
-
 
 static void init_layer_line(char *line, int i, int y)
 {
@@ -66,8 +63,20 @@ static void fill_layer(int i)
 
 void init_layers(void)
 {
-    for (int i = 0; i < layer_count; i++) {
+    for (int i = 0; i < LAYER_COUNT; i++) {
         fill_layer(i);
         init_tiles(i);
     }
+}
+
+layer_t *get_layers(void)
+{
+    return layers;
+}
+
+int get_tile_id(int i, int y, int x)
+{
+    if (x < 0 || y < 0 || x >= MAP_WIDTH || y >= MAP_HEIGHT)
+        return 152;
+    return layers[i].tiles[y][x];
 }

@@ -16,9 +16,9 @@ typedef struct resolution_s {
 } resolution_t;
 
 typedef struct camera_s {
-    sfView *view;
-    sfVector2f center;
-    sfVector2f size;
+    sfVector2i map_position;
+    sfVector2f pos_in_tile;
+    float zoom;
 } camera_t;
 
 // render/camera.c
@@ -28,7 +28,6 @@ void set_camera(camera_t *camera, sfRenderWindow *window);
 
 typedef struct render_window_s {
     sfRenderWindow *window;
-    camera_t *camera;
 } render_window_t;
 
 // render/render_window.c

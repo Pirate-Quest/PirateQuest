@@ -26,6 +26,8 @@ SRCS_FILE	=	src/main.c					\
 				src/event/event_handler.c	\
 				src/map/map_layers.c		\
 				src/map/rect_from_id.c		\
+				src/map/tiles_manager.c		\
+				src/map/tiles_move.c		\
 				src/render/camera.c			\
 				src/render/render_window.c	\
 				src/render/resolutions.c	\

@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <stdarg.h>
 #include "../../../../include/hashtable.h"
 
 hashtable_t *new_hashtable(int (*hash_method)(char *, int), int len)
@@ -23,6 +24,23 @@ hashtable_t *new_hashtable(int (*hash_method)(char *, int), int len)
     entries[len] = NULL;
     result->entries = entries;
     return result;
+}
+
+hashtable_t *ht_from_args(int len, ...)
+{
+    va_list args;
+    hashtable_t *ht = new_hashtable(&hash, len);
+    char *key;
+    void *value;
+
+    va_start(args, len);
+    for (int i = 0; i < len; i++) {
+        key = va_arg(args, char *);
+        value = va_arg(args, void *);
+        ht_insert(ht, key, value);
+    }
+    va_end(args);
+    return ht;
 }
 
 static void free_ht(hashtable_t *ht)

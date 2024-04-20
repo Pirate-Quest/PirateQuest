@@ -6,7 +6,7 @@
 ##
 
 TARGET			=	my_rpg
-CC				=	gcc
+CC				=	gcc -g3
 CXXFLAGS		=	-g3 -Wall -Werror -Wextra
 
 HSRC			=	-lcsfml-graphics -lcsfml-audio -lcsfml-system		\
@@ -28,13 +28,14 @@ SRCS_FILE	=	src/main.c						\
 				src/map/map_layers.c			\
 				src/map/rect_from_id.c			\
 				src/map/tiles_manager.c			\
-				src/map/tiles_move.c			\
+				src/player/player_sprite.c		\
 				src/render/camera.c				\
 				src/render/render_window.c		\
 				src/render/resolutions.c		\
 				src/scheduler/task_daemon.c		\
 				src/scheduler/task_provider.c	\
 				src/settings/settings_import.c	\
+				src/utils/texture_util.c		\
 
 all:	$(BUILD_DIR) $(TARGET)
 

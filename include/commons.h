@@ -68,4 +68,11 @@ typedef struct vector_s {
     int y;
 } vector_t;
 
+typedef enum {
+    UP,
+    RIGHT,
+    DOWN,
+    LEFT,
+} direction_t;
+
 #endif /* !COMMONS_H */

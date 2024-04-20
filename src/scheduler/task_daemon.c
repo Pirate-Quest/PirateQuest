@@ -7,7 +7,6 @@
 
 #include <stdlib.h>
 #include "../../include/pirate_quest.h"
-#include "../../include/task.h"
 
 int is_valid_interval(double seconds, double interval)
 {
@@ -31,7 +30,7 @@ void apply_count(pirate_quest_t *game, task_t *task)
 void execute_all_tasks(pirate_quest_t *game, double seconds)
 {
     my_list_node_t *current = game->tasks->head;
-    int status;
+    int status = -1;
     task_t *task;
 
     while (current != NULL) {

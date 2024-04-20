@@ -19,6 +19,20 @@ void free_game(pirate_quest_t *game)
         sfRenderWindow_destroy(game->window->window);
         free(game->window);
     }
+    if (game->settings != NULL)
+        free(game->settings);
+}
+
+static task_daemon_t *new_daemon_task(void)
+{
+    task_daemon_t *daemon = malloc(sizeof(task_daemon_t));
+
+    *daemon = (task_daemon_t) {
+            .clock = sfClock_create(),
+            .last_update = 0,
+            .seconds = 0.0
+    };
+    return daemon;
 }
 
 int init_window(pirate_quest_t *game)
@@ -37,6 +51,8 @@ int init_window(pirate_quest_t *game)
     camera->zoom = 2.5;
     game->window = window;
     game->camera = camera;
+    game->task_daemon = new_daemon_task();
+    game->tasks = my_list_create(&free_task);
     return TRUE;
 }
 
@@ -46,7 +62,9 @@ static void update(pirate_quest_t *game)
     sfRenderWindow_clear(game->window->window, sfBlack);
     for (int i = 0; i < LAYER_COUNT; i++)
         update_layer(game, i);
+    update_player(game);
     sfRenderWindow_display(game->window->window);
+    update_tasks(game);
 }
 
 static int init_game(pirate_quest_t *game)
@@ -58,6 +76,7 @@ static int init_game(pirate_quest_t *game)
     if (game->settings == NULL) {
         return my_puterr("Error: Could not import settings.\n");
     }
+    game->player = init_player(game);
     return 0;
 }
 

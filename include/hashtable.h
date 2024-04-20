@@ -35,6 +35,7 @@ typedef struct hashtable_s {
 int hash(char *key, int len);
 
 hashtable_t *new_hashtable(int (*hash)(char *, int), int len);
+hashtable_t *ht_from_args(int len, ...);
 void delete_hashtable(hashtable_t *ht);
 
 int ht_insert(hashtable_t *ht, char *key, void *value);

@@ -39,4 +39,6 @@ void update_listeners(pirate_quest_t *game);
  */
 void close_event(sfEvent event, pirate_quest_t *game);
 
+void key_pressed_event(sfEvent event, pirate_quest_t *game);
+
 #endif /* !EVENT_H */

@@ -7,7 +7,6 @@
 
 #include "../../include/gamerules.h"
 #include "../../include/pirate_quest.h"
-#include <limits.h>
 #include <stdio.h>
 
 static int get_max_xp_from_lvl(int lvl)

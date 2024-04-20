@@ -13,6 +13,11 @@
     #define TRUE 1
     #define FALSE 0
 
+    #define INT_MAX 2147483647
+    #define INT_MIN -2147483648
+
+    #define UNSIGNED_INT_MAX 4294967295
+
 int my_strlen(char const *str);
 void my_putchar(char c);
 int my_putstr(char const *str);

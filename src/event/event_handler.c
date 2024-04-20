@@ -5,12 +5,12 @@
 ** event_handler.c
 */
 
-#include <SFML/Graphics.h>
 #include "../../include/pirate_quest.h"
 #include "../../include/event.h"
 
 event_listener_t event_listener[] = {
     {sfEvtClosed, &close_event},
+    {sfEvtKeyPressed, &key_pressed_event},
 };
 int events_size = {sizeof(event_listener) / sizeof(event_listener_t)};
 

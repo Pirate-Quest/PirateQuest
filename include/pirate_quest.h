@@ -14,12 +14,28 @@
     #include "render.h"
     #include "map.h"
 
+
+/**
+ * @brief The task daemon struct
+ *
+ * @param clock The clock of the task daemon
+ * @param last_update The last update of the task daemon
+ * @param seconds The seconds of the task daemon
+ */
+typedef struct task_daemon_s {
+    sfClock* clock;
+    int last_update;
+    double seconds;
+} task_daemon_t;
+
 typedef sfSprite* square_t[LAYER_COUNT][RENDER_HEIGHT][RENDER_WIDTH];
 
 typedef struct pirate_quest_s {
     render_window_t *window;
     camera_t *camera;
     square_t square;
+    task_daemon_t *task_daemon;
+    my_list_t *tasks;
 } pirate_quest_t;
 
 typedef struct asset_s {

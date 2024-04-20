@@ -8,6 +8,7 @@
 #include "../../include/map.h"
 #include "../../include/commons.h"
 #include <stdio.h>
+#include <stddef.h>
 
 layer_t layers[LAYER_COUNT] = {
     {

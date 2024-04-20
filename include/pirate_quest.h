@@ -8,12 +8,11 @@
 #ifndef PIRATE_QUEST_H
     #define PIRATE_QUEST_H
 
-    #include <stddef.h>
     #include <SFML/Graphics.h>
     #include "commons.h"
     #include "render.h"
     #include "map.h"
-
+    #include "settings.h"
 
 /**
  * @brief The task daemon struct
@@ -36,6 +35,7 @@ typedef struct pirate_quest_s {
     square_t square;
     task_daemon_t *task_daemon;
     my_list_t *tasks;
+    settings_t *settings;
 } pirate_quest_t;
 
 typedef struct asset_s {

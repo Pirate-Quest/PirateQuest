@@ -34,6 +34,7 @@ SRCS_FILE	=	src/main.c						\
 				src/render/resolutions.c		\
 				src/scheduler/task_daemon.c		\
 				src/scheduler/task_provider.c	\
+				src/settings/settings_import.c	\
 
 all:	$(BUILD_DIR) $(TARGET)
 

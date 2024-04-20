@@ -49,6 +49,18 @@ static void update(pirate_quest_t *game)
     sfRenderWindow_display(game->window->window);
 }
 
+static int init_game(pirate_quest_t *game)
+{
+    init_icon(game->window);
+    init_layers();
+    init_squares(game);
+    game->settings = import_settings();
+    if (game->settings == NULL) {
+        return my_puterr("Error: Could not import settings.\n");
+    }
+    return 0;
+}
+
 int main(void)
 {
     pirate_quest_t game;
@@ -60,12 +72,14 @@ int main(void)
         return my_puterr("Error: Could not create window. This could be "
             "due to a lack of memory. Or incompatible hardware.\n");
     }
-    init_icon(game.window);
-    init_layers();
-    init_squares(&game);
+    if (init_game(&game) != 0) {
+        free_game(&game);
+        return my_puterr("Error: Could not initialize game.\n");
+    }
     sfRenderWindow_setFramerateLimit(game.window->window, 120);
     while (sfRenderWindow_isOpen(game.window->window))
         update(&game);
+    write_settings(game.settings);
     free_game(&game);
     return FALSE;
 }

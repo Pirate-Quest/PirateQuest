@@ -65,6 +65,7 @@ static void update(pirate_quest_t *game)
     update_player(game);
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
+    update_key_pressed(game);
 }
 
 static int init_game(pirate_quest_t *game)

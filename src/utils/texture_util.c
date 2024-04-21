@@ -7,10 +7,10 @@
 
 #include <SFML/Graphics.h>
 
-void move_rect(sfIntRect *rect, int offset, unsigned int max_value)
+void move_rect(sfIntRect *rect, int offset, int start, int max_value)
 {
     rect->left += offset;
     if (rect->left >= max_value) {
-        rect->left = 0;
+        rect->left = start;
     }
 }

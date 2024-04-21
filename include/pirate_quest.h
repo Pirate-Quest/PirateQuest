@@ -89,6 +89,6 @@ int update_player(pirate_quest_t *game);
 int on_player_tick(pirate_quest_t *game, hashtable_t *_);
 
 // utils/texture_util.c
-void move_rect(sfIntRect *rect, int offset, unsigned int max_value);
+void move_rect(sfIntRect *rect, int offset, int start, int max_value);
 
 #endif /* PIRATE_QUEST_H */

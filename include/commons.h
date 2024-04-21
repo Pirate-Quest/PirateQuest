@@ -70,9 +70,9 @@ typedef struct vector_s {
 
 typedef enum {
     UP,
-    RIGHT,
-    DOWN,
     LEFT,
+    DOWN,
+    RIGHT,
 } direction_t;
 
 #endif /* !COMMONS_H */

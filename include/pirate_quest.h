@@ -47,7 +47,7 @@ typedef struct task_daemon_s {
 typedef struct player_s {
     sfSprite *sprite;
     sfVector2f pos;
-    sfVector2f speed;
+    int is_moving;
     sfVector2f size;
     sfIntRect rect;
     sfTexture *texture;

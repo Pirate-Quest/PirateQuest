@@ -51,10 +51,20 @@ static void go_left(pirate_quest_t *game, float delta_time)
 
 void key_pressed_event(sfEvent event, pirate_quest_t *game)
 {
+    if (event.key.code == game->settings->up
+        || event.key.code == game->settings->down
+        || event.key.code == game->settings->left
+        || event.key.code == game->settings->right)
+        game->player->is_moving = 1;
 }
 
 void key_released_event(sfEvent event, pirate_quest_t *game)
 {
+    if (event.key.code == game->settings->up
+        || event.key.code == game->settings->down
+        || event.key.code == game->settings->left
+        || event.key.code == game->settings->right)
+        game->player->is_moving = 0;
 }
 
 int is_corner(pirate_quest_t *game)

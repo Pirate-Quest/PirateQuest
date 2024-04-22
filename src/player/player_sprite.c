@@ -10,7 +10,7 @@
 const task_builder_t task = {
     .on_tick = &on_player_tick,
     .on_end = NULL,
-    .second_interval = 0.3,
+    .second_interval = 0.1,
     .execution_count = -1
 };
 
@@ -38,8 +38,10 @@ player_t *init_player(pirate_quest_t *game)
     sfSprite_setTexture(player->sprite, player->texture, sfTrue);
     sfSprite_setScale(player->sprite, (sfVector2f){2, 2});
     sfSprite_setTextureRect(player->sprite, player->rect);
+    sfSprite_setPosition(player->sprite, player->pos);
     player->task = register_task(
         game, &task, NULL);
+    update_direction(player, DOWN);
     return player;
 }
 

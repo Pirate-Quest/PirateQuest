@@ -64,6 +64,11 @@ void key_released_event(sfEvent event, pirate_quest_t *game)
         || event.key.code == game->settings->down
         || event.key.code == game->settings->left
         || event.key.code == game->settings->right)
+        if (sfKeyboard_isKeyPressed(game->settings->up) == 1
+            || sfKeyboard_isKeyPressed(game->settings->down) == 1
+            || sfKeyboard_isKeyPressed(game->settings->left) == 1
+            || sfKeyboard_isKeyPressed(game->settings->right) == 1)
+            return;
         game->player->is_moving = 0;
 }
 
@@ -87,11 +92,11 @@ int is_corner(pirate_quest_t *game)
 void update_key_pressed(pirate_quest_t *game)
 {
     if (sfKeyboard_isKeyPressed(game->settings->down))
-        go_down(game, is_corner(game) ? 2.8 : 4);
+        go_down(game, is_corner(game) ? 5.6 : 8);
     if (sfKeyboard_isKeyPressed(game->settings->up))
-        go_up(game, is_corner(game) ? 2.8 : 4);
+        go_up(game, is_corner(game) ? 5.6 : 8);
     if (sfKeyboard_isKeyPressed(game->settings->left))
-        go_left(game, is_corner(game) ? 2.8 : 4);
+        go_left(game, is_corner(game) ? 5.6 : 8);
     if (sfKeyboard_isKeyPressed(game->settings->right))
-        go_right(game, is_corner(game) ? 2.8 : 4);
+        go_right(game, is_corner(game) ? 5.6 : 8);
 }

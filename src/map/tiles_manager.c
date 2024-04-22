@@ -16,8 +16,9 @@ void init_square_sprite(int i, sfVector2i loc, pirate_quest_t *game,
     sfSprite_setTextureRect(game->square[i][loc.y][loc.x], rect_from_id(
         get_tile_id(0, game->camera->map_position.y +
             (loc.y - RENDER_HEIGHT / 2),
-        game->camera->map_position.x + (loc.x - RENDER_WIDTH / 2))
-    ));
+        game->camera->map_position.x + (loc.x - RENDER_WIDTH / 2)),
+        get_layers()[i].offset)
+    );
     sfSprite_setScale(game->square[i][loc.y][loc.x], (sfVector2f){2.5, 2.5});
 }
 
@@ -60,7 +61,7 @@ void update_layer(pirate_quest_t *game, int i)
             sfSprite_setTextureRect(game->square[i][y][x], rect_from_id(
                 get_tile_id(i, game->camera->map_position.y + (y -
                 RENDER_HEIGHT / 2), game->camera->map_position.x + (x -
-                RENDER_WIDTH / 2)))
+                RENDER_WIDTH / 2)), get_layers()[i].offset)
             );
             sfSprite_setPosition(game->square[i][y][x], (sfVector2f){(x * 32 *
                 game->camera->zoom) + get_resolution(0).width / 2 -

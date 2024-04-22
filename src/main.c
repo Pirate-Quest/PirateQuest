@@ -46,7 +46,7 @@ int init_window(pirate_quest_t *game)
     }
     window->window = sfRenderWindow_create(
         get_sfvideo_mode(0), "Pirate Quest", sfClose, NULL);
-    camera->map_position = (sfVector2i){5, 16};
+    camera->map_position = (sfVector2i){95, 86};
     camera->pos_in_tile = (sfVector2f){0.0, 0.0};
     camera->zoom = 2.5;
     game->window = window;

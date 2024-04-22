@@ -73,7 +73,7 @@ typedef struct asset_s {
 } asset_t;
 
 // map/rect_from_id.c
-sfIntRect rect_from_id(int id);
+sfIntRect rect_from_id(int id, int offset);
 
 // main.c
 int get_tile_id(int i, int y, int x);

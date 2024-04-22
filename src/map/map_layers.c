@@ -12,8 +12,14 @@
 
 layer_t layers[LAYER_COUNT] = {
     {
-        .filepath = "assets/map/background_layer.csv",
-        .tileset_path = "assets/map/background_layer_tiles.png"
+        .filepath = "assets/map/map_background.csv",
+        .tileset_path = "assets/map/tileset.png",
+        .offset = 20
+    },
+    {
+        .filepath = "assets/map/map_decoration.csv",
+        .tileset_path = "assets/map/tileset.png",
+        .offset = 22
     }
 };
 

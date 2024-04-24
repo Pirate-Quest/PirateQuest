@@ -14,10 +14,15 @@ layer_t layers[LAYER_COUNT] = {
     {
         .filepath = "assets/map/map_background.csv",
         .tileset_path = "assets/map/tileset.png",
-        .offset = 20
+        .offset = 22
     },
     {
         .filepath = "assets/map/map_decoration.csv",
+        .tileset_path = "assets/map/tileset.png",
+        .offset = 22
+    },
+    {
+        .filepath = "assets/map/map_decoration2.csv",
         .tileset_path = "assets/map/tileset.png",
         .offset = 22
     }
@@ -40,9 +45,9 @@ static void init_layer_line(char *line, int i, int y)
     free(tiles);
 }
 
-void init_tiles(int i)
+static void init_tiles(char *filepath, int i)
 {
-    FILE *fd = fopen(layers[i].filepath, "r");
+    FILE *fd = fopen(filepath, "r");
     char *line = NULL;
     size_t len = 0;
     size_t size;
@@ -72,7 +77,7 @@ void init_layers(void)
 {
     for (int i = 0; i < LAYER_COUNT; i++) {
         fill_layer(i);
-        init_tiles(i);
+        init_tiles(layers[i].filepath, i);
     }
 }
 

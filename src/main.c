@@ -71,6 +71,7 @@ static void update(pirate_quest_t *game)
 static int init_game(pirate_quest_t *game)
 {
     init_icon(game->window);
+    init_collisions(game);
     init_layers();
     init_squares(game);
     game->settings = import_settings();

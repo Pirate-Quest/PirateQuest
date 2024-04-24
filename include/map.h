@@ -19,7 +19,9 @@
     #define RENDER_WIDTH 18
     #define RENDER_HEIGHT 11
 
-    #define LAYER_COUNT 2
+    #define LAYER_COUNT 3
+
+    #define COLLISION_FILEPATH "assets/map/map_collision.csv"
 
 typedef struct layer_s {
     char *filepath;

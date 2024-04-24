@@ -25,6 +25,7 @@ SRCS_FILE	=	src/main.c						\
 				src/event/close_event.c			\
 				src/event/event_handler.c		\
 				src/event/input_event.c			\
+				src/map/collision.c				\
 				src/map/map_layers.c			\
 				src/map/rect_from_id.c			\
 				src/map/tiles_manager.c			\

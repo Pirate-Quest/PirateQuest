@@ -56,6 +56,7 @@ typedef struct player_s {
 } player_t;
 
 typedef sfSprite *square_t[LAYER_COUNT][RENDER_HEIGHT][RENDER_WIDTH];
+typedef int collision_t[MAP_HEIGHT][MAP_WIDTH];
 
 struct pirate_quest_s {
     render_window_t *window;
@@ -65,6 +66,7 @@ struct pirate_quest_s {
     player_t *player;
     my_list_t *tasks;
     task_daemon_t *task_daemon;
+    collision_t collision;
 };
 
 typedef struct asset_s {
@@ -91,4 +93,7 @@ int on_player_tick(pirate_quest_t *game, hashtable_t *_);
 // utils/texture_util.c
 void move_rect(sfIntRect *rect, int offset, int start, int max_value);
 
+void init_collisions(pirate_quest_t *game);
+
+// map/collision.c
 #endif /* PIRATE_QUEST_H */

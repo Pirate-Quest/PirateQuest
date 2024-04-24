@@ -28,13 +28,13 @@ player_t *init_player(pirate_quest_t *game)
     player_t *player = malloc(sizeof(player_t));
 
     player->pos = (sfVector2f){get_resolution(0).width / 2,
-        get_resolution(0).height / 2};
+        (get_resolution(0).height / 2) - 10};
     player->is_moving = 0;
     player->size = (sfVector2f){64, 64};
     player->rect = (sfIntRect){0, 0, 64, 64};
     player->texture = sfTexture_createFromFile("assets/player.png", NULL);
     player->sprite = sfSprite_create();
-    sfSprite_setOrigin(player->sprite, (sfVector2f){32, 32});
+    sfSprite_setOrigin(player->sprite, (sfVector2f){32, 32 + 25});
     sfSprite_setTexture(player->sprite, player->texture, sfTrue);
     sfSprite_setScale(player->sprite, (sfVector2f){2, 2});
     sfSprite_setTextureRect(player->sprite, player->rect);

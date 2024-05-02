@@ -12,8 +12,72 @@
 
 layer_t layers[LAYER_COUNT] = {
     {
-        .filepath = "assets/map/background_layer.csv",
-        .tileset_path = "assets/map/background_layer_tiles.png"
+        .filepath = "assets/map/map_1.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_2.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_3.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_4.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_5.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_6.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_7.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_8.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_9.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_10.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_11.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_12.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_13.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_14.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_15.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_16.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_17.csv",
+        .offset = 100
     }
 };
 
@@ -34,9 +98,9 @@ static void init_layer_line(char *line, int i, int y)
     free(tiles);
 }
 
-void init_tiles(int i)
+static void init_tiles(char *filepath, int i)
 {
-    FILE *fd = fopen(layers[i].filepath, "r");
+    FILE *fd = fopen(filepath, "r");
     char *line = NULL;
     size_t len = 0;
     size_t size;
@@ -66,7 +130,7 @@ void init_layers(void)
 {
     for (int i = 0; i < LAYER_COUNT; i++) {
         fill_layer(i);
-        init_tiles(i);
+        init_tiles(layers[i].filepath, i);
     }
 }
 

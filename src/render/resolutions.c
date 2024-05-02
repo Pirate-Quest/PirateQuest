@@ -6,6 +6,7 @@
 */
 
 #include "../../include/render.h"
+#include "../../include/pirate_quest.h"
 #include <SFML/Graphics.h>
 
 const resolution_t resolutions[3] = {
@@ -14,9 +15,9 @@ const resolution_t resolutions[3] = {
     {800, 600}
 };
 
-resolution_t get_resolution(int index)
+resolution_t get_resolution(pirate_quest_t *game)
 {
-    return (resolutions[index]);
+    return (resolutions[game->settings->resolution]);
 }
 
 int get_resolutions_count(void)

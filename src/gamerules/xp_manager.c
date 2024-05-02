@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2024
-** my_rpg
+** PirateQuest
 ** File description:
-** XP_manager.c
+** xp_manager.c
 */
 
 #include "../../include/gamerules.h"

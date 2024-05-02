@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2024
-** a-maze-d
+** commons
 ** File description:
 ** my_memset.c
 */

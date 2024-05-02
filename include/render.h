@@ -24,7 +24,7 @@ typedef struct camera_s {
 typedef struct tile_object_s {
     int id;
     sfIntRect rect;
-    sfVector2f  origin;
+    sfVector2f origin;
 } tile_object_t;
 
 // render/camera.c

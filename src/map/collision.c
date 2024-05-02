@@ -26,7 +26,7 @@ static void init_layer_line(pirate_quest_t *game, char *line, int y)
     free(tiles);
 }
 
-    void init_collisions(pirate_quest_t *game)
+void init_collisions(pirate_quest_t *game)
 {
     FILE *fd = fopen(COLLISION_FILEPATH, "r");
     char *line = NULL;

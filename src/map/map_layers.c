@@ -12,19 +12,44 @@
 
 layer_t layers[LAYER_COUNT] = {
     {
-        .filepath = "assets/map/map_background.csv",
-        .tileset_path = "assets/map/tileset.png",
-        .offset = 22
+        .filepath = "assets/map/map_1.csv",
+        .offset = 100
     },
     {
-        .filepath = "assets/map/map_decoration.csv",
-        .tileset_path = "assets/map/tileset.png",
-        .offset = 22
+        .filepath = "assets/map/map_2.csv",
+        .offset = 100
     },
     {
-        .filepath = "assets/map/map_decoration2.csv",
-        .tileset_path = "assets/map/tileset.png",
-        .offset = 22
+        .filepath = "assets/map/map_3.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_4.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_5.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_6.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_7.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_8.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_9.csv",
+        .offset = 99
+    },
+    {
+        .filepath = "assets/map/map_10.csv",
+        .offset = 100
     }
 };
 

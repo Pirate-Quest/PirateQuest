@@ -21,6 +21,12 @@ typedef struct camera_s {
     float zoom;
 } camera_t;
 
+typedef struct tile_object_s {
+    int id;
+    sfIntRect rect;
+    sfVector2f  origin;
+} tile_object_t;
+
 // render/camera.c
 void set_camera_center(camera_t *camera, sfVector2f center);
 void set_camera_size(camera_t *camera, sfVector2f size);

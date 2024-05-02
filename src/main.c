@@ -13,6 +13,7 @@
 
 void free_game(pirate_quest_t *game)
 {
+    sfTexture_destroy(game->tileset);
     if (game->camera != NULL)
         free(game->camera);
     if (game->window != NULL) {
@@ -46,13 +47,14 @@ int init_window(pirate_quest_t *game)
     }
     window->window = sfRenderWindow_create(
         get_sfvideo_mode(0), "Pirate Quest", sfClose, NULL);
-    camera->map_position = (sfVector2i){95, 86};
+    camera->map_position = (sfVector2i){19, 69};
     camera->pos_in_tile = (sfVector2f){0.0, 0.0};
     camera->zoom = 2.5;
     game->window = window;
     game->camera = camera;
     game->task_daemon = new_daemon_task();
     game->tasks = my_list_create(&free_task);
+    game->tileset = sfTexture_createFromFile("assets/map/tileset.png", NULL);
     return TRUE;
 }
 
@@ -62,7 +64,9 @@ static void update(pirate_quest_t *game)
     sfRenderWindow_clear(game->window->window, sfBlack);
     for (int i = 0; i < LAYER_COUNT; i++)
         update_layer(game, i);
+    draw_back_tiles_object(game);
     update_player(game);
+    draw_front_tiles_object(game);
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
     update_key_pressed(game);

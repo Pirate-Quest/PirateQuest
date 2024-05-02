@@ -49,7 +49,7 @@ void init_squares(pirate_quest_t *game)
         init_square(
             game,
             i,
-            sfTexture_createFromFile(get_layers()[i].tileset_path, NULL)
+            game->tileset
         );
     }
 }

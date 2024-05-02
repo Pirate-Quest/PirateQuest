@@ -29,6 +29,7 @@ SRCS_FILE	=	src/main.c						\
 				src/map/map_layers.c			\
 				src/map/rect_from_id.c			\
 				src/map/tiles_manager.c			\
+				src/object/tile_object.c		\
 				src/player/player_sprite.c		\
 				src/render/camera.c				\
 				src/render/render_window.c		\

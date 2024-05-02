@@ -41,12 +41,14 @@ int init_window(pirate_quest_t *game)
     render_window_t *window = malloc(sizeof(render_window_t));
     camera_t *camera = malloc(sizeof(camera_t));
 
-    if (window == NULL || camera == NULL) {
-        my_puterr("Error: Could not allocate memory for window.\n");
+    game->settings = import_settings();
+    if (window == NULL || camera == NULL || game->settings == NULL) {
+        my_puterr("Error: Could not allocate memory for window."
+            " or settings.\n");
         return FALSE;
     }
-    window->window = sfRenderWindow_create(
-        get_sfvideo_mode(0), "Pirate Quest", sfClose, NULL);
+    window->window = sfRenderWindow_create(get_sfvideo_mode(
+        game->settings->resolution), "Pirate Quest", sfClose, NULL);
     camera->map_position = (sfVector2i){19, 69};
     camera->pos_in_tile = (sfVector2f){0.0, 0.0};
     camera->zoom = 2.5;
@@ -78,9 +80,6 @@ static void update(pirate_quest_t *game)
 
 static int init_game(pirate_quest_t *game)
 {
-    game->settings = import_settings();
-    if (game->settings == NULL)
-        return my_puterr("Error: Could not import settings.\n");
     init_icon(game->window);
     init_collisions(game);
     init_layers();

@@ -27,6 +27,8 @@ settings_t *initialize_settings(void)
 
 void set_keycode(settings_t *settings, char *line)
 {
+    if (my_strncmp(line, "res: ", 5) == 0)
+        settings->resolution = my_getnbr(line + 5);
     if (my_strncmp(line, "up: ", 4) == 0)
         settings->up = my_getnbr(line + 4);
     if (my_strncmp(line, "down: ", 6) == 0)
@@ -37,8 +39,6 @@ void set_keycode(settings_t *settings, char *line)
         settings->right = my_getnbr(line + 7);
     if (my_strncmp(line, "attack: ", 8) == 0)
         settings->attack = my_getnbr(line + 8);
-    if (my_strncmp(line, "res: ", 5) == 0)
-        settings->resolution = my_getnbr(line + 5);
 }
 
 settings_t *import_settings(void)
@@ -49,14 +49,11 @@ settings_t *import_settings(void)
     size_t len = 0;
     size_t size;
 
-    if (fd == NULL) {
+    if (fd == NULL)
         return initialize_settings();
-    }
     settings = malloc(sizeof(settings_t));
-    for (int i = 0; i < 5; i++) {
-        size = getline(&line, &len, fd);
-        if (size == -1 || my_strcmp(line, "") == 0)
-            break;
+    for (size = getline(&line, &len, fd); size != -1;
+        size = getline(&line, &len, fd)) {
         line[size - 1] = '\0';
         set_keycode(settings, line);
     }

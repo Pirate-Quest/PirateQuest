@@ -21,6 +21,12 @@ typedef struct camera_s {
     float zoom;
 } camera_t;
 
+typedef struct tile_object_s {
+    int id;
+    sfIntRect rect;
+    sfVector2f origin;
+} tile_object_t;
+
 // render/camera.c
 void set_camera_center(camera_t *camera, sfVector2f center);
 void set_camera_size(camera_t *camera, sfVector2f size);
@@ -31,7 +37,6 @@ typedef struct render_window_s {
 } render_window_t;
 
 // render/render_window.c
-resolution_t get_resolution(int index);
 int get_resolutions_count(void);
 sfVideoMode get_sfvideo_mode(int index);
 

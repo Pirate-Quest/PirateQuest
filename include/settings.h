@@ -17,6 +17,7 @@ typedef struct settings_s {
     sfKeyCode left;
     sfKeyCode right;
     sfKeyCode attack;
+    int resolution;
 } settings_t;
 
 settings_t *import_settings(void);

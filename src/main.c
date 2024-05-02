@@ -13,6 +13,7 @@
 
 void free_game(pirate_quest_t *game)
 {
+    sfTexture_destroy(game->tileset);
     if (game->camera != NULL)
         free(game->camera);
     if (game->window != NULL) {
@@ -40,19 +41,22 @@ int init_window(pirate_quest_t *game)
     render_window_t *window = malloc(sizeof(render_window_t));
     camera_t *camera = malloc(sizeof(camera_t));
 
-    if (window == NULL || camera == NULL) {
-        my_puterr("Error: Could not allocate memory for window.\n");
+    game->settings = import_settings();
+    if (window == NULL || camera == NULL || game->settings == NULL) {
+        my_puterr("Error: Could not allocate memory for window."
+            " or settings.\n");
         return FALSE;
     }
-    window->window = sfRenderWindow_create(
-        get_sfvideo_mode(0), "Pirate Quest", sfClose, NULL);
-    camera->map_position = (sfVector2i){5, 16};
+    window->window = sfRenderWindow_create(get_sfvideo_mode(
+        game->settings->resolution), "Pirate Quest", sfClose, NULL);
+    camera->map_position = (sfVector2i){19, 69};
     camera->pos_in_tile = (sfVector2f){0.0, 0.0};
     camera->zoom = 2.5;
     game->window = window;
     game->camera = camera;
     game->task_daemon = new_daemon_task();
     game->tasks = my_list_create(&free_task);
+    game->tileset = sfTexture_createFromFile("assets/map/tileset.png", NULL);
     return TRUE;
 }
 
@@ -62,20 +66,24 @@ static void update(pirate_quest_t *game)
     sfRenderWindow_clear(game->window->window, sfBlack);
     for (int i = 0; i < LAYER_COUNT; i++)
         update_layer(game, i);
+    for (int i = 0; i < LAYER_COUNT; i++)
+        for (int y = 0; y < RENDER_HEIGHT; y++)
+            draw_back_tiles_object(game, i, y);
     update_player(game);
+    for (int i = 0; i < LAYER_COUNT; i++)
+        for (int y = 0; y < RENDER_HEIGHT; y++)
+            draw_front_tiles_object(game, i, y);
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
+    update_key_pressed(game);
 }
 
 static int init_game(pirate_quest_t *game)
 {
     init_icon(game->window);
+    init_collisions(game);
     init_layers();
     init_squares(game);
-    game->settings = import_settings();
-    if (game->settings == NULL) {
-        return my_puterr("Error: Could not import settings.\n");
-    }
     game->player = init_player(game);
     return 0;
 }

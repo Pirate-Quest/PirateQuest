@@ -5,6 +5,7 @@
 ** rect_from_id.c
 */
 
+#include "../../include/map.h"
 #include <SFML/Graphics.h>
 
 /*
@@ -21,7 +22,9 @@
  * y = id / 20 * 32
  */
 
-sfIntRect rect_from_id(int id)
+sfIntRect rect_from_id(int id, int offset)
 {
-    return (sfIntRect){(id % 20) * 32, (id / 20) * 32, 32, 32};
+    if (id == -1)
+        return rect_from_id(DEFAULT_EMPTY_TILE_ID, offset);
+    return (sfIntRect){(id % offset) * 32, (id / offset) * 32, 32, 32};
 }

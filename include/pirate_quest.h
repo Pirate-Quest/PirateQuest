@@ -47,7 +47,7 @@ typedef struct task_daemon_s {
 typedef struct player_s {
     sfSprite *sprite;
     sfVector2f pos;
-    sfVector2f speed;
+    int is_moving;
     sfVector2f size;
     sfIntRect rect;
     sfTexture *texture;
@@ -56,6 +56,7 @@ typedef struct player_s {
 } player_t;
 
 typedef sfSprite *square_t[LAYER_COUNT][RENDER_HEIGHT][RENDER_WIDTH];
+typedef int collision_t[MAP_HEIGHT][MAP_WIDTH];
 
 struct pirate_quest_s {
     render_window_t *window;
@@ -65,6 +66,8 @@ struct pirate_quest_s {
     player_t *player;
     my_list_t *tasks;
     task_daemon_t *task_daemon;
+    collision_t collision;
+    sfTexture *tileset;
 };
 
 typedef struct asset_s {
@@ -73,7 +76,7 @@ typedef struct asset_s {
 } asset_t;
 
 // map/rect_from_id.c
-sfIntRect rect_from_id(int id);
+sfIntRect rect_from_id(int id, int offset);
 
 // main.c
 int get_tile_id(int i, int y, int x);
@@ -89,6 +92,20 @@ int update_player(pirate_quest_t *game);
 int on_player_tick(pirate_quest_t *game, hashtable_t *_);
 
 // utils/texture_util.c
-void move_rect(sfIntRect *rect, int offset, unsigned int max_value);
+void move_rect(sfIntRect *rect, int offset, int start, int max_value);
 
+// utils/calculate_pos.c
+sfVector2f calculate_position(int x, int y, pirate_quest_t *game);
+
+// map/collision.c
+void init_collisions(pirate_quest_t *game);
+
+// object/tile_object.c
+void draw_front_tiles_object(pirate_quest_t *game, int layer, int y);
+void draw_back_tiles_object(pirate_quest_t *game, int layer, int y);
+
+// render/render_window.c
+resolution_t get_resolution(pirate_quest_t *game);
+
+// map/collision.c
 #endif /* PIRATE_QUEST_H */

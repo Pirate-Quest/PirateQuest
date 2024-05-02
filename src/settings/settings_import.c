@@ -10,42 +10,35 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../../include/settings.h"
-#include "../../include/pirate_quest.h"
 
 settings_t *initialize_settings(void)
 {
     settings_t *settings = malloc(sizeof(settings_t));
 
-    settings->up = sfKeyUp;
-    settings->down = sfKeyDown;
-    settings->left = sfKeyLeft;
-    settings->right = sfKeyRight;
-    settings->attack = sfKeySpace;
+    settings->up = sfKeyZ;
+    settings->down = sfKeyS;
+    settings->left = sfKeyQ;
+    settings->right = sfKeyD;
+    settings->attack = sfKeyF;
+    settings->resolution = 0;
     write_settings(settings);
     return settings;
 }
 
-void set_keycode(settings_t *settings, int i, char *line)
+void set_keycode(settings_t *settings, char *line)
 {
-    sfKeyCode keycode = (sfKeyCode) my_getnbr(line);
-
-    switch (i) {
-        case 0:
-            settings->up = keycode;
-            break;
-        case 1:
-            settings->down = keycode;
-            break;
-        case 2:
-            settings->left = keycode;
-            break;
-        case 3:
-            settings->right = keycode;
-            break;
-        case 4:
-            settings->attack = keycode;
-            break;
-    }
+    if (my_strncmp(line, "res: ", 5) == 0)
+        settings->resolution = my_getnbr(line + 5);
+    if (my_strncmp(line, "up: ", 4) == 0)
+        settings->up = my_getnbr(line + 4);
+    if (my_strncmp(line, "down: ", 6) == 0)
+        settings->down = my_getnbr(line + 6);
+    if (my_strncmp(line, "left: ", 6) == 0)
+        settings->left = my_getnbr(line + 6);
+    if (my_strncmp(line, "right: ", 7) == 0)
+        settings->right = my_getnbr(line + 7);
+    if (my_strncmp(line, "attack: ", 8) == 0)
+        settings->attack = my_getnbr(line + 8);
 }
 
 settings_t *import_settings(void)
@@ -56,16 +49,13 @@ settings_t *import_settings(void)
     size_t len = 0;
     size_t size;
 
-    if (fd == NULL) {
+    if (fd == NULL)
         return initialize_settings();
-    }
     settings = malloc(sizeof(settings_t));
-    for (int i = 0; i < 5; i++) {
-        size = getline(&line, &len, fd);
-        if (size == -1 || my_strcmp(line, "") == 0)
-            break;
+    for (size = getline(&line, &len, fd); size != -1;
+        size = getline(&line, &len, fd)) {
         line[size - 1] = '\0';
-        set_keycode(settings, i, line);
+        set_keycode(settings, line);
     }
     fclose(fd);
     return settings;
@@ -77,10 +67,11 @@ void write_settings(settings_t *settings)
 
     if (fd == NULL)
         return;
-    fprintf(fd, "%d\n", settings->up);
-    fprintf(fd, "%d\n", settings->down);
-    fprintf(fd, "%d\n", settings->left);
-    fprintf(fd, "%d\n", settings->right);
-    fprintf(fd, "%d\n", settings->attack);
+    fprintf(fd, "up: %d\n", settings->up);
+    fprintf(fd, "down: %d\n", settings->down);
+    fprintf(fd, "left: %d\n", settings->left);
+    fprintf(fd, "right: %d\n", settings->right);
+    fprintf(fd, "attack: %d\n", settings->attack);
+    fprintf(fd, "res: %d\n", settings->resolution);
     fclose(fd);
 }

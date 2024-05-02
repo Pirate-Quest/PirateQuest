@@ -37,6 +37,7 @@ SRCS_FILE	=	src/main.c						\
 				src/scheduler/task_daemon.c		\
 				src/scheduler/task_provider.c	\
 				src/settings/settings_import.c	\
+				src/utils/calculate_pos.c		\
 				src/utils/texture_util.c		\
 
 all:	$(BUILD_DIR) $(TARGET)

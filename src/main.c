@@ -64,9 +64,13 @@ static void update(pirate_quest_t *game)
     sfRenderWindow_clear(game->window->window, sfBlack);
     for (int i = 0; i < LAYER_COUNT; i++)
         update_layer(game, i);
-    draw_back_tiles_object(game);
+    for (int i = 0; i < LAYER_COUNT; i++)
+        for (int y = 0; y < RENDER_HEIGHT; y++)
+            draw_back_tiles_object(game, i, y);
     update_player(game);
-    draw_front_tiles_object(game);
+    for (int i = 0; i < LAYER_COUNT; i++)
+        for (int y = 0; y < RENDER_HEIGHT; y++)
+            draw_front_tiles_object(game, i, y);
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
     update_key_pressed(game);
@@ -74,14 +78,13 @@ static void update(pirate_quest_t *game)
 
 static int init_game(pirate_quest_t *game)
 {
+    game->settings = import_settings();
+    if (game->settings == NULL)
+        return my_puterr("Error: Could not import settings.\n");
     init_icon(game->window);
     init_collisions(game);
     init_layers();
     init_squares(game);
-    game->settings = import_settings();
-    if (game->settings == NULL) {
-        return my_puterr("Error: Could not import settings.\n");
-    }
     game->player = init_player(game);
     return 0;
 }

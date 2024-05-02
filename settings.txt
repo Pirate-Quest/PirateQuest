@@ -1,5 +1,6 @@
-25
-18
-16
-3
-57
+up: 25
+down: 18
+left: 16
+right: 3
+attack: 5
+res: 0

@@ -94,11 +94,18 @@ int on_player_tick(pirate_quest_t *game, hashtable_t *_);
 // utils/texture_util.c
 void move_rect(sfIntRect *rect, int offset, int start, int max_value);
 
+// utils/calculate_pos.c
+sfVector2f calculate_position(int x, int y, pirate_quest_t *game);
+
 // map/collision.c
 void init_collisions(pirate_quest_t *game);
 
-void draw_front_tiles_object(pirate_quest_t *game);
-void draw_back_tiles_object(pirate_quest_t *game);
+// object/tile_object.c
+void draw_front_tiles_object(pirate_quest_t *game, int layer, int y);
+void draw_back_tiles_object(pirate_quest_t *game, int layer, int y);
+
+// render/render_window.c
+resolution_t get_resolution(pirate_quest_t *game);
 
 // map/collision.c
 #endif /* PIRATE_QUEST_H */

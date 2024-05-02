@@ -27,8 +27,8 @@ player_t *init_player(pirate_quest_t *game)
 {
     player_t *player = malloc(sizeof(player_t));
 
-    player->pos = (sfVector2f){get_resolution(0).width / 2,
-        (get_resolution(0).height / 2) - 10};
+    player->pos = (sfVector2f){get_resolution(game).width / 2,
+        (get_resolution(game).height / 2) - 10};
     player->is_moving = 0;
     player->size = (sfVector2f){64, 64};
     player->rect = (sfIntRect){0, 0, 64, 64};

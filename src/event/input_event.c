@@ -39,8 +39,8 @@ int is_colid_block(pirate_quest_t *game, sfVector2f pos, sfVector2i direction)
 static void go_down(pirate_quest_t *game, float delta_time)
 {
     float offset = delta_time / (32.0 * game->camera->zoom);
-    sfVector2f pos = (sfVector2f){get_resolution(0).width / 2,
-        get_resolution(0).height / 2};
+    sfVector2f pos = (sfVector2f){get_resolution(game).width / 2,
+        get_resolution(game).height / 2};
 
     update_direction(game->player, DOWN);
     if (is_colid_block(game, (sfVector2f){pos.x, pos.y + (offset + 4)},
@@ -57,8 +57,8 @@ static void go_down(pirate_quest_t *game, float delta_time)
 static void go_up(pirate_quest_t *game, float delta_time)
 {
     float offset = delta_time / (32.0 * game->camera->zoom);
-    sfVector2f pos = (sfVector2f){get_resolution(0).width / 2,
-        get_resolution(0).height / 2};
+    sfVector2f pos = (sfVector2f){get_resolution(game).width / 2,
+        get_resolution(game).height / 2};
 
     update_direction(game->player, UP);
     if (is_colid_block(game, (sfVector2f){pos.x, (pos.y - 4)},
@@ -74,8 +74,8 @@ static void go_up(pirate_quest_t *game, float delta_time)
 static void go_right(pirate_quest_t *game, float delta_time)
 {
     float offset = delta_time / (32.0 * game->camera->zoom);
-    sfVector2f pos = (sfVector2f){get_resolution(0).width / 2,
-        get_resolution(0).height / 2};
+    sfVector2f pos = (sfVector2f){get_resolution(game).width / 2,
+        get_resolution(game).height / 2};
 
     update_direction(game->player, RIGHT);
     if (is_colid_block(game, (sfVector2f){pos.x - (offset - 4), pos.y},
@@ -91,8 +91,8 @@ static void go_right(pirate_quest_t *game, float delta_time)
 static void go_left(pirate_quest_t *game, float delta_time)
 {
     float offset = delta_time / (32.0 * game->camera->zoom);
-    sfVector2f pos = (sfVector2f){get_resolution(0).width / 2,
-        get_resolution(0).height / 2};
+    sfVector2f pos = (sfVector2f){get_resolution(game).width / 2,
+        get_resolution(game).height / 2};
 
     update_direction(game->player, LEFT);
     if (is_colid_block(game, (sfVector2f){pos.x + (offset - 4), pos.y},

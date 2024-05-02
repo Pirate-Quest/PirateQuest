@@ -37,7 +37,6 @@ typedef struct render_window_s {
 } render_window_t;
 
 // render/render_window.c
-resolution_t get_resolution(int index);
 int get_resolutions_count(void);
 sfVideoMode get_sfvideo_mode(int index);
 

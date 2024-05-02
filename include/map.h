@@ -19,7 +19,7 @@
     #define RENDER_WIDTH 18
     #define RENDER_HEIGHT 11
 
-    #define LAYER_COUNT 10
+    #define LAYER_COUNT 17
 
     #define COLLISION_FILEPATH "assets/map/map_collision.csv"
 

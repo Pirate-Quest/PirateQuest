@@ -45,10 +45,38 @@ layer_t layers[LAYER_COUNT] = {
     },
     {
         .filepath = "assets/map/map_9.csv",
-        .offset = 99
+        .offset = 100
     },
     {
         .filepath = "assets/map/map_10.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_11.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_12.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_13.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_14.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_15.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_16.csv",
+        .offset = 100
+    },
+    {
+        .filepath = "assets/map/map_17.csv",
         .offset = 100
     }
 };

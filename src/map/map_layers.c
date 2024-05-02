@@ -74,10 +74,6 @@ layer_t layers[LAYER_COUNT] = {
     {
         .filepath = "assets/map/map_16.csv",
         .offset = 100
-    },
-    {
-        .filepath = "assets/map/map_17.csv",
-        .offset = 100
     }
 };
 

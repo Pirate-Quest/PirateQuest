@@ -128,6 +128,7 @@ static void button_pressed(pirate_quest_t *game)
         update_texture(game, i, BUTTON_ACTIVE);
         if (buttons[i].callback != NULL)
             buttons[i].callback(game, &buttons[i], game->buttons);
+        play_sound(game, ZIPCLICK_SOUND);
     }
 }
 

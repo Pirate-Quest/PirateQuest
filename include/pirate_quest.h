@@ -9,6 +9,7 @@
     #define PIRATE_QUEST_H
 
     #include <SFML/Graphics.h>
+    #include <SFML/Audio.h>
     #include "commons.h"
     #include "render.h"
     #include "map.h"
@@ -86,12 +87,14 @@ struct button_s {
     sfText *text;
 };
 
+// gui/button/button_registry.c
 void init_buttons(pirate_quest_t *game);
 void show_buttons(pirate_quest_t *game);
 void button_event(sfEvent event, pirate_quest_t *game);
 
 typedef sfSprite *square_t[LAYER_COUNT][RENDER_HEIGHT][RENDER_WIDTH];
 typedef int collision_t[MAP_HEIGHT][MAP_WIDTH];
+typedef struct sound_impl_s sound_impl_t;
 
 struct pirate_quest_s {
     render_window_t *window;
@@ -105,6 +108,7 @@ struct pirate_quest_s {
     sfTexture *tileset;
     button_t *buttons;
     sfFont *font;
+    sound_impl_t *sounds;
 };
 
 typedef struct asset_s {
@@ -143,5 +147,24 @@ void draw_back_tiles_object(pirate_quest_t *game, int layer, int y);
 
 // render/render_window.c
 resolution_t get_resolution(pirate_quest_t *game);
+
+typedef enum {
+    ZIPCLICK_SOUND,
+} sound_key_t;
+
+typedef struct sound_s {
+    sound_key_t key;
+    char *path;
+} sound_t;
+
+struct sound_impl_s {
+    sound_key_t key;
+    sfSound *sound;
+};
+
+// sound/sound_registry.c
+void init_sound(pirate_quest_t *game);
+void play_sound(pirate_quest_t *game, sound_key_t key);
+void destroy_sounds(pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */

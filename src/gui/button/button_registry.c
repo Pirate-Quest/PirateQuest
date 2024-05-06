@@ -97,7 +97,8 @@ void show_buttons(pirate_quest_t *game)
     for (int i = 0; i < button_count; i++) {
         if (game->buttons[i].status == BUTTON_HIDDEN)
             continue;
-        if (buttons[i].show_btn != NULL && !buttons[i].show_btn(game, &buttons[i], game->buttons)) {
+        if (buttons[i].show_btn != NULL
+            && !buttons[i].show_btn(game, &buttons[i], game->buttons)) {
             game->buttons[i] = BUTTON_HIDDEN;
             continue;
         }

@@ -17,7 +17,8 @@ const button_builder_t buttons[] = {
         .text_size = 40,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.5,
-        .callback = NULL
+        .callback = NULL,
+        .show_btn = NULL
     },
     {
         .path = "assets/button/basic_btn.png",
@@ -27,7 +28,8 @@ const button_builder_t buttons[] = {
         .text_size = 40,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.5,
-        .callback = NULL
+        .callback = NULL,
+        .show_btn = NULL
     },
     {
         .path = "assets/button/basic_btn.png",
@@ -37,7 +39,8 @@ const button_builder_t buttons[] = {
         .text_size = 30,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.5,
-        .callback = NULL
+        .callback = NULL,
+        .show_btn = NULL
     }
 };
 const int button_count = sizeof(buttons) / sizeof(button_builder_t);
@@ -92,7 +95,9 @@ void init_buttons(pirate_quest_t *game)
 void show_buttons(pirate_quest_t *game)
 {
     for (int i = 0; i < button_count; i++) {
-        if (game->buttons[i].status == BUTTON_HIDDEN)
+        if (game->buttons[i].status == BUTTON_HIDDEN
+            || (buttons[i].show_btn != NULL &&
+            !buttons[i].show_btn(game, &buttons[i], game->buttons)))
             continue;
         sfRenderWindow_drawSprite(game->window->window,
             game->buttons[i].sprite, NULL);

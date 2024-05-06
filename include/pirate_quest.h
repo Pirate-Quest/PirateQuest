@@ -17,6 +17,12 @@
 
 typedef struct pirate_quest_s pirate_quest_t;
 
+typedef enum {
+    GAME_STATE_MENU,
+    GAME_STATE_PLAYING,
+    GAME_STATE_TRANSITION
+} game_state_t;
+
 typedef struct task_s {
     int (*on_tick)(pirate_quest_t *, hashtable_t *);
     int (*on_end)(pirate_quest_t *, hashtable_t *);
@@ -66,7 +72,12 @@ typedef struct button_builder_s {
     int text_size;
     sfColor text_color;
     float scale;
-    void(*callback)(
+    void (*callback)(
+        pirate_quest_t *game,
+        const struct button_builder_s *button,
+        button_t *buttons
+    );
+    int (*show_btn)(
         pirate_quest_t *game,
         const struct button_builder_s *button,
         button_t *buttons
@@ -97,6 +108,7 @@ typedef int collision_t[MAP_HEIGHT][MAP_WIDTH];
 typedef struct sound_impl_s sound_impl_t;
 
 struct pirate_quest_s {
+    game_state_t state;
     render_window_t *window;
     camera_t *camera;
     square_t square;

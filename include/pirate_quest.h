@@ -55,6 +55,41 @@ typedef struct player_s {
     task_t *task;
 } player_t;
 
+typedef struct button_s button_t;
+
+typedef struct button_builder_s {
+    char *path;
+    sfIntRect rect;
+    char *text;
+    sfVector2f text_pos;
+    int text_size;
+    sfColor text_color;
+    float scale;
+    void(*callback)(
+        pirate_quest_t *game,
+        const struct button_builder_s *button,
+        button_t *buttons
+    );
+} button_builder_t;
+
+typedef enum {
+    BUTTON_IDLE,
+    BUTTON_HOVER,
+    BUTTON_ACTIVE,
+    BUTTON_HIDDEN
+} button_status_t;
+
+struct button_s {
+    sfSprite *sprite;
+    button_status_t status;
+    sfTexture *texture;
+    sfText *text;
+};
+
+void init_buttons(pirate_quest_t *game);
+void show_buttons(pirate_quest_t *game);
+void button_event(sfEvent event, pirate_quest_t *game);
+
 typedef sfSprite *square_t[LAYER_COUNT][RENDER_HEIGHT][RENDER_WIDTH];
 typedef int collision_t[MAP_HEIGHT][MAP_WIDTH];
 
@@ -68,6 +103,8 @@ struct pirate_quest_s {
     task_daemon_t *task_daemon;
     collision_t collision;
     sfTexture *tileset;
+    button_t *buttons;
+    sfFont *font;
 };
 
 typedef struct asset_s {
@@ -107,5 +144,4 @@ void draw_back_tiles_object(pirate_quest_t *game, int layer, int y);
 // render/render_window.c
 resolution_t get_resolution(pirate_quest_t *game);
 
-// map/collision.c
 #endif /* PIRATE_QUEST_H */

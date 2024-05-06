@@ -73,6 +73,7 @@ static void update(pirate_quest_t *game)
     for (int i = 0; i < LAYER_COUNT; i++)
         for (int y = 0; y < RENDER_HEIGHT; y++)
             draw_front_tiles_object(game, i, y);
+    show_buttons(game);
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
     update_key_pressed(game);
@@ -80,7 +81,11 @@ static void update(pirate_quest_t *game)
 
 static int init_game(pirate_quest_t *game)
 {
+    game->font = sfFont_createFromFile("assets/font/Caribbean.ttf");
+    if (game->font == NULL)
+        return 1;
     init_icon(game->window);
+    init_buttons(game);
     init_collisions(game);
     init_layers();
     init_squares(game);

@@ -95,10 +95,12 @@ void init_buttons(pirate_quest_t *game)
 void show_buttons(pirate_quest_t *game)
 {
     for (int i = 0; i < button_count; i++) {
-        if (game->buttons[i].status == BUTTON_HIDDEN
-            || (buttons[i].show_btn != NULL &&
-            !buttons[i].show_btn(game, &buttons[i], game->buttons)))
+        if (game->buttons[i].status == BUTTON_HIDDEN)
             continue;
+        if (buttons[i].show_btn != NULL && !buttons[i].show_btn(game, &buttons[i], game->buttons)) {
+            game->buttons[i] = BUTTON_HIDDEN;
+            continue;
+        }
         sfRenderWindow_drawSprite(game->window->window,
             game->buttons[i].sprite, NULL);
         sfRenderWindow_drawText(game->window->window,

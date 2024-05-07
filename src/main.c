@@ -95,6 +95,7 @@ static int init_game(pirate_quest_t *game)
     init_layers();
     init_squares(game);
     game->player = init_player(game);
+    load_game(game, 0);
     return 0;
 }
 

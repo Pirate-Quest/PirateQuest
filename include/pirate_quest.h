@@ -14,6 +14,7 @@
     #include "render.h"
     #include "map.h"
     #include "settings.h"
+    #include "gamerules.h"
 
 typedef struct pirate_quest_s pirate_quest_t;
 
@@ -61,7 +62,24 @@ typedef struct game_phase_info_s {
     sfVector2i pos_in_map;
 } game_phase_info_t;
 
+typedef enum {
+    NONE_ITEM,
+    SWORD_ITEM,
+} inventory_item_t;
+
+    #define SLOT_COUNT 5
+
+typedef struct player_inventory_s {
+    inventory_item_t slots[SLOT_COUNT];
+} player_inventory_t;
+
 typedef struct player_data_s {
+    game_phase_t phase;
+    player_xp_t xp;
+    player_inventory_t inventory;
+    int resistance_lvl;
+    int strength_lvl;
+    int speed_lvl;
 } player_data_t;
 
 typedef struct player_s {
@@ -73,6 +91,7 @@ typedef struct player_s {
     sfTexture *texture;
     direction_t direction;
     task_t *task;
+    player_data_t *data;
 } player_t;
 
 typedef struct button_s button_t;
@@ -205,5 +224,7 @@ int show_main_menu_btns(pirate_quest_t *game,
     const button_builder_t *_, button_t *__);
 void init_main_menu(pirate_quest_t *game);
 void update_main_menu(pirate_quest_t *game);
+
+void load_game(pirate_quest_t *game, int id);
 
 #endif /* PIRATE_QUEST_H */

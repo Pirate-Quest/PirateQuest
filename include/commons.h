@@ -62,6 +62,7 @@ void *my_list_get(my_list_t *list, int index);
 void my_list_remove(my_list_t *list, void *value);
 int my_list_size(my_list_t *list);
 int my_list_contains(my_list_t *list, void *value);
+char *my_itoa(int nb);
 
 typedef struct vector_s {
     int x;

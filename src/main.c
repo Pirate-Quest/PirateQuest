@@ -74,6 +74,7 @@ static void update(pirate_quest_t *game)
     for (int i = 0; i < LAYER_COUNT; i++)
         for (int y = 0; y < RENDER_HEIGHT; y++)
             draw_front_tiles_object(game, i, y);
+    update_main_menu(game);
     show_buttons(game);
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
@@ -88,6 +89,7 @@ static int init_game(pirate_quest_t *game)
         return 1;
     init_sound(game);
     init_icon(game->window);
+    init_main_menu(game);
     init_buttons(game);
     init_collisions(game);
     init_layers();

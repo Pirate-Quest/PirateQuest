@@ -51,6 +51,19 @@ typedef struct task_daemon_s {
     double seconds;
 } task_daemon_t;
 
+typedef enum {
+    TUTORIAL_PHASE,
+    VILLAGE_PHASE
+} game_phase_t;
+
+typedef struct game_phase_info_s {
+    game_phase_t phase;
+    sfVector2i pos_in_map;
+} game_phase_info_t;
+
+typedef struct player_data_s {
+} player_data_t;
+
 typedef struct player_s {
     sfSprite *sprite;
     sfVector2f pos;
@@ -106,6 +119,7 @@ void button_event(sfEvent event, pirate_quest_t *game);
 typedef sfSprite *square_t[LAYER_COUNT][RENDER_HEIGHT][RENDER_WIDTH];
 typedef int collision_t[MAP_HEIGHT][MAP_WIDTH];
 typedef struct sound_impl_s sound_impl_t;
+typedef struct main_menu_s main_menu_t;
 
 struct pirate_quest_s {
     game_state_t state;
@@ -121,6 +135,7 @@ struct pirate_quest_s {
     button_t *buttons;
     sfFont *font;
     sound_impl_t *sounds;
+    main_menu_t *main_menu;
 };
 
 typedef struct asset_s {
@@ -162,6 +177,7 @@ resolution_t get_resolution(pirate_quest_t *game);
 
 typedef enum {
     ZIPCLICK_SOUND,
+    HURT_SOUND
 } sound_key_t;
 
 typedef struct sound_s {
@@ -178,5 +194,16 @@ struct sound_impl_s {
 void init_sound(pirate_quest_t *game);
 void play_sound(pirate_quest_t *game, sound_key_t key);
 void destroy_sounds(pirate_quest_t *game);
+
+struct main_menu_s {
+    sfTexture *background_texture;
+    sfSprite *background;
+};
+
+// gui/interface/main_menu.c
+int show_main_menu_btns(pirate_quest_t *game,
+    const button_builder_t *_, button_t *__);
+void init_main_menu(pirate_quest_t *game);
+void update_main_menu(pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */

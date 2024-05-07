@@ -11,36 +11,36 @@
 const button_builder_t buttons[] = {
     {
         .path = "assets/button/basic_btn.png",
-        .rect = (sfIntRect){50, 100, 401, 174},
+        .rect = (sfIntRect){100, 100, 401, 174},
         .text = "New",
         .text_pos = (sfVector2f){45, 15},
         .text_size = 40,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.5,
         .callback = NULL,
-        .show_btn = NULL
+        .show_btn = &show_main_menu_btns
     },
     {
         .path = "assets/button/basic_btn.png",
-        .rect = (sfIntRect){50, 200, 401, 174},
+        .rect = (sfIntRect){100, 200, 401, 174},
         .text = "Load",
         .text_pos = (sfVector2f){45, 15},
         .text_size = 40,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.5,
         .callback = NULL,
-        .show_btn = NULL
+        .show_btn = &show_main_menu_btns
     },
     {
         .path = "assets/button/basic_btn.png",
-        .rect = (sfIntRect){50, 300, 401, 174},
+        .rect = (sfIntRect){100, 300, 401, 174},
         .text = "Settings",
         .text_pos = (sfVector2f){22, 20},
         .text_size = 30,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.5,
         .callback = NULL,
-        .show_btn = NULL
+        .show_btn = &show_main_menu_btns
     }
 };
 const int button_count = sizeof(buttons) / sizeof(button_builder_t);
@@ -99,7 +99,7 @@ void show_buttons(pirate_quest_t *game)
             continue;
         if (buttons[i].show_btn != NULL
             && !buttons[i].show_btn(game, &buttons[i], game->buttons)) {
-            game->buttons[i] = BUTTON_HIDDEN;
+            game->buttons[i].status = BUTTON_HIDDEN;
             continue;
         }
         sfRenderWindow_drawSprite(game->window->window,

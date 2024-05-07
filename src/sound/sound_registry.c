@@ -13,6 +13,7 @@ const sound_t sounds[] = {
         .path = "assets/sound/zipclick.ogg"
     }
 };
+
 const int sound_count = sizeof(sounds) / sizeof(sound_t);
 
 void init_sound(pirate_quest_t *game)

@@ -73,7 +73,7 @@ static void read_params(char *line, player_data_t **player_data)
 
 void load_game(pirate_quest_t *game, int id)
 {
-    FILE *file = fopen(my_strcat(my_strdup("save"), my_itoa(id)), "r");
+    FILE *file = fopen(my_strcat(my_strdup("save"), my_itoa(id)), "w+");
     player_data_t **player_data = &game->player->data;
     char *line = NULL;
     size_t len = 0;

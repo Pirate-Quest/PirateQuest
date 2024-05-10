@@ -84,6 +84,7 @@ static void update(pirate_quest_t *game)
 static int init_game(pirate_quest_t *game)
 {
     game->state = GAME_STATE_MENU;
+    game->current_gui = MAIN_MENU;
     game->font = sfFont_createFromFile("assets/font/Caribbean.ttf");
     if (game->font == NULL)
         return 1;
@@ -95,7 +96,6 @@ static int init_game(pirate_quest_t *game)
     init_layers();
     init_squares(game);
     game->player = init_player(game);
-    load_game(game, 0);
     return 0;
 }
 

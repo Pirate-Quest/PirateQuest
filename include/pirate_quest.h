@@ -19,6 +19,12 @@
 typedef struct pirate_quest_s pirate_quest_t;
 
 typedef enum {
+    MAIN_MENU,
+    SAVE_MENU,
+    SETTINGS_MENU,
+} current_gui_t;
+
+typedef enum {
     GAME_STATE_MENU,
     GAME_STATE_PLAYING,
     GAME_STATE_TRANSITION
@@ -142,6 +148,8 @@ typedef struct main_menu_s main_menu_t;
 
 struct pirate_quest_s {
     game_state_t state;
+    current_gui_t current_gui;
+    main_menu_t *main_menu;
     render_window_t *window;
     camera_t *camera;
     square_t square;
@@ -154,7 +162,6 @@ struct pirate_quest_s {
     button_t *buttons;
     sfFont *font;
     sound_impl_t *sounds;
-    main_menu_t *main_menu;
 };
 
 typedef struct asset_s {
@@ -222,9 +229,18 @@ struct main_menu_s {
 // gui/interface/main_menu.c
 int show_main_menu_btns(pirate_quest_t *game,
     const button_builder_t *_, button_t *__);
+void main_menu_btns_event(pirate_quest_t *game,
+    button_builder_t *button, button_t *_);
 void init_main_menu(pirate_quest_t *game);
 void update_main_menu(pirate_quest_t *game);
 
-void load_game(pirate_quest_t *game, int id);
+// gui/interface/main_menu.c
+int show_save_menu_btns(pirate_quest_t *game,
+    const button_builder_t *_, button_t *__);
+void save_menu_btns_event(pirate_quest_t *game,
+    button_builder_t *button, button_t *_);
+
+// game/game_save.c
+void load_game(pirate_quest_t *game, char *id);
 
 #endif /* PIRATE_QUEST_H */

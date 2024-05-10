@@ -28,7 +28,7 @@ const button_builder_t buttons[] = {
         .text_size = 40,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.5,
-        .callback = NULL,
+        .callback = &main_menu_btns_event,
         .show_btn = &show_main_menu_btns
     },
     {
@@ -41,6 +41,50 @@ const button_builder_t buttons[] = {
         .scale = 0.5,
         .callback = NULL,
         .show_btn = &show_main_menu_btns
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){100, 100, 401, 174},
+        .text = "Save-1",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.5,
+        .callback = &save_menu_btns_event,
+        .show_btn = &show_save_menu_btns
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){100, 200, 401, 174},
+        .text = "Save-2",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.5,
+        .callback = &save_menu_btns_event,
+        .show_btn = &show_save_menu_btns
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){100, 300, 401, 174},
+        .text = "Save-3",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.5,
+        .callback = &save_menu_btns_event,
+        .show_btn = &show_save_menu_btns
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){100, 400, 401, 174},
+        .text = "Save-4",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.5,
+        .callback = &save_menu_btns_event,
+        .show_btn = &show_save_menu_btns
     }
 };
 const int button_count = sizeof(buttons) / sizeof(button_builder_t);

@@ -7,6 +7,9 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include "../../include/pirate_quest.h"
 
 void init_as_default(pirate_quest_t *game)
@@ -21,9 +24,9 @@ void init_as_default(pirate_quest_t *game)
     game->player->data->speed_lvl = 0;
 }
 
-void save_game(pirate_quest_t *game, int id)
+void save_game(pirate_quest_t *game, char *id)
 {
-    FILE *file = fopen(my_strcat(my_strdup("save"), my_itoa(id)), "w");
+    FILE *file = fopen(id, "w");
     player_data_t *player_data = game->player->data;
 
     if (!file)
@@ -50,6 +53,20 @@ static int my_intlen(int nb)
     return len;
 }
 
+static void read_slot_params(char *line, player_data_t **player_data)
+{
+    if (my_strncmp(line, "slot0=", 6) == 0)
+        (*player_data)->inventory.slots[0] = my_getnbr(line + 6);
+    if (my_strncmp(line, "slot1=", 6) == 0)
+        (*player_data)->inventory.slots[1] = my_getnbr(line + 6);
+    if (my_strncmp(line, "slot2=", 6) == 0)
+        (*player_data)->inventory.slots[2] = my_getnbr(line + 6);
+    if (my_strncmp(line, "slot3=", 6) == 0)
+        (*player_data)->inventory.slots[3] = my_getnbr(line + 6);
+    if (my_strncmp(line, "slot4=", 6) == 0)
+        (*player_data)->inventory.slots[4] = my_getnbr(line + 6);
+}
+
 static void read_params(char *line, player_data_t **player_data)
 {
     if (my_strncmp(line, "phase=", 6) == 0)
@@ -64,16 +81,24 @@ static void read_params(char *line, player_data_t **player_data)
         (*player_data)->strength_lvl = my_getnbr(line + 13);
     if (my_strncmp(line, "speed_lvl=", 10) == 0)
         (*player_data)->speed_lvl = my_getnbr(line + 10);
-    for (int i = 0; i < SLOT_COUNT; i++)
-        if (my_strncmp(line, my_strcat("slot", my_itoa(i)),
-            4 + my_intlen(i)) == 0)
-            (*player_data)->inventory.slots[i] =
-                my_getnbr(line + 4 + my_intlen(i));
+    read_slot_params(line, player_data);
 }
 
-void load_game(pirate_quest_t *game, int id)
+void print_player_data(player_data_t *player_data)
 {
-    FILE *file = fopen(my_strcat(my_strdup("save"), my_itoa(id)), "w+");
+    printf("phase=%d\n", player_data->phase);
+    printf("current_lvl=%d\n", player_data->xp.current_lvl);
+    printf("current_xp=%d\n", player_data->xp.current_xp);
+    printf("resistance_lvl=%d\n", player_data->resistance_lvl);
+    printf("strength_lvl=%d\n", player_data->strength_lvl);
+    printf("speed_lvl=%d\n", player_data->speed_lvl);
+    for (int i = 0; i < SLOT_COUNT; i++)
+        printf("slot%d=%d\n", i, player_data->inventory.slots[i]);
+}
+
+void load_game(pirate_quest_t *game, char *id)
+{
+    FILE *file = fopen(id, "r");
     player_data_t **player_data = &game->player->data;
     char *line = NULL;
     size_t len = 0;

@@ -73,6 +73,17 @@ typedef enum {
     SWORD_ITEM,
 } inventory_item_t;
 
+typedef struct inventory_item_registry_s {
+    inventory_item_t item;
+    char *name;
+    char *path;
+} inventory_item_registry_t;
+
+typedef struct inventory_item_impl_s {
+    sfSprite *sprite;
+    sfTexture *texture;
+} inventory_item_impl_t;
+
     #define SLOT_COUNT 5
 
 typedef struct player_inventory_s {
@@ -230,7 +241,7 @@ struct main_menu_s {
 int show_main_menu_btns(pirate_quest_t *game,
     const button_builder_t *_, button_t *__);
 void main_menu_btns_event(pirate_quest_t *game,
-    button_builder_t *button, button_t *_);
+    const button_builder_t *button, button_t *_);
 void init_main_menu(pirate_quest_t *game);
 void update_main_menu(pirate_quest_t *game);
 
@@ -238,9 +249,18 @@ void update_main_menu(pirate_quest_t *game);
 int show_save_menu_btns(pirate_quest_t *game,
     const button_builder_t *_, button_t *__);
 void save_menu_btns_event(pirate_quest_t *game,
-    button_builder_t *button, button_t *_);
+    const button_builder_t *button, button_t *_);
 
 // game/game_save.c
 void load_game(pirate_quest_t *game, char *id);
+
+// game/game_phase.c
+sfVector2i get_pos_from_phase(game_phase_t phase);
+
+// gui/interface/back_button.c
+int show_back_btn(pirate_quest_t *game,
+    const button_builder_t *_, button_t *__);
+void back_btn_event(pirate_quest_t *game,
+    const button_builder_t *button, button_t *_);
 
 #endif /* PIRATE_QUEST_H */

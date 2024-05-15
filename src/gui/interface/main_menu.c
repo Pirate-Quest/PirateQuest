@@ -14,12 +14,18 @@ int show_main_menu_btns(pirate_quest_t *game,
 }
 
 void main_menu_btns_event(pirate_quest_t *game,
-    button_builder_t *button, button_t *_)
+    const button_builder_t *button, button_t *_)
 {
     if (button->text == NULL)
         return;
-    if (my_strcmp(button->text, "Load") == 0) {
+    if (my_strcmp(button->text, "Play") == 0) {
         game->current_gui = SAVE_MENU;
+    }
+    if (my_strcmp(button->text, "Settings") == 0) {
+        game->current_gui = SETTINGS_MENU;
+    }
+    if (my_strcmp(button->text, "Exit") == 0) {
+        sfRenderWindow_close(game->window->window);
     }
 }
 
@@ -40,6 +46,8 @@ void init_main_menu(pirate_quest_t *game)
 
 void update_main_menu(pirate_quest_t *game)
 {
+    if (game->main_menu == NULL || game->state != GAME_STATE_MENU)
+        return;
     sfRenderWindow_drawSprite(game->window->window,
         game->main_menu->background, NULL);
 }

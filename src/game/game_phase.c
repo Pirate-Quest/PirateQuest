@@ -10,11 +10,11 @@
 const game_phase_info_t game_phases[] = {
     {
         .phase = TUTORIAL_PHASE,
-        .pos_in_map = {0, 0}
+        .pos_in_map = {19, 69}
     },
     {
         .phase = VILLAGE_PHASE,
-        .pos_in_map = {0, 0}
+        .pos_in_map = {143, 128}
     }
 };
 

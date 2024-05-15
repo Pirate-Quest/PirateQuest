@@ -14,9 +14,12 @@ int show_save_menu_btns(pirate_quest_t *game,
 }
 
 void save_menu_btns_event(pirate_quest_t *game,
-    button_builder_t *button, button_t *_)
+    const button_builder_t *button, button_t *_)
 {
     if (button->text == NULL)
         return;
     load_game(game, button->text);
+    game->state = GAME_STATE_PLAYING;
+    game->current_gui = MAIN_MENU;
+    game->camera->map_position = get_pos_from_phase(game->player->data->phase);
 }

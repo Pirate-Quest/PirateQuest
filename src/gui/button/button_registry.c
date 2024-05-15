@@ -12,18 +12,7 @@ const button_builder_t buttons[] = {
     {
         .path = "assets/button/basic_btn.png",
         .rect = (sfIntRect){100, 100, 401, 174},
-        .text = "New",
-        .text_pos = (sfVector2f){45, 15},
-        .text_size = 40,
-        .text_color = (sfColor){255, 255, 255, 255},
-        .scale = 0.5,
-        .callback = NULL,
-        .show_btn = &show_main_menu_btns
-    },
-    {
-        .path = "assets/button/basic_btn.png",
-        .rect = (sfIntRect){100, 200, 401, 174},
-        .text = "Load",
+        .text = "Play",
         .text_pos = (sfVector2f){45, 15},
         .text_size = 40,
         .text_color = (sfColor){255, 255, 255, 255},
@@ -33,13 +22,24 @@ const button_builder_t buttons[] = {
     },
     {
         .path = "assets/button/basic_btn.png",
-        .rect = (sfIntRect){100, 300, 401, 174},
+        .rect = (sfIntRect){100, 200, 401, 174},
         .text = "Settings",
         .text_pos = (sfVector2f){22, 20},
         .text_size = 30,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.5,
-        .callback = NULL,
+        .callback = &main_menu_btns_event,
+        .show_btn = &show_main_menu_btns
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){100, 300, 401, 174},
+        .text = "Exit",
+        .text_pos = (sfVector2f){45, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.5,
+        .callback = &main_menu_btns_event,
         .show_btn = &show_main_menu_btns
     },
     {
@@ -85,8 +85,20 @@ const button_builder_t buttons[] = {
         .scale = 0.5,
         .callback = &save_menu_btns_event,
         .show_btn = &show_save_menu_btns
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){100, 550, 401, 174},
+        .text = "Back",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.5,
+        .callback = &back_btn_event,
+        .show_btn = &show_back_btn
     }
 };
+
 const int button_count = sizeof(buttons) / sizeof(button_builder_t);
 
 static void update_texture(pirate_quest_t *game, int i, int status)
@@ -171,34 +183,37 @@ static void button_hover(pirate_quest_t *game, sfVector2f mouse_pos)
     }
 }
 
-static void button_pressed(pirate_quest_t *game)
+static void button_pressed(pirate_quest_t *game, sfVector2f mouse_pos)
 {
     for (int i = 0; i < button_count; i++) {
         if (game->buttons[i].status != BUTTON_HOVER)
             continue;
         game->buttons[i].status = BUTTON_ACTIVE;
         update_texture(game, i, BUTTON_ACTIVE);
+        play_sound(game, ZIPCLICK_SOUND);
         if (buttons[i].callback != NULL)
             buttons[i].callback(game, &buttons[i], game->buttons);
-        play_sound(game, ZIPCLICK_SOUND);
+    }
+    for (int i = 0; i < button_count; i++) {
+        button_hover(game, mouse_pos);
+    }
+}
+
+static void unactive_buttons(pirate_quest_t *game, sfVector2f mouse_pos)
+{
+    for (int i = 0; i < button_count; i++) {
+        game->buttons[i].status = BUTTON_IDLE;
+        button_hover(game, mouse_pos);
     }
 }
 
 sfVector2f get_mouse_pos(pirate_quest_t *game)
 {
     sfVector2i mouse_pos = sfMouse_getPositionRenderWindow(
-        game->window->window
+            game->window->window
     );
 
     return (sfVector2f) {mouse_pos.x, mouse_pos.y};
-}
-
-static void unactive_buttons(pirate_quest_t *game)
-{
-    for (int i = 0; i < button_count; i++) {
-        game->buttons[i].status = BUTTON_IDLE;
-        button_hover(game, get_mouse_pos(game));
-    }
 }
 
 void button_event(sfEvent event, pirate_quest_t *game)
@@ -208,7 +223,7 @@ void button_event(sfEvent event, pirate_quest_t *game)
     if (event.type == sfEvtMouseMoved)
         button_hover(game, get_mouse_pos(game));
     if (event.type == sfEvtMouseButtonPressed)
-        button_pressed(game);
+        button_pressed(game, get_mouse_pos(game));
     if (event.type == sfEvtMouseButtonReleased)
-        unactive_buttons(game);
+        unactive_buttons(game, get_mouse_pos(game));
 }

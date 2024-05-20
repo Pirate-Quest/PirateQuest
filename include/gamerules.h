@@ -15,6 +15,6 @@ typedef struct player_xp_s {
 } player_xp_t;
 
 player_xp_t *init_player_xp(void);
-player_xp_t *add_xp(player_xp_t *playerXp, unsigned int amount);
+player_xp_t *add_xp(player_xp_t *player_xp, unsigned int amount);
 
 #endif //MY_RPG_GAMERULES_H

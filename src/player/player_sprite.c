@@ -42,6 +42,7 @@ player_t *init_player(pirate_quest_t *game)
     player->task = register_task(
         game, &task, NULL);
     update_direction(player, DOWN);
+    player->data = malloc(sizeof(player_data_t));
     return player;
 }
 

@@ -3,4 +3,4 @@ down: 18
 left: 16
 right: 3
 attack: 5
-res: 0
+res: 1

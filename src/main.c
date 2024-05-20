@@ -13,6 +13,8 @@
 
 void free_game(pirate_quest_t *game)
 {
+    free_dialogues_registry(game);
+    free_interlocutors_registry(game);
     destroy_sounds(game);
     sfTexture_destroy(game->tileset);
     if (game->camera != NULL)
@@ -88,6 +90,8 @@ static int init_game(pirate_quest_t *game)
     game->font = sfFont_createFromFile("assets/font/Caribbean.ttf");
     if (game->font == NULL)
         return 1;
+    init_dialogues_registry(game);
+    init_interlocutors_registry(game);
     init_sound(game);
     init_icon(game->window);
     init_main_menu(game);

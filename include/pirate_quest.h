@@ -158,6 +158,7 @@ typedef int collision_t[MAP_HEIGHT][MAP_WIDTH];
 typedef struct sound_impl_s sound_impl_t;
 typedef struct main_menu_s main_menu_t;
 typedef struct dialogue_impl_s dialogue_impl_t;
+typedef struct interlocutor_impl_s interlocutor_impl_t;
 
 struct pirate_quest_s {
     game_state_t state;
@@ -176,6 +177,7 @@ struct pirate_quest_s {
     sfFont *font;
     sound_impl_t *sounds;
     dialogue_impl_t *dialogues;
+    interlocutor_impl_t *interlocutors;
 };
 
 typedef struct asset_s {
@@ -270,8 +272,26 @@ void back_btn_event(pirate_quest_t *game,
 typedef enum {
     UNKNOWN,
     ME,
-    FRANCK_THE_PIRATE,
+    FRANCK,
+    ANA,
 } dialogue_interlocutor_t;
+
+typedef struct interlocutor_builder_s {
+    dialogue_interlocutor_t interlocutor;
+    char *name;
+    char *file_path;
+    float scale;
+    sfVector2f origin;
+    sfVector2f size;
+} interlocutor_builder_t;
+
+struct interlocutor_impl_s {
+    const dialogue_interlocutor_t *interlocutor;
+    sfTexture *texture;
+    sfSprite *sprite;
+    sfText *name_text;
+    sfRectangleShape *name_bg;
+};
 
 typedef struct dialogue_s {
     FILE *file;
@@ -300,6 +320,9 @@ dialogue_t *parse_dialogue_file(const char *file_path, int *dialogue_count);
 void free_dialogues(dialogue_t *dialogues, int dialogue_count);
 
 // dialogues/dialogues_registry.c
+void init_interlocutors_registry(pirate_quest_t *game);
+void free_interlocutors_registry(pirate_quest_t *game);
+void draw_interlocutor(pirate_quest_t *game, dialogue_interlocutor_t i);
 void init_dialogues_registry(pirate_quest_t *game);
 void free_dialogues_registry(pirate_quest_t *game);
 

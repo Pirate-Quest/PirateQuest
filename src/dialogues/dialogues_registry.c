@@ -85,22 +85,35 @@ static void set_interlocutor_scale(pirate_quest_t *game, int i)
 
 static void set_interlocutor_name(pirate_quest_t *game, int i)
 {
+    sfVector2f pos = sfSprite_getPosition(game->interlocutors[i].sprite);
+    sfFloatRect rect;
+
     game->interlocutors[i].name_text = sfText_create();
     sfText_setString(game->interlocutors[i].name_text, interlocutors[i].name);
     sfText_setFont(game->interlocutors[i].name_text, game->font);
     sfText_setCharacterSize(game->interlocutors[i].name_text, 20);
+    rect = sfText_getGlobalBounds(game->interlocutors[i].name_text);
+    sfText_setPosition(game->interlocutors[i].name_text,
+        (sfVector2f){pos.x + (interlocutors[i].size.x
+        * interlocutors[i].scale * game->camera->zoom) / 2 - rect.width / 2,
+        pos.y - 10});
 }
 
 static void set_interlocutor_name_bg(pirate_quest_t *game, int i)
 {
+    sfVector2f pos = sfSprite_getPosition(game->interlocutors[i].sprite);
+    sfFloatRect rect = sfText_getGlobalBounds(
+        game->interlocutors[i].name_text);
+
     game->interlocutors[i].name_bg = sfRectangleShape_create();
     sfRectangleShape_setFillColor(game->interlocutors[i].name_bg,
-        sfBlack);
+        (sfColor){0, 0, 0, 150});
     sfRectangleShape_setSize(game->interlocutors[i].name_bg,
-        (sfVector2f){sfText_getGlobalBounds(
-            game->interlocutors[i].name_text).width + 10,
-        sfText_getGlobalBounds(
-            game->interlocutors[i].name_text).height + 10});
+        (sfVector2f){rect.width + 30, rect.height + 30});
+    sfRectangleShape_setPosition(game->interlocutors[i].name_bg,
+        (sfVector2f){pos.x - 10 + (interlocutors[i].size.x
+        * interlocutors[i].scale * game->camera->zoom) / 2 -
+        rect.width / 2 - 5, pos.y - 20});
 }
 
 void init_interlocutors_registry(pirate_quest_t *game)

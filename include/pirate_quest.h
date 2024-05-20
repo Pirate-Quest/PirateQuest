@@ -10,6 +10,7 @@
 
     #include <SFML/Graphics.h>
     #include <SFML/Audio.h>
+    #include <stdio.h>
     #include "commons.h"
     #include "render.h"
     #include "map.h"
@@ -272,6 +273,7 @@ typedef enum {
 } dialogue_interlocutor_t;
 
 typedef struct dialogue_s {
+    FILE *file;
     dialogue_interlocutor_t speaker;
     char *content;
     int time;

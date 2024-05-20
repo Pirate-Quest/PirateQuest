@@ -23,7 +23,7 @@ static dialogue_interlocutor_t get_speaker_enum(const char *speaker)
 
 static dialogue_t *realloc_dialogues(dialogue_t *dialogues, int dialogue_count)
 {
-    dialogues = realloc(dialogues, (dialogue_count + 1) * sizeof(dialogue_t));
+    dialogues = realloc(dialogues, sizeof(dialogue_t) * (dialogue_count + 1));
     if (!dialogues) {
         perror("Memory allocation failed");
         exit(EXIT_FAILURE);
@@ -32,13 +32,13 @@ static dialogue_t *realloc_dialogues(dialogue_t *dialogues, int dialogue_count)
 }
 
 static void parse_line(dialogue_t *dialogues, int dialogue_count, char *line,
-    char *content, FILE *file)
+    char *content)
 {
     char speaker[50];
     int time;
 
     if (sscanf(line, "[%49[^]]]=>%d\n", speaker, &time) == 2) {
-        if (fgets(content, sizeof(content), file)) {
+        if (fgets(content, sizeof(content), dialogues->file)) {
             content[strcspn(content, "\n")] = '\0';
             dialogues[dialogue_count].speaker = get_speaker_enum(speaker);
             dialogues[dialogue_count].time = time;
@@ -61,7 +61,8 @@ dialogue_t *parse_dialogue_file(const char *file_path, int *dialogue_count)
         if (line[0] != '[')
             continue;
         dialogues = realloc_dialogues(dialogues, *dialogue_count);
-        parse_line(dialogues, *dialogue_count, line, content, file);
+        dialogues[*dialogue_count].file = file;
+        parse_line(dialogues, *dialogue_count, line, content);
         (*dialogue_count)++;
     }
     fclose(file);

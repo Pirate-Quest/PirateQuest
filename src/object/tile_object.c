@@ -41,17 +41,17 @@ const tile_object_t tile_objects[] = {
     {
         .id = 2188,
         .rect = (sfIntRect){2752, 544, 32 * 4, 32 * 5},
-        .origin = (sfVector2f){32, 32 * 4},
+        .origin = (sfVector2f){32 * 2, 32 * 4},
     },
     {
         .id = 2192,
         .rect = (sfIntRect){2880, 544, 32 * 4, 32 * 5},
-        .origin = (sfVector2f){32, 32 * 4},
+        .origin = (sfVector2f){32 * 2, 32 * 4},
     },
     {
         .id = 2196,
-        .rect = (sfIntRect){3008, 544, 32 * 4, 32 * 5},
-        .origin = (sfVector2f){32, 32 * 4},
+        .rect = (sfIntRect){3008, 576, 32 * 4, 32 * 4},
+        .origin = (sfVector2f){32 * 2, 32 * 3},
     },
     {
         .id = 4934,

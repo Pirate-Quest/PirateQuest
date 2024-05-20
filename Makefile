@@ -22,6 +22,8 @@ OBJS			=	$(addprefix $(BUILD_DIR)/, $(SRCS_FILE:.c=.o))
 
 SRCS_FILE	=	src/main.c							\
 				src/assets.c						\
+				src/dialogues/dialogues_parser.c	\
+				src/dialogues/dialogues_registry.c	\
 				src/event/close_event.c				\
 				src/event/event_handler.c			\
 				src/event/input_event.c				\

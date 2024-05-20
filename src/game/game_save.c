@@ -7,9 +7,6 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <unistd.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 #include "../../include/pirate_quest.h"
 
 void init_as_default(pirate_quest_t *game)

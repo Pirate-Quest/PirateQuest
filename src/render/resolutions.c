@@ -10,9 +10,8 @@
 #include <SFML/Graphics.h>
 
 const resolution_t resolutions[3] = {
-    {1280, 720},
-    {1920, 1080},
-    {800, 600}
+    {.width = 1280, .height = 720, .render_width = 18, .render_height = 11},
+    {.width = 1920, .height = 1080, .render_width = 18, .render_height = 11}
 };
 
 resolution_t get_resolution(pirate_quest_t *game)

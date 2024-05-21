@@ -54,7 +54,6 @@ int player_is_in_square(pirate_quest_t *game, int x, int y)
         32 * game->camera->zoom,
         32 * game->camera->zoom
     };
-
     return vector_is_in_rect(game->player->pos, squarer_rect);
 }
 

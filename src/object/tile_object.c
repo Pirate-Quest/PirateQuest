@@ -57,6 +57,56 @@ const tile_object_t tile_objects[] = {
         .id = 4934,
         .rect = (sfIntRect){1056, 1504, 32 * 2, 32 * 3},
         .origin = (sfVector2f){32, 32 * 2},
+    },
+    {
+        .id = 5252,
+        .rect = (sfIntRect){1664, 1632, 32 * 2, 32 * 2},
+        .origin = (sfVector2f){0, 32},
+    },
+    {
+        .id = 5038,
+        .rect = (sfIntRect){1184, 1504, 32 * 3, 32 * 3},
+        .origin = (sfVector2f){32, 32*3},
+    },
+    {
+        .id = 4935,
+        .rect = (sfIntRect){1120, 1504, 32 * 2, 32 * 2},
+        .origin = (sfVector2f){0, 64},
+    },
+    {
+        .id = 3651,
+        .rect = (sfIntRect){1632, 1120, 32, 32},
+        .origin = (sfVector2f){0, 32},
+    },
+    {
+        .id = 3650,
+        .rect = (sfIntRect){1600, 1120, 32, 32 },
+        .origin = (sfVector2f){0, 32},
+    },
+    {
+        .id = 8622,
+        .rect = (sfIntRect){672, 2624, 32 * 4, 32 * 4},
+        .origin = (sfVector2f){32, 128},
+    },
+    {
+        .id = 8632,
+        .rect = (sfIntRect){992, 2624, 32 * 3, 32 * 4},
+        .origin = (sfVector2f){32, 128},
+    },
+    {
+        .id = 8622,
+        .rect = (sfIntRect){672, 2624, 32 * 4, 32 * 4},
+        .origin = (sfVector2f){32, 128},
+    },
+    {
+        .id = 8628,
+        .rect = (sfIntRect){864, 2624, 32 * 4, 32 * 4},
+        .origin = (sfVector2f){32, 128},
+    },
+    {
+        .id = 6607,
+        .rect = (sfIntRect){224, 2048, 32 * 2, 32 * 2},
+        .origin = (sfVector2f){0, 64},
     }
 };
 

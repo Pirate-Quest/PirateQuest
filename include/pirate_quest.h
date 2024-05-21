@@ -278,6 +278,7 @@ typedef enum {
     ME,
     FRANCK,
     ANA,
+    ASTORA,
 } dialogue_interlocutor_t;
 
 typedef struct interlocutor_builder_s {
@@ -306,7 +307,8 @@ typedef struct dialogue_s {
 
 typedef enum {
     NONE_DIALOGUE,
-    TUTORIAL_1
+    TUTORIAL_1,
+    FIRST_NPC,
 } dialogue_enum_t;
 
 typedef struct dialogue_builder_s {

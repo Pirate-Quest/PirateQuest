@@ -357,7 +357,7 @@ void draw_interlocutor(pirate_quest_t *game, dialogue_interlocutor_t i);
 void init_dialogues_registry(pirate_quest_t *game);
 void free_dialogues_registry(pirate_quest_t *game);
 
-#define IS_DIALOGUE_PLAYING(g) ((g)->dialogue_service->is_dialogue_playing)
+    #define IS_DIALOGUE_PLAYING(g) ((g)->dialogue_service->is_dialogue_playing)
 
 // dialogues/dialogue_player.c
 void init_dialogue_box(pirate_quest_t *game);

@@ -66,7 +66,7 @@ const tile_object_t tile_objects[] = {
     {
         .id = 5038,
         .rect = (sfIntRect){1184, 1504, 32 * 3, 32 * 3},
-        .origin = (sfVector2f){32, 32*3},
+        .origin = (sfVector2f){32, 32 * 3},
     },
     {
         .id = 4935,

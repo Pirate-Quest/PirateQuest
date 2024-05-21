@@ -48,10 +48,11 @@ player_t *init_player(pirate_quest_t *game)
 
 int update_player(pirate_quest_t *game)
 {
-    if (player_is_in_square(game, 46, 70) && game->dialogue_service->is_dialogue_playing == 0 &&
-            sfKeyboard_isKeyPressed(sfKeyE))
+    if (player_is_in_square(game, 46, 70) && game->dialogue_service->
+        is_dialogue_playing == 0 && sfKeyboard_isKeyPressed(sfKeyE))
         play_dialogue(game, get_dialogue(game, FIRST_NPC), 0);
-    if (game->player->is_moving == 0 || game->dialogue_service->is_dialogue_playing) {
+    if (game->player->is_moving == 0
+        || game->dialogue_service->is_dialogue_playing) {
         game->player->rect.left = 0;
         sfSprite_setTextureRect(game->player->sprite, game->player->rect);
         sfRenderWindow_drawSprite(

@@ -57,13 +57,22 @@ int player_is_in_square(pirate_quest_t *game, int x, int y)
     return vector_is_in_rect(game->player->pos, squarer_rect);
 }
 
-int player_is_in_square_rect(pirate_quest_t *game, sfVector2i pos1, sfVector2i pos2)
+static int player_is_in_square_rect2(pirate_quest_t *game,
+    sfVector2i pos1, sfVector2i pos2, int i)
+{
+    for (int j = pos1.y; j <= pos2.y; j++) {
+        if (player_is_in_square(game, i, j))
+            return 1;
+    }
+    return 0;
+}
+
+int player_is_in_square_rect(pirate_quest_t *game,
+    sfVector2i pos1, sfVector2i pos2)
 {
     for (int i = pos1.x; i <= pos2.x; i++) {
-        for (int j = pos1.y; j <= pos2.y; j++) {
-            if (player_is_in_square(game, i, j))
-                return 1;
-        }
+        if (player_is_in_square_rect2(game, pos1, pos2, i))
+            return 1;
     }
     return 0;
 }

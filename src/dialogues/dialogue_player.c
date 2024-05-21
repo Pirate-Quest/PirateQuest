@@ -63,6 +63,7 @@ static int on_tick(pirate_quest_t *game, hashtable_t *_, int exec_count)
     }
     sfText_setString(game->dialogue_box->text,
         my_strndup(current_dialogue->content, showed_text_length));
+    play_sound(game, ZIPCLICK_SOUND);
     game->dialogue_service->current_dialogue_text_index += 2;
     return 0;
 }

@@ -25,6 +25,7 @@ SRCS_FILE	=	src/main.c							\
 				src/dialogues/dialogues_parser.c	\
 				src/dialogues/dialogues_registry.c	\
 				src/dialogues/dialogue_player.c		\
+				src/dialogues/dialogues_service.c	\
 				src/event/close_event.c				\
 				src/event/event_handler.c			\
 				src/event/input_event.c				\

@@ -145,12 +145,12 @@ void draw_interlocutor(pirate_quest_t *game,
     for (int i = 0; i < intrlcutors; i++) {
         if (interlocutors[i].interlocutor != interlocutor)
             continue;
-            sfRenderWindow_drawSprite(game->window->window,
-                game->interlocutors[i].sprite, NULL);
-            sfRenderWindow_drawRectangleShape(game->window->window,
-                game->interlocutors[i].name_bg, NULL);
-            sfRenderWindow_drawText(game->window->window,
-                game->interlocutors[i].name_text, NULL);
+        sfRenderWindow_drawSprite(game->window->window,
+            game->interlocutors[i].sprite, NULL);
+        sfRenderWindow_drawRectangleShape(game->window->window,
+            game->interlocutors[i].name_bg, NULL);
+        sfRenderWindow_drawText(game->window->window,
+            game->interlocutors[i].name_text, NULL);
     }
 }
 

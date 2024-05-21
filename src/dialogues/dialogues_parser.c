@@ -12,13 +12,13 @@
 
 static dialogue_interlocutor_t get_speaker_enum(const char *speaker)
 {
-    if (strcmp(speaker, "ME") == 0) {
+    if (strcmp(speaker, "ME") == 0)
         return ME;
-    } else if (strcmp(speaker, "FRANCK") == 0) {
+    if (strcmp(speaker, "ANA") == 0)
+        return ANA;
+    if (strcmp(speaker, "FRANCK") == 0)
         return FRANCK;
-    } else {
-        return UNKNOWN;
-    }
+    return UNKNOWN;
 }
 
 static dialogue_t *realloc_dialogues(dialogue_t *dialogues, int dialogue_count)
@@ -36,13 +36,13 @@ static void parse_line(dialogue_t *dialogues, int dialogue_count, char *line,
 {
     char speaker[50];
     int time;
+    char dialogue_text[200];
 
     if (sscanf(line, "[%49[^]]]=>%d\n", speaker, &time) == 2) {
-        if (fgets(content, sizeof(content), dialogues->file)) {
-            content[strcspn(content, "\n")] = '\0';
+        if (fgets(dialogue_text, sizeof(dialogue_text), dialogues->file)) {
             dialogues[dialogue_count].speaker = get_speaker_enum(speaker);
             dialogues[dialogue_count].time = time;
-            dialogues[dialogue_count].content = strdup(content);
+            dialogues[dialogue_count].content = strdup(dialogue_text);
         }
     }
 }

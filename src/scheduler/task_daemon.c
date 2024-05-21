@@ -23,7 +23,6 @@ void apply_count(pirate_quest_t *game, task_t *task)
     if (task->execution_count == 0) {
         if (task->on_end != NULL)
             task->on_end(game, task->data);
-        unregister_task(game, task);
     }
 }
 
@@ -36,12 +35,12 @@ void execute_all_tasks(pirate_quest_t *game, double seconds)
     while (current != NULL) {
         task = current->data;
         if (task->execution_count == 0) {
-            unregister_task(game, task);
             current = current->next;
+            unregister_task(game, task);
             continue;
         }
         if (is_valid_interval(seconds, task->second_interval)) {
-            status = task->on_tick(game, task->data);
+            status = task->on_tick(game, task->data, task->execution_count);
             apply_count(game, task);
         }
         if (status == 1)

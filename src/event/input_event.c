@@ -147,6 +147,8 @@ int is_corner(pirate_quest_t *game)
 
 void update_key_pressed(pirate_quest_t *game)
 {
+    if (game->dialogue_service->is_dialogue_playing)
+        return;
     if (sfKeyboard_isKeyPressed(game->settings->down))
         go_down(game, is_corner(game) ? 5.6 : 8);
     if (sfKeyboard_isKeyPressed(game->settings->up))

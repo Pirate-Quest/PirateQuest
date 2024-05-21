@@ -14,7 +14,7 @@ const task_builder_t task = {
     .execution_count = -1
 };
 
-int on_player_tick(pirate_quest_t *game, hashtable_t *_)
+int on_player_tick(pirate_quest_t *game, hashtable_t *_, int exec_count)
 {
     if (game->player->is_moving == 0)
         return 0;

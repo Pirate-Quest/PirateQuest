@@ -79,6 +79,7 @@ static void update(pirate_quest_t *game)
             draw_front_tiles_object(game, i, y);
     update_main_menu(game);
     show_buttons(game);
+    update_dialogue_visuals(game);
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
     update_key_pressed(game);

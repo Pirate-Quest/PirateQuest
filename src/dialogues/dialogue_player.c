@@ -7,12 +7,18 @@
 
 #include "../../include/pirate_quest.h"
 
-static void init_dialogue_service(pirate_quest_t *game)
+static void stop_playing(pirate_quest_t *game)
 {
-    game->dialogue_service = malloc(sizeof(dialogue_service_t));
     game->dialogue_service->is_dialogue_playing = 0;
     game->dialogue_service->current_dialogue = NONE_DIALOGUE;
     game->dialogue_service->current_dialogue_index = 0;
+    game->dialogue_service->current_dialogue_text_index = 0;
+}
+
+static void init_dialogue_service(pirate_quest_t *game)
+{
+    game->dialogue_service = malloc(sizeof(dialogue_service_t));
+    stop_playing(game);
 }
 
 void init_dialogue_box(pirate_quest_t *game)
@@ -44,13 +50,37 @@ void free_dialogue_box(pirate_quest_t *game)
     free(game->dialogue_box);
 }
 
-static int on_tick(pirate_quest_t *game, hashtable_t *_)
+static int on_tick(pirate_quest_t *game, hashtable_t *_, int exec_count)
 {
+    dialogue_t *current_dialogue = get_current_dialogue(game);
+    int showed_text_length =
+        game->dialogue_service->current_dialogue_text_index;
+
+    replace_char(current_dialogue->content, '\n', ' ');
+    if (showed_text_length >= my_strlen(current_dialogue->content)) {
+        sfText_setString(game->dialogue_box->text, current_dialogue->content);
+        return 0;
+    }
+    sfText_setString(game->dialogue_box->text,
+        my_strndup(current_dialogue->content, showed_text_length));
+    game->dialogue_service->current_dialogue_text_index += 2;
     return 0;
 }
 
 static int on_end(pirate_quest_t *game, hashtable_t *_)
 {
+    dialogue_impl_t *dialogue = get_dialogue(game,
+        game->dialogue_service->current_dialogue);
+
+    if (game->dialogue_service->current_dialogue_index + 1
+        < dialogue->dialogue_count) {
+        game->dialogue_service->current_dialogue_index++;
+        game->dialogue_service->current_dialogue_text_index = 0;
+        play_dialogue(game, dialogue,
+            game->dialogue_service->current_dialogue_index);
+        return 0;
+    }
+    stop_playing(game);
     return 0;
 }
 
@@ -60,6 +90,34 @@ void play_dialogue(pirate_quest_t *game, dialogue_impl_t *dialogue, int i)
         .on_tick = &on_tick,
         .on_end = &on_end,
         .second_interval = 0.1,
-        .execution_count = 0
+        .execution_count = (dialogue->dialogues[i].time) * 10
     };
+
+    game->dialogue_service->is_dialogue_playing = 1;
+    game->dialogue_service->current_dialogue = dialogue->dialogue;
+    game->dialogue_service->current_dialogue_index = i;
+    game->dialogue_service->current_dialogue_text_index = 0;
+    sfText_setString(game->dialogue_box->text,
+        dialogue->dialogues[i].content);
+    register_task(game, &builder, ht_from_args(0));
+}
+
+void update_dialogue_visuals(pirate_quest_t *game)
+{
+    dialogue_t *current_dialogue;
+    sfFloatRect ga = sfRectangleShape_getGlobalBounds(game->dialogue_box->box);
+    sfFloatRect gb = sfText_getGlobalBounds(game->dialogue_box->text);
+
+    if (!game->dialogue_service->is_dialogue_playing)
+        return;
+    current_dialogue = get_current_dialogue(game);
+    draw_interlocutor(game, current_dialogue->speaker);
+    sfText_setPosition(game->dialogue_box->text, (sfVector2f){
+        ga.left + (ga.width - gb.width) / 2,
+        ga.top + (ga.height - gb.height) / 2
+    });
+    sfRenderWindow_drawRectangleShape(game->window->window,
+        game->dialogue_box->box, NULL);
+    sfRenderWindow_drawText(game->window->window,
+        game->dialogue_box->text, NULL);
 }

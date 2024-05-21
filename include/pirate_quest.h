@@ -32,7 +32,7 @@ typedef enum {
 } game_state_t;
 
 typedef struct task_s {
-    int (*on_tick)(pirate_quest_t *, hashtable_t *);
+    int (*on_tick)(pirate_quest_t *, hashtable_t *, int);
     int (*on_end)(pirate_quest_t *, hashtable_t *);
     double second_interval;
     int execution_count;
@@ -40,7 +40,7 @@ typedef struct task_s {
 } task_t;
 
 typedef struct task_builder_s {
-    int (*on_tick)(pirate_quest_t *, hashtable_t *);
+    int (*on_tick)(pirate_quest_t *, hashtable_t *, int);
     int (*on_end)(pirate_quest_t *, hashtable_t *);
     double second_interval;
     int execution_count;
@@ -203,7 +203,7 @@ void update_layer(pirate_quest_t *game, int i);
 player_t *init_player(pirate_quest_t *game);
 void update_direction(player_t *player, direction_t direction);
 int update_player(pirate_quest_t *game);
-int on_player_tick(pirate_quest_t *game, hashtable_t *_);
+int on_player_tick(pirate_quest_t *game, hashtable_t *_, int exec_count);
 
 // utils/texture_util.c
 void move_rect(sfIntRect *rect, int offset, int start, int max_value);
@@ -333,6 +333,7 @@ struct dialogue_service_s {
     int is_dialogue_playing;
     dialogue_enum_t current_dialogue;
     int current_dialogue_index;
+    int current_dialogue_text_index;
 };
 
 // dialogues/dialogues_parser.c
@@ -349,5 +350,11 @@ void free_dialogues_registry(pirate_quest_t *game);
 // dialogues/dialogue_player.c
 void init_dialogue_box(pirate_quest_t *game);
 void free_dialogue_box(pirate_quest_t *game);
+void update_dialogue_visuals(pirate_quest_t *game);
+void play_dialogue(pirate_quest_t *game, dialogue_impl_t *dialogue, int i);
+
+// dialogues/dialogues_service.c
+dialogue_impl_t *get_dialogue(pirate_quest_t *game, dialogue_enum_t dialogue);
+dialogue_t *get_current_dialogue(pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */

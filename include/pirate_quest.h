@@ -217,7 +217,8 @@ void move_rect(sfIntRect *rect, int offset, int start, int max_value);
 // utils/calculate_pos.c
 sfVector2f calculate_position(int x, int y, pirate_quest_t *game);
 int player_is_in_square(pirate_quest_t *game, int x, int y);
-int player_is_in_square_rect(pirate_quest_t *game, sfVector2i pos1, sfVector2i pos2);
+int player_is_in_square_rect(pirate_quest_t *game,
+    sfVector2i pos1, sfVector2i pos2);
 
 // map/collision.c
 void init_collisions(pirate_quest_t *game);

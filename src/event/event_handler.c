@@ -14,7 +14,7 @@ event_listener_t event_listener[] = {
     {sfEvtKeyReleased, &key_released_event},
     {sfEvtMouseMoved, &button_event},
     {sfEvtMouseButtonPressed, &button_event},
-    {sfEvtMouseButtonReleased, &button_event},
+    {sfEvtMouseButtonReleased, &button_event}
 };
 int events_size = {sizeof(event_listener) / sizeof(event_listener_t)};
 

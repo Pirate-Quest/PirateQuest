@@ -32,7 +32,7 @@ typedef enum {
 } game_state_t;
 
 typedef struct task_s {
-    int (*on_tick)(pirate_quest_t *, hashtable_t *);
+    int (*on_tick)(pirate_quest_t *, hashtable_t *, int);
     int (*on_end)(pirate_quest_t *, hashtable_t *);
     double second_interval;
     int execution_count;
@@ -40,7 +40,7 @@ typedef struct task_s {
 } task_t;
 
 typedef struct task_builder_s {
-    int (*on_tick)(pirate_quest_t *, hashtable_t *);
+    int (*on_tick)(pirate_quest_t *, hashtable_t *, int);
     int (*on_end)(pirate_quest_t *, hashtable_t *);
     double second_interval;
     int execution_count;
@@ -158,6 +158,9 @@ typedef int collision_t[MAP_HEIGHT][MAP_WIDTH];
 typedef struct sound_impl_s sound_impl_t;
 typedef struct main_menu_s main_menu_t;
 typedef struct dialogue_impl_s dialogue_impl_t;
+typedef struct interlocutor_impl_s interlocutor_impl_t;
+typedef struct dialogue_box_s dialogue_box_t;
+typedef struct dialogue_service_s dialogue_service_t;
 
 struct pirate_quest_s {
     game_state_t state;
@@ -176,6 +179,9 @@ struct pirate_quest_s {
     sfFont *font;
     sound_impl_t *sounds;
     dialogue_impl_t *dialogues;
+    interlocutor_impl_t *interlocutors;
+    dialogue_box_t *dialogue_box;
+    dialogue_service_t *dialogue_service;
 };
 
 typedef struct asset_s {
@@ -197,13 +203,14 @@ void update_layer(pirate_quest_t *game, int i);
 player_t *init_player(pirate_quest_t *game);
 void update_direction(player_t *player, direction_t direction);
 int update_player(pirate_quest_t *game);
-int on_player_tick(pirate_quest_t *game, hashtable_t *_);
+int on_player_tick(pirate_quest_t *game, hashtable_t *_, int exec_count);
 
 // utils/texture_util.c
 void move_rect(sfIntRect *rect, int offset, int start, int max_value);
 
 // utils/calculate_pos.c
 sfVector2f calculate_position(int x, int y, pirate_quest_t *game);
+int player_is_in_square(pirate_quest_t *game, int x, int y);
 
 // map/collision.c
 void init_collisions(pirate_quest_t *game);
@@ -269,8 +276,26 @@ void back_btn_event(pirate_quest_t *game,
 typedef enum {
     UNKNOWN,
     ME,
-    FRANCK_THE_PIRATE,
+    FRANCK,
+    ANA,
 } dialogue_interlocutor_t;
+
+typedef struct interlocutor_builder_s {
+    dialogue_interlocutor_t interlocutor;
+    char *name;
+    char *file_path;
+    float scale;
+    sfVector2f origin;
+    sfVector2f size;
+} interlocutor_builder_t;
+
+struct interlocutor_impl_s {
+    const dialogue_interlocutor_t *interlocutor;
+    sfTexture *texture;
+    sfSprite *sprite;
+    sfText *name_text;
+    sfRectangleShape *name_bg;
+};
 
 typedef struct dialogue_s {
     FILE *file;
@@ -280,6 +305,7 @@ typedef struct dialogue_s {
 } dialogue_t;
 
 typedef enum {
+    NONE_DIALOGUE,
     TUTORIAL_1
 } dialogue_enum_t;
 
@@ -288,10 +314,26 @@ typedef struct dialogue_builder_s {
     const char *file_path;
 } dialogue_builder_t;
 
+extern const dialogue_builder_t dialogues[];
+extern const int dialogue_count;
+
 struct dialogue_impl_s {
     dialogue_enum_t dialogue;
     dialogue_t *dialogues;
     int dialogue_count;
+};
+
+typedef struct dialogue_box_s {
+    sfRectangleShape *box;
+    sfText *text;
+    sfFont *font;
+} dialogue_box_t;
+
+struct dialogue_service_s {
+    int is_dialogue_playing;
+    dialogue_enum_t current_dialogue;
+    int current_dialogue_index;
+    int current_dialogue_text_index;
 };
 
 // dialogues/dialogues_parser.c
@@ -299,7 +341,20 @@ dialogue_t *parse_dialogue_file(const char *file_path, int *dialogue_count);
 void free_dialogues(dialogue_t *dialogues, int dialogue_count);
 
 // dialogues/dialogues_registry.c
+void init_interlocutors_registry(pirate_quest_t *game);
+void free_interlocutors_registry(pirate_quest_t *game);
+void draw_interlocutor(pirate_quest_t *game, dialogue_interlocutor_t i);
 void init_dialogues_registry(pirate_quest_t *game);
 void free_dialogues_registry(pirate_quest_t *game);
+
+// dialogues/dialogue_player.c
+void init_dialogue_box(pirate_quest_t *game);
+void free_dialogue_box(pirate_quest_t *game);
+void update_dialogue_visuals(pirate_quest_t *game);
+void play_dialogue(pirate_quest_t *game, dialogue_impl_t *dialogue, int i);
+
+// dialogues/dialogues_service.c
+dialogue_impl_t *get_dialogue(pirate_quest_t *game, dialogue_enum_t dialogue);
+dialogue_t *get_current_dialogue(pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */

@@ -13,6 +13,9 @@
 
 void free_game(pirate_quest_t *game)
 {
+    free_dialogues_registry(game);
+    free_interlocutors_registry(game);
+    free_dialogue_box(game);
     destroy_sounds(game);
     sfTexture_destroy(game->tileset);
     if (game->camera != NULL)
@@ -76,6 +79,7 @@ static void update(pirate_quest_t *game)
             draw_front_tiles_object(game, i, y);
     update_main_menu(game);
     show_buttons(game);
+    update_dialogue_visuals(game);
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
     update_key_pressed(game);
@@ -88,6 +92,9 @@ static int init_game(pirate_quest_t *game)
     game->font = sfFont_createFromFile("assets/font/Caribbean.ttf");
     if (game->font == NULL)
         return 1;
+    init_dialogues_registry(game);
+    init_interlocutors_registry(game);
+    init_dialogue_box(game);
     init_sound(game);
     init_icon(game->window);
     init_main_menu(game);

@@ -14,7 +14,7 @@ static int rect_contains(pirate_quest_t *game, sfVector2f pos,
     sfFloatRect rect;
 
     for (int k = 0; k < RENDER_WIDTH; k++) {
-        rect = sfSprite_getGlobalBounds(game->square[0][j][k]);
+        rect = sfSprite_getGlobalBounds(game->square[0][j][k]->sprite);
         if (!(pos.x >= rect.left && pos.x <= rect.left + rect.width
             && pos.y >= rect.top && pos.y <= rect.top + rect.height))
             continue;

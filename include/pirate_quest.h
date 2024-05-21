@@ -153,7 +153,12 @@ void init_buttons(pirate_quest_t *game);
 void show_buttons(pirate_quest_t *game);
 void button_event(sfEvent event, pirate_quest_t *game);
 
-typedef sfSprite *square_t[LAYER_COUNT][RENDER_HEIGHT][RENDER_WIDTH];
+typedef struct square_tile_s {
+    sfSprite *sprite;
+    sfVector2i pos;
+} square_tile_t;
+
+typedef square_tile_t *square_t[LAYER_COUNT][RENDER_HEIGHT][RENDER_WIDTH];
 typedef int collision_t[MAP_HEIGHT][MAP_WIDTH];
 typedef struct sound_impl_s sound_impl_t;
 typedef struct main_menu_s main_menu_t;
@@ -198,6 +203,7 @@ int get_tile_id(int i, int y, int x);
 // map/tiles_manager.c
 void init_squares(pirate_quest_t *game);
 void update_layer(pirate_quest_t *game, int i);
+square_tile_t *get_square(pirate_quest_t *game, sfVector2i pos);
 
 // player/player_sprite.c
 player_t *init_player(pirate_quest_t *game);

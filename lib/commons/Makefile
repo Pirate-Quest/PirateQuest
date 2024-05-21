@@ -11,7 +11,8 @@ ARRC	=	ar rc
 
 SRCS	=	my_str_dup.c								\
 			my_rev_str.c								\
-			my_getnbr.c								\
+			my_getnbr.c									\
+			my_itoa.c									\
 			my_str_utils.c								\
 			my_str_to_word_array.c						\
 			my_put_int.c								\

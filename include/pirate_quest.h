@@ -217,6 +217,7 @@ void move_rect(sfIntRect *rect, int offset, int start, int max_value);
 // utils/calculate_pos.c
 sfVector2f calculate_position(int x, int y, pirate_quest_t *game);
 int player_is_in_square(pirate_quest_t *game, int x, int y);
+int player_is_in_square_rect(pirate_quest_t *game, sfVector2i pos1, sfVector2i pos2);
 
 // map/collision.c
 void init_collisions(pirate_quest_t *game);
@@ -364,5 +365,8 @@ void play_dialogue(pirate_quest_t *game, dialogue_impl_t *dialogue, int i);
 // dialogues/dialogues_service.c
 dialogue_impl_t *get_dialogue(pirate_quest_t *game, dialogue_enum_t dialogue);
 dialogue_t *get_current_dialogue(pirate_quest_t *game);
+
+//teleportation of players and npc dialogue features
+int dialogue_npc(pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */

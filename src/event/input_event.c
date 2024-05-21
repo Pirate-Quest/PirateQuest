@@ -107,6 +107,8 @@ static void go_left(pirate_quest_t *game, float delta_time)
 
 void key_pressed_event(sfEvent event, pirate_quest_t *game)
 {
+    if (game->dialogue_service->is_dialogue_playing)
+        return;
     if (event.key.code == game->settings->up
         || event.key.code == game->settings->down
         || event.key.code == game->settings->left
@@ -116,6 +118,8 @@ void key_pressed_event(sfEvent event, pirate_quest_t *game)
 
 void key_released_event(sfEvent event, pirate_quest_t *game)
 {
+    if (game->dialogue_service->is_dialogue_playing)
+        return;
     if (sfKeyboard_isKeyPressed(game->settings->up) == 1
         || sfKeyboard_isKeyPressed(game->settings->down) == 1
         || sfKeyboard_isKeyPressed(game->settings->left) == 1

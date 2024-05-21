@@ -41,11 +41,13 @@ static int rect_is_in_rect(sfIntRect rect1, sfIntRect rect2)
 
 int player_is_in_square(pirate_quest_t *game, int x, int y)
 {
+    sfVector2f square_pos = sfSprite_getPosition(game->square[0][y][x]);
     sfIntRect square = (sfIntRect){
-        sfSprite_getPosition(game->square[0][y][x]).x,
-        sfSprite_getPosition(game->square[0][y][x]).y,
+        square_pos.x,
+        square_pos.y,
         32 * game->camera->zoom,
-        32 * game->camera->zoom};
+        32 * game->camera->zoom
+    };
 
     return vector_is_in_rect(game->player->pos, square);
 }

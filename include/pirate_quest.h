@@ -159,6 +159,8 @@ typedef struct sound_impl_s sound_impl_t;
 typedef struct main_menu_s main_menu_t;
 typedef struct dialogue_impl_s dialogue_impl_t;
 typedef struct interlocutor_impl_s interlocutor_impl_t;
+typedef struct dialogue_box_s dialogue_box_t;
+typedef struct dialogue_service_s dialogue_service_t;
 
 struct pirate_quest_s {
     game_state_t state;
@@ -178,6 +180,8 @@ struct pirate_quest_s {
     sound_impl_t *sounds;
     dialogue_impl_t *dialogues;
     interlocutor_impl_t *interlocutors;
+    dialogue_box_t *dialogue_box;
+    dialogue_service_t *dialogue_service;
 };
 
 typedef struct asset_s {
@@ -301,6 +305,7 @@ typedef struct dialogue_s {
 } dialogue_t;
 
 typedef enum {
+    NONE_DIALOGUE,
     TUTORIAL_1
 } dialogue_enum_t;
 
@@ -309,10 +314,25 @@ typedef struct dialogue_builder_s {
     const char *file_path;
 } dialogue_builder_t;
 
+extern const dialogue_builder_t dialogues[];
+extern const int dialogue_count;
+
 struct dialogue_impl_s {
     dialogue_enum_t dialogue;
     dialogue_t *dialogues;
     int dialogue_count;
+};
+
+typedef struct dialogue_box_s {
+    sfRectangleShape *box;
+    sfText *text;
+    sfFont *font;
+} dialogue_box_t;
+
+struct dialogue_service_s {
+    int is_dialogue_playing;
+    dialogue_enum_t current_dialogue;
+    int current_dialogue_index;
 };
 
 // dialogues/dialogues_parser.c
@@ -325,5 +345,9 @@ void free_interlocutors_registry(pirate_quest_t *game);
 void draw_interlocutor(pirate_quest_t *game, dialogue_interlocutor_t i);
 void init_dialogues_registry(pirate_quest_t *game);
 void free_dialogues_registry(pirate_quest_t *game);
+
+// dialogues/dialogue_player.c
+void init_dialogue_box(pirate_quest_t *game);
+void free_dialogue_box(pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */

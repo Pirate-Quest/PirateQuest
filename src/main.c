@@ -15,6 +15,7 @@ void free_game(pirate_quest_t *game)
 {
     free_dialogues_registry(game);
     free_interlocutors_registry(game);
+    free_dialogue_box(game);
     destroy_sounds(game);
     sfTexture_destroy(game->tileset);
     if (game->camera != NULL)
@@ -92,6 +93,7 @@ static int init_game(pirate_quest_t *game)
         return 1;
     init_dialogues_registry(game);
     init_interlocutors_registry(game);
+    init_dialogue_box(game);
     init_sound(game);
     init_icon(game->window);
     init_main_menu(game);

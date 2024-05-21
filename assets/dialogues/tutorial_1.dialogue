@@ -1,17 +1,20 @@
+[ME]=>3
+Ou suis-je? Cette ile semble immense!
+
+[FRANCK]=>4
+Bienvenue, camarade! Je vois que tu as echoue ici aussi.
+
 [ME]=>2
-Salut tu suce ?
+Salut! Qui es-tu?
 
-[FRANCK]=>2
-NANNN !!
+[FRANCK]=>3
+Je suis Franck, un pirate comme toi.
+
+[FRANCK]=>3
+Je suis coince ici depuis un moment.
 
 [ME]=>2
-20 balles.
+Mon bateau est en morceaux...
 
-[FRANCK]=>5
-Ohh apres tout pourquoi pas 20 balles c'est 20 balles
-
-[ANA]=>5
-Ohh apres tout pourquoi pas 20 balles c'est 20 balles
-
-[FRANCK]=>5
-Ohh apres tout pourquoi pas 20 balles c'est 20 balles
+[ME]=>3
+Je dois le reconstruire pour quitter cette ile.

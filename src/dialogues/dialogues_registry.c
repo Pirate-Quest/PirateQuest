@@ -44,15 +44,34 @@ const interlocutor_builder_t interlocutors[] = {
         .interlocutor = ASTORA,
         .name = "Solaire d'Astora",
         .file_path = "assets/sprites/solaire.png",
-        .scale = 0.5,
-        .origin = (sfVector2f){100.0, 100.0},
+        .scale = 0.30,
+        .origin = (sfVector2f){100.0, 0.0},
         .size = (sfVector2f){357.0, 699.0}
-    }
+    },
+    {
+        .interlocutor = TUTO,
+        .name = "Seigneur des pirates",
+        .file_path = "assets/sprites/tuto.png",
+        .scale = 0.40,
+        .origin = (sfVector2f){100.0, 100.0},
+        .size = (sfVector2f){300.0, 383.0}
+    },
+    {
+        .interlocutor = MAYOR,
+        .name = "Maire de la ville",
+        .file_path = "assets/sprites/mayor.png",
+        .scale = 0.40,
+        .origin = (sfVector2f){100.0, 100.0},
+        .size = (sfVector2f){300.0, 362.0}
+    },
 };
 
 const dialogue_builder_t dialogues[] = {
     {TUTORIAL_1, "assets/dialogues/tutorial_1.dialogue"},
     {FIRST_NPC, "assets/dialogues/png1.dialogue"},
+    {COMMAND, "assets/dialogues/tutorial.dialogue"},
+    {MAYOR_DG, "assets/dialogues/mayor.dialogue"},
+    {SOLO_SWORD, "assets/dialogues/sword.dialogue"},
 };
 
 const int intrlcutors = sizeof(interlocutors) / sizeof(interlocutor_builder_t);

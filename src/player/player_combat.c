@@ -2,5 +2,7 @@
 ** EPITECH PROJECT, 2024
 ** PirateQuest
 ** File description:
-** camera.c
+** player_combat.c
 */
+
+#include "../../include/pirate_quest.h"

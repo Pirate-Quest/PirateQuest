@@ -11,5 +11,3 @@ const inventory_item_registry_t inventory_item_registry[] = {
     {NONE_ITEM, "None", "assets/item/empty.png"},
     {SWORD_ITEM, "Sword", "assets/item/sword.png"},
 };
-
-const

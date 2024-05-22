@@ -64,8 +64,42 @@ int init_window(pirate_quest_t *game)
     return TRUE;
 }
 
+int init_splash_screen(pirate_quest_t *game)
+{
+    resolution_t resolution = get_resolution(game);
+    sfTexture *splash = sfTexture_createFromFile("assets/W.png", NULL);
+
+    game->timer = sfClock_create();
+    game->scr = sfSprite_create();
+    sfSprite_setTexture(game->scr, splash, sfTrue);
+    sfSprite_setScale(game->main_menu->background, (sfVector2f){
+        (float) resolution.width / 1920, (float) resolution.height / 1080});
+    return 0;
+}
+
+void draw_splash_screen(pirate_quest_t *game)
+{
+    sfRenderWindow_clear(game->window->window, sfBlack);
+    sfRenderWindow_drawSprite(game->window->window, game->scr, NULL);
+    sfRenderWindow_display(game->window->window);
+}
+
+static void update2(pirate_quest_t *game)
+{
+    for (int i = 0; i < LAYER_COUNT; i++)
+        for (int y = 0; y < RENDER_HEIGHT; y++)
+            draw_front_tiles_object(game, i, y);
+    update_main_menu(game);
+    dialogue_npc(game);
+    show_buttons(game);
+}
+
 static void update(pirate_quest_t *game)
 {
+    if (sfClock_getElapsedTime(game->timer).microseconds < 4000000) {
+        draw_splash_screen(game);
+        return;
+    }
     update_listeners(game);
     sfRenderWindow_clear(game->window->window, sfBlack);
     for (int i = 0; i < LAYER_COUNT; i++)
@@ -74,12 +108,7 @@ static void update(pirate_quest_t *game)
         for (int y = 0; y < RENDER_HEIGHT; y++)
             draw_back_tiles_object(game, i, y);
     update_player(game);
-    for (int i = 0; i < LAYER_COUNT; i++)
-        for (int y = 0; y < RENDER_HEIGHT; y++)
-            draw_front_tiles_object(game, i, y);
-    update_main_menu(game);
-    dialogue_npc(game);
-    show_buttons(game);
+    update2(game);
     update_dialogue_visuals(game);
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
@@ -104,6 +133,7 @@ static int init_game(pirate_quest_t *game)
     init_layers();
     init_squares(game);
     game->player = init_player(game);
+    init_splash_screen(game);
     return 0;
 }
 

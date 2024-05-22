@@ -14,7 +14,7 @@ static int rect_contains(pirate_quest_t *game, sfVector2f pos,
     sfFloatRect rect;
 
     for (int k = 0; k < RENDER_WIDTH; k++) {
-        rect = sfSprite_getGlobalBounds(game->square[0][j][k]);
+        rect = sfSprite_getGlobalBounds(game->square[0][j][k]->sprite);
         if (!(pos.x >= rect.left && pos.x <= rect.left + rect.width
             && pos.y >= rect.top && pos.y <= rect.top + rect.height))
             continue;
@@ -107,6 +107,8 @@ static void go_left(pirate_quest_t *game, float delta_time)
 
 void key_pressed_event(sfEvent event, pirate_quest_t *game)
 {
+    if (game->dialogue_service->is_dialogue_playing)
+        return;
     if (event.key.code == game->settings->up
         || event.key.code == game->settings->down
         || event.key.code == game->settings->left
@@ -116,6 +118,8 @@ void key_pressed_event(sfEvent event, pirate_quest_t *game)
 
 void key_released_event(sfEvent event, pirate_quest_t *game)
 {
+    if (game->dialogue_service->is_dialogue_playing)
+        return;
     if (sfKeyboard_isKeyPressed(game->settings->up) == 1
         || sfKeyboard_isKeyPressed(game->settings->down) == 1
         || sfKeyboard_isKeyPressed(game->settings->left) == 1
@@ -147,6 +151,8 @@ int is_corner(pirate_quest_t *game)
 
 void update_key_pressed(pirate_quest_t *game)
 {
+    if (game->dialogue_service->is_dialogue_playing)
+        return;
     if (sfKeyboard_isKeyPressed(game->settings->down))
         go_down(game, is_corner(game) ? 5.6 : 8);
     if (sfKeyboard_isKeyPressed(game->settings->up))

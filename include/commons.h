@@ -24,6 +24,8 @@ int my_putstr(char const *str);
 int my_puterr(char const *str);
 void my_put_nbr(int nb);
 char *my_strdup(char *str);
+char *my_strndup(char *str, int n);
+void replace_char(char *str, char find, char replace);
 int my_strcmp(char const *s1, char const *s2);
 int my_strncmp(char *s1, char *s2, int n);
 char *my_strcpy(char *dest, char const *src);

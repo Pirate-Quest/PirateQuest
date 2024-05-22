@@ -12,13 +12,19 @@
 
 static dialogue_interlocutor_t get_speaker_enum(const char *speaker)
 {
-    if (strcmp(speaker, "ME") == 0) {
+    if (strcmp(speaker, "ME") == 0)
         return ME;
-    } else if (strcmp(speaker, "FRANCK_THE_PIRATE") == 0) {
-        return FRANCK_THE_PIRATE;
-    } else {
-        return UNKNOWN;
-    }
+    if (strcmp(speaker, "ANA") == 0)
+        return ANA;
+    if (strcmp(speaker, "FRANCK") == 0)
+        return FRANCK;
+    if (strcmp(speaker, "ASTORA") == 0)
+        return ASTORA;
+    if (strcmp(speaker, "TUTO") == 0)
+        return TUTO;
+    if (strcmp(speaker, "MAYOR") == 0)
+        return MAYOR;
+    return UNKNOWN;
 }
 
 static dialogue_t *realloc_dialogues(dialogue_t *dialogues, int dialogue_count)
@@ -31,18 +37,22 @@ static dialogue_t *realloc_dialogues(dialogue_t *dialogues, int dialogue_count)
     return dialogues;
 }
 
-static void parse_line(dialogue_t *dialogues, int dialogue_count, char *line,
-    char *content)
+static void parse_line(dialogue_t *dialogues, int dialogue_count, char *line)
 {
     char speaker[50];
-    int time;
+    unsigned int time;
+    char dialogue_text[500];
+    size_t len;
 
-    if (sscanf(line, "[%49[^]]]=>%d\n", speaker, &time) == 2) {
-        if (fgets(content, sizeof(content), dialogues->file)) {
-            content[strcspn(content, "\n")] = '\0';
+    if (sscanf(line, "[%49[^]]]=>%u\n", speaker, &time) == 2) {
+        if (fgets(dialogue_text, sizeof(dialogue_text), dialogues->file)) {
             dialogues[dialogue_count].speaker = get_speaker_enum(speaker);
             dialogues[dialogue_count].time = time;
-            dialogues[dialogue_count].content = strdup(content);
+            len = strlen(dialogue_text);
+            dialogues[dialogue_count].content =
+                malloc(sizeof(sfUint32) * (len + 1));
+            utf8_to_32(dialogue_text, dialogue_text + len + 1,
+                dialogues[dialogue_count].content);
         }
     }
 }
@@ -52,7 +62,6 @@ dialogue_t *parse_dialogue_file(const char *file_path, int *dialogue_count)
     FILE *file = fopen(file_path, "r");
     char line[256];
     dialogue_t *dialogues = NULL;
-    char content[200];
 
     if (!file)
         return NULL;
@@ -62,7 +71,7 @@ dialogue_t *parse_dialogue_file(const char *file_path, int *dialogue_count)
             continue;
         dialogues = realloc_dialogues(dialogues, *dialogue_count);
         dialogues[*dialogue_count].file = file;
-        parse_line(dialogues, *dialogue_count, line, content);
+        parse_line(dialogues, *dialogue_count, line);
         (*dialogue_count)++;
     }
     fclose(file);

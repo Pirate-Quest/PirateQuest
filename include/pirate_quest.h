@@ -16,6 +16,7 @@
     #include "map.h"
     #include "settings.h"
     #include "gamerules.h"
+    #include "item.h"
 
 typedef struct pirate_quest_s pirate_quest_t;
 
@@ -72,6 +73,10 @@ typedef struct game_phase_info_s {
 typedef enum {
     NONE_ITEM,
     SWORD_ITEM,
+    KEY_ITEM,
+    LETTER_ITEM,
+    PLANK_ITEM,
+    TUTO_SWORD_ITEM,
 } inventory_item_t;
 
 typedef struct inventory_item_registry_s {
@@ -82,10 +87,18 @@ typedef struct inventory_item_registry_s {
 
 typedef struct inventory_item_impl_s {
     sfSprite *sprite;
-    sfTexture *texture;
+    int item_id;
 } inventory_item_impl_t;
 
     #define SLOT_COUNT 5
+    #define TOTAL_ITEM 6
+
+typedef struct inv_bar_s {
+    sfTexture *texture_bar;
+    sfSprite *sprite_bar;
+    sfSprite *slots[SLOT_COUNT];
+    inventory_item_t slots_id[SLOT_COUNT];
+} inv_bar_t;
 
 typedef struct player_inventory_s {
     inventory_item_t slots[SLOT_COUNT];
@@ -184,6 +197,8 @@ struct pirate_quest_s {
     sfFont *font;
     sound_impl_t *sounds;
     dialogue_impl_t *dialogues;
+    item_texture_t *item_texture[TOTAL_ITEM];
+    inv_bar_t *inv_bar;
     interlocutor_impl_t *interlocutors;
     dialogue_box_t *dialogue_box;
     dialogue_service_t *dialogue_service;

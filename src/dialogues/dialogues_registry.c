@@ -52,7 +52,7 @@ const interlocutor_builder_t interlocutors[] = {
 
 const dialogue_builder_t dialogues[] = {
     {TUTORIAL_1, "assets/dialogues/tutorial_1.dialogue"},
-    {FIRST_NPC, "assets/dialogues/png1.dialogue"},
+    {FIRST_NPC, "assets/dialogues/png1.txt"},
 };
 
 const int intrlcutors = sizeof(interlocutors) / sizeof(interlocutor_builder_t);

@@ -6,6 +6,7 @@
 */
 
 #include "../../include/pirate_quest.h"
+#include <unistd.h>
 
 static void stop_playing(pirate_quest_t *game)
 {
@@ -56,13 +57,16 @@ static int on_tick(pirate_quest_t *game, hashtable_t *_, int exec_count)
     int showed_text_length =
         game->dialogue_service->current_dialogue_text_index;
 
-    replace_char(current_dialogue->content, '\n', ' ');
-    if (showed_text_length >= my_strlen(current_dialogue->content)) {
-        sfText_setString(game->dialogue_box->text, current_dialogue->content);
+    for (int i = 0; i < showed_text_length; i++)
+        if (current_dialogue->content[i] == '\n')
+            current_dialogue->content[i] = ' ';
+    if (showed_text_length >= csfml_strlen(current_dialogue->content)) {
+        sfText_setUnicodeString(game->dialogue_box->text,
+            current_dialogue->content);
         return 0;
     }
-    sfText_setString(game->dialogue_box->text,
-        my_strndup(current_dialogue->content, showed_text_length));
+    sfText_setUnicodeString(game->dialogue_box->text,
+        csfml_strndup(current_dialogue->content, showed_text_length));
     play_sound(game, ZIPCLICK_SOUND);
     game->dialogue_service->current_dialogue_text_index += 2;
     return 0;
@@ -102,8 +106,7 @@ void play_dialogue(pirate_quest_t *game, dialogue_impl_t *dialogue, int i)
     game->dialogue_service->current_dialogue = dialogue->dialogue;
     game->dialogue_service->current_dialogue_index = i;
     game->dialogue_service->current_dialogue_text_index = 0;
-    sfText_setString(game->dialogue_box->text,
-        dialogue->dialogues[i].content);
+    sfText_setString(game->dialogue_box->text, "");
     register_task(game, &builder, ht_from_args(0));
 }
 

@@ -1,8 +1,8 @@
-[ME]=>2
-Salut je suis perdu
+[ME]=>3
+Salut je suis perdu é vraiment là le poulêt
 
 [ASTORA]=>2
-SALUT !
+vraiment là le poulêt
 
 [ME]=>3
 Que faire ?

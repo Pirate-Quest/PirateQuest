@@ -78,6 +78,7 @@ static void update(pirate_quest_t *game)
         for (int y = 0; y < RENDER_HEIGHT; y++)
             draw_front_tiles_object(game, i, y);
     update_main_menu(game);
+    dialogue_npc(game);
     show_buttons(game);
     update_dialogue_visuals(game);
     sfRenderWindow_display(game->window->window);

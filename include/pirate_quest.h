@@ -153,7 +153,12 @@ void init_buttons(pirate_quest_t *game);
 void show_buttons(pirate_quest_t *game);
 void button_event(sfEvent event, pirate_quest_t *game);
 
-typedef sfSprite *square_t[LAYER_COUNT][RENDER_HEIGHT][RENDER_WIDTH];
+typedef struct square_tile_s {
+    sfSprite *sprite;
+    sfVector2i pos;
+} square_tile_t;
+
+typedef square_tile_t *square_t[LAYER_COUNT][RENDER_HEIGHT][RENDER_WIDTH];
 typedef int collision_t[MAP_HEIGHT][MAP_WIDTH];
 typedef struct sound_impl_s sound_impl_t;
 typedef struct main_menu_s main_menu_t;
@@ -198,6 +203,7 @@ int get_tile_id(int i, int y, int x);
 // map/tiles_manager.c
 void init_squares(pirate_quest_t *game);
 void update_layer(pirate_quest_t *game, int i);
+square_tile_t *get_square(pirate_quest_t *game, sfVector2i pos);
 
 // player/player_sprite.c
 player_t *init_player(pirate_quest_t *game);
@@ -211,6 +217,8 @@ void move_rect(sfIntRect *rect, int offset, int start, int max_value);
 // utils/calculate_pos.c
 sfVector2f calculate_position(int x, int y, pirate_quest_t *game);
 int player_is_in_square(pirate_quest_t *game, int x, int y);
+int player_is_in_square_rect(pirate_quest_t *game,
+    sfVector2i pos1, sfVector2i pos2);
 
 // map/collision.c
 void init_collisions(pirate_quest_t *game);
@@ -278,6 +286,7 @@ typedef enum {
     ME,
     FRANCK,
     ANA,
+    ASTORA,
 } dialogue_interlocutor_t;
 
 typedef struct interlocutor_builder_s {
@@ -306,7 +315,8 @@ typedef struct dialogue_s {
 
 typedef enum {
     NONE_DIALOGUE,
-    TUTORIAL_1
+    TUTORIAL_1,
+    FIRST_NPC,
 } dialogue_enum_t;
 
 typedef struct dialogue_builder_s {
@@ -347,6 +357,8 @@ void draw_interlocutor(pirate_quest_t *game, dialogue_interlocutor_t i);
 void init_dialogues_registry(pirate_quest_t *game);
 void free_dialogues_registry(pirate_quest_t *game);
 
+    #define IS_DIALOGUE_PLAYING(g) ((g)->dialogue_service->is_dialogue_playing)
+
 // dialogues/dialogue_player.c
 void init_dialogue_box(pirate_quest_t *game);
 void free_dialogue_box(pirate_quest_t *game);
@@ -356,5 +368,8 @@ void play_dialogue(pirate_quest_t *game, dialogue_impl_t *dialogue, int i);
 // dialogues/dialogues_service.c
 dialogue_impl_t *get_dialogue(pirate_quest_t *game, dialogue_enum_t dialogue);
 dialogue_t *get_current_dialogue(pirate_quest_t *game);
+
+//teleportation of players and npc dialogue features
+int dialogue_npc(pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */

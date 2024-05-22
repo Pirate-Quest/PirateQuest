@@ -39,11 +39,20 @@ const interlocutor_builder_t interlocutors[] = {
         .scale = 2.5,
         .origin = (sfVector2f){100.0, 100.0},
         .size = (sfVector2f){32.0, 64.0}
+    },
+    {
+        .interlocutor = ASTORA,
+        .name = "Solaire d'Astora",
+        .file_path = "assets/sprites/solaire.png",
+        .scale = 0.5,
+        .origin = (sfVector2f){100.0, 100.0},
+        .size = (sfVector2f){357.0, 699.0}
     }
 };
 
 const dialogue_builder_t dialogues[] = {
-    {TUTORIAL_1, "assets/dialogues/tutorial_1.dialogue"}
+    {TUTORIAL_1, "assets/dialogues/tutorial_1.dialogue"},
+    {FIRST_NPC, "assets/dialogues/png1.dialogue"},
 };
 
 const int intrlcutors = sizeof(interlocutors) / sizeof(interlocutor_builder_t);

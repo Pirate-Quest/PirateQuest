@@ -36,7 +36,7 @@ void init_dialogue_box(pirate_quest_t *game)
         (sfVector2f){32 * 2.5 * game->camera->zoom, get_resolution(game).height
         - 32 * 2.5 * game->camera->zoom});
     game->dialogue_box->text = sfText_create();
-    game->dialogue_box->font = sfFont_createFromFile("assets/font/Bitter.ttf");
+    game->dialogue_box->font = sfFont_createFromFile("assets/font/white.ttf");
     sfText_setFont(game->dialogue_box->text, game->dialogue_box->font);
     sfText_setCharacterSize(game->dialogue_box->text, 30);
     sfText_setFillColor(game->dialogue_box->text, sfWhite);

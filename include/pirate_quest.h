@@ -104,6 +104,7 @@ typedef struct player_s {
     sfSprite *sprite;
     sfVector2f pos;
     int is_moving;
+    sfVector2f size;
     sfIntRect rect;
     sfTexture *texture;
     direction_t direction;
@@ -186,8 +187,12 @@ struct pirate_quest_s {
     interlocutor_impl_t *interlocutors;
     dialogue_box_t *dialogue_box;
     dialogue_service_t *dialogue_service;
-    sfClock *clock;
 };
+
+typedef struct asset_s {
+    char *key;
+    char *path;
+} asset_t;
 
 // map/rect_from_id.c
 sfIntRect rect_from_id(int id, int offset);
@@ -205,15 +210,6 @@ player_t *init_player(pirate_quest_t *game);
 void update_direction(player_t *player, direction_t direction);
 int update_player(pirate_quest_t *game);
 int on_player_tick(pirate_quest_t *game, hashtable_t *_, int exec_count);
-
-// utils/csfml_str.c
-int csfml_strlen(sfUint32 *content);
-void csfml_replace_char(sfUint32 *str, sfUint32 find, sfUint32 replace);
-sfUint32 *csfml_strndup(sfUint32 *str, int n);
-
-// utils/utf8_to_32.c
-void utf8_to_32(const char *begin, const char *end, sfUint32 *output);
-sfUint32 convert_char_utf8_to_32(const char **begin);
 
 // utils/texture_util.c
 void move_rect(sfIntRect *rect, int offset, int start, int max_value);
@@ -313,7 +309,7 @@ struct interlocutor_impl_s {
 typedef struct dialogue_s {
     FILE *file;
     dialogue_interlocutor_t speaker;
-    sfUint32 *content;
+    char *content;
     int time;
 } dialogue_t;
 

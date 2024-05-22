@@ -22,4 +22,6 @@ void save_menu_btns_event(pirate_quest_t *game,
     game->state = GAME_STATE_PLAYING;
     game->current_gui = MAIN_MENU;
     game->camera->map_position = get_pos_from_phase(game->player->data->phase);
+    if (game->player->data->phase == TUTORIAL_PHASE)
+        play_dialogue(game, get_dialogue(game, COMMAND), 0);
 }

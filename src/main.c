@@ -55,7 +55,7 @@ int init_window(pirate_quest_t *game)
         game->settings->resolution), "Pirate Quest", sfClose, NULL);
     camera->map_position = (sfVector2i){19, 69};
     camera->pos_in_tile = (sfVector2f){0.0, 0.0};
-    camera->zoom = 2.5;
+    camera->zoom = get_resolution(game).zoom;
     game->window = window;
     game->camera = camera;
     game->task_daemon = new_daemon_task();

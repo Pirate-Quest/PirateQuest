@@ -187,6 +187,8 @@ struct pirate_quest_s {
     interlocutor_impl_t *interlocutors;
     dialogue_box_t *dialogue_box;
     dialogue_service_t *dialogue_service;
+    sfSprite *scr;
+    sfClock *timer;
 };
 
 typedef struct asset_s {
@@ -213,6 +215,14 @@ int on_player_tick(pirate_quest_t *game, hashtable_t *_, int exec_count);
 
 // utils/texture_util.c
 void move_rect(sfIntRect *rect, int offset, int start, int max_value);
+
+// utils/csfml_str.c
+sfUint32 *csfml_strndup(sfUint32 *str, int n);
+void csfml_replace_char(sfUint32 *str, sfUint32 find, sfUint32 replace);
+int csfml_strlen(sfUint32 *content);
+
+// utils/utf8_to_32.c
+void utf8_to_32(const char *begin, const char *end, sfUint32 *output);
 
 // utils/calculate_pos.c
 sfVector2f calculate_position(int x, int y, pirate_quest_t *game);
@@ -287,6 +297,8 @@ typedef enum {
     FRANCK,
     ANA,
     ASTORA,
+    TUTO,
+    MAYOR,
 } dialogue_interlocutor_t;
 
 typedef struct interlocutor_builder_s {
@@ -309,7 +321,7 @@ struct interlocutor_impl_s {
 typedef struct dialogue_s {
     FILE *file;
     dialogue_interlocutor_t speaker;
-    char *content;
+    sfUint32 *content;
     int time;
 } dialogue_t;
 
@@ -317,6 +329,9 @@ typedef enum {
     NONE_DIALOGUE,
     TUTORIAL_1,
     FIRST_NPC,
+    COMMAND,
+    MAYOR_DG,
+    SOLO_SWORD,
 } dialogue_enum_t;
 
 typedef struct dialogue_builder_s {

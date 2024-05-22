@@ -21,7 +21,7 @@ BUILD_DIR 		=	build
 OBJS			=	$(addprefix $(BUILD_DIR)/, $(SRCS_FILE:.c=.o))
 
 SRCS_FILE	=	src/main.c							\
-				src/assets.c						\
+				src/algorithm/path_finding.c		\
 				src/dialogues/dialogues_parser.c	\
 				src/dialogues/dialogues_registry.c	\
 				src/dialogues/dialogue_player.c		\
@@ -41,7 +41,6 @@ SRCS_FILE	=	src/main.c							\
 				src/map/tiles_manager.c				\
 				src/object/tile_object.c			\
 				src/player/player_sprite.c			\
-				src/render/camera.c					\
 				src/render/render_window.c			\
 				src/render/resolutions.c			\
 				src/scheduler/task_daemon.c			\
@@ -49,6 +48,8 @@ SRCS_FILE	=	src/main.c							\
 				src/settings/settings_import.c		\
 				src/sound/sound_registry.c			\
 				src/utils/calculate_pos.c			\
+				src/utils/utf8_to_32.c				\
+				src/utils/csfml_str.c				\
 				src/utils/texture_util.c			\
 				src/dialogues/dialogue_npc.c		\
 

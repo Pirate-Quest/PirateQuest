@@ -1,14 +1,44 @@
-[ME]=>2
-Salut je suis perdu
+[FRANCK]=>3
+Bonjour très chère aventurier,
 
-[ASTORA]=>2
-SALUT !
+[FRANCK]=>4
+Comment allez vous en cette belle après-midi ?
 
-[ME]=>3
-Que faire ?
+[ME]=>4
+Je ne suis pas un aventurier, je suis un capi...
 
-[ASTORA]=>4
-Louer soit le soleil
+[FRANCK]=>4
+Ecoutez j'ai un petit service à vous demander,
+
+[FRANCK]=>4
+il y a un terrible monstre dans cette crypte
+
+[FRANCK]=>4
+qui nous bloque le passage vers la ville,
+
+[FRANCK]=>4
+mais je suis sûr qu'un aventurier tel que vous
+
+[FRANCK]=>3
+, pourra s'en occuper sans problème.
 
 [ME]=>5
-Est-ce que je suis en train de rever ?
+Je viens de vous dire que... Bon laissez     tomber
+
+[ME]=>3
+je n’ai même pas d’arme pour me battre,
+
+[ME]=>3
+je les ai perdus dans la tempête
+
+[FRANCK]=>5
+Pas de problème, il y a un sabre un peu plus au sud d’ici
+
+[FRANCK]=>4
+il vous suffit d'appuyer sur 'E'
+
+[FRANCK]=>4
+pour interagir avec n'importe quel objet
+
+[ME]=>4
+C'est vrai qu'une arme me serait bien utile

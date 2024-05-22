@@ -186,6 +186,7 @@ struct pirate_quest_s {
     interlocutor_impl_t *interlocutors;
     dialogue_box_t *dialogue_box;
     dialogue_service_t *dialogue_service;
+    sfClock *clock;
 };
 
 // map/rect_from_id.c

@@ -187,6 +187,8 @@ struct pirate_quest_s {
     interlocutor_impl_t *interlocutors;
     dialogue_box_t *dialogue_box;
     dialogue_service_t *dialogue_service;
+    sfSprite *scr;
+    sfClock *timer;
 };
 
 typedef struct asset_s {

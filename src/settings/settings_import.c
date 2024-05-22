@@ -20,7 +20,7 @@ settings_t *initialize_settings(void)
     settings->left = sfKeyQ;
     settings->right = sfKeyD;
     settings->attack = sfKeyF;
-    settings->resolution = 0;
+    settings->resolution = 1;
     write_settings(settings);
     return settings;
 }

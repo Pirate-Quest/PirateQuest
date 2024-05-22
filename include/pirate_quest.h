@@ -287,6 +287,8 @@ typedef enum {
     FRANCK,
     ANA,
     ASTORA,
+    TUTO,
+    MAYOR,
 } dialogue_interlocutor_t;
 
 typedef struct interlocutor_builder_s {
@@ -317,6 +319,8 @@ typedef enum {
     NONE_DIALOGUE,
     TUTORIAL_1,
     FIRST_NPC,
+    COMMAND,
+    MAYOR_DG,
 } dialogue_enum_t;
 
 typedef struct dialogue_builder_s {

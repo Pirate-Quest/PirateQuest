@@ -20,6 +20,10 @@ static dialogue_interlocutor_t get_speaker_enum(const char *speaker)
         return FRANCK;
     if (strcmp(speaker, "ASTORA") == 0)
         return ASTORA;
+    if (strcmp(speaker, "TUTO") == 0)
+        return TUTO;
+    if (strcmp(speaker, "MAYOR") == 0)
+        return MAYOR;
     return UNKNOWN;
 }
 

@@ -32,8 +32,7 @@ static void set_texture(pirate_quest_t *game)
 
 int remove_item(pirate_quest_t *game, int item)
 {
-    for (int i = 0; i < SLOT_COUNT; i++)
-    {
+    for (int i = 0; i < SLOT_COUNT; i++) {
         if (game->inv_bar->slots_id[i] == item){
             game->inv_bar->slots_id[i] = NONE_ITEM;
             sfSprite_setTexture(game->inv_bar->slots[i],
@@ -46,8 +45,7 @@ int remove_item(pirate_quest_t *game, int item)
 
 int is_item(pirate_quest_t *game, int item)
 {
-    for (int i = 0; i < SLOT_COUNT; i++)
-    {
+    for (int i = 0; i < SLOT_COUNT; i++){
         if (game->inv_bar->slots_id[i] == item)
             return 1;
     }
@@ -56,8 +54,7 @@ int is_item(pirate_quest_t *game, int item)
 
 int add_item(pirate_quest_t *game, int item)
 {
-    for (int i = 0; i < SLOT_COUNT; i++)
-    {
+    for (int i = 0; i < SLOT_COUNT; i++){
         if (game->inv_bar->slots_id[i] == NONE_ITEM){
             game->inv_bar->slots_id[i] = item;
             sfSprite_setTexture(game->inv_bar->slots[i],

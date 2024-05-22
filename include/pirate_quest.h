@@ -93,11 +93,11 @@ typedef struct inventory_item_impl_s {
     #define SLOT_COUNT 5
     #define TOTAL_ITEM 6
 
-    typedef struct inv_bar_s {
-        sfTexture *texture_bar;
-        sfSprite *sprite_bar;
-        sfSprite *slots[SLOT_COUNT];
-        inventory_item_t slots_id[SLOT_COUNT];
+typedef struct inv_bar_s {
+    sfTexture *texture_bar;
+    sfSprite *sprite_bar;
+    sfSprite *slots[SLOT_COUNT];
+    inventory_item_t slots_id[SLOT_COUNT];
 } inv_bar_t;
 
 typedef struct player_inventory_s {

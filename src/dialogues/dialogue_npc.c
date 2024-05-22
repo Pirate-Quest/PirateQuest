@@ -56,5 +56,9 @@ int dialogue_npc(pirate_quest_t *game)
     if (player_is_in_square(game, 107, 18) && game->dialogue_service->
         is_dialogue_playing == 0 && sfKeyboard_isKeyPressed(sfKeyE))
         play_dialogue(game, get_dialogue(game, MAYOR_DG), 0);
+    if (player_is_in_square(game, 27, 99) && game->dialogue_service->
+        is_dialogue_playing == 0 && sfKeyboard_isKeyPressed(sfKeyE)) {
+        play_dialogue(game, get_dialogue(game, SOLO_SWORD), 0);
+        }
     return 0;
 }

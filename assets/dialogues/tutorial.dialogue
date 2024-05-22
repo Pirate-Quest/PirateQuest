@@ -1,6 +1,15 @@
 [ME]=>3
 Qu'est ce qui ce passe ???
 
+[ME]=>3
+Cette satanée tempête m'a pris de court...
+
+[ME]=>3
+J'ai peut-être un peu abusé du grog
+
+[TUTO]=>3
+... hmm hmm ?
+
 [ME]=>2
 Qui êtes vous ?
 
@@ -34,41 +43,17 @@ La touche 'E' pour interagir avec l'environnement
 [TUTO]=>3
 Et parler aux habitants
 
+[TUTO]=>4
+Il y'a quelqu'un qui pourrait t'aider
+
+[TUTO]=>4
+Longe le petit chemin de pierre vers l'est
+
+[TUTO]=>4
+Parle lui avec 'E' il aura surement des choses a dire
+
 [ME]=>3
 Je vous remercie pour tout
 
 [TUTO]=>4
 Bonne chance dans ta quête le loup de mer
-
-[FRANCK]=>2
-Salut l'étranger
-
-[ME]=>5
-HEINNNN ? Mais qu'est ce qui ce passe encore ?!!!!!!!!!
-
-[FRANCK]=>5
-Ton entrée était fracassante on peut pas te l'enlever
-
-[ME]=>3
-OU SUIS-JE ????
-
-[FRANCK]=>4
-Vient me voir à mon campement à l'est
-
-[FRANCK]=>3
-Je repondrais à toute tes questions
-
-[ME]=>3
-Hein mais vous êtes qui ?
-
-[ME]=>3
-Et pourquoi je vous ferais confiance ?
-
-[FRANCK]=>3
-Après tout c'est toi qui vois
-
-[FRANCK]=>4
-En plus tu es vachement en position de négocier
-
-[ME]=>5
-Est-ce que je suis en train de rêver ?

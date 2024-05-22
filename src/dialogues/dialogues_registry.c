@@ -71,6 +71,7 @@ const dialogue_builder_t dialogues[] = {
     {FIRST_NPC, "assets/dialogues/png1.dialogue"},
     {COMMAND, "assets/dialogues/tutorial.dialogue"},
     {MAYOR_DG, "assets/dialogues/mayor.dialogue"},
+    {SOLO_SWORD, "assets/dialogues/sword.dialogue"},
 };
 
 const int intrlcutors = sizeof(interlocutors) / sizeof(interlocutor_builder_t);

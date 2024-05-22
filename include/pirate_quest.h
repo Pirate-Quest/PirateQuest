@@ -321,6 +321,7 @@ typedef enum {
     FIRST_NPC,
     COMMAND,
     MAYOR_DG,
+    SOLO_SWORD,
 } dialogue_enum_t;
 
 typedef struct dialogue_builder_s {

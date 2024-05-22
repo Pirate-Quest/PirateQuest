@@ -1,26 +1,44 @@
-[ME]=>2
-Salut, comment peux tu m'aider ?
-
 [FRANCK]=>3
-Ecoute j'ai quelque probleme avec une bestiole
-
-[FRANCK]=>3
-Dans la grotte a l'est
-
-[FRANCK]=>3
-Si tu m'aide je peux me montrer conciliant
-
-[ME]=>3
-Hmmm et si je refuse ?
-
-[FRANCK]=>3
-Je sais pas, je te tue dans la seconde ??!
+Bonjour très chère aventurier,
 
 [FRANCK]=>4
-Ou alors je te laisse mourir de faim, au choix !
+Comment allez vous en cette belle après-midi ?
+
+[ME]=>4
+Je ne suis pas un aventurier, je suis un capi...
+
+[FRANCK]=>4
+Ecoutez j'ai un petit service à vous demander,
+
+[FRANCK]=>4
+il y a un terrible monstre dans cette crypte
+
+[FRANCK]=>4
+qui nous bloque le passage vers la ville,
+
+[FRANCK]=>4
+mais je suis sûr qu'un aventurier tel que vous
+
+[FRANCK]=>3
+, pourra s'en occuper sans problème.
+
+[ME]=>5
+Je viens de vous dire que... Bon laissez     tomber
 
 [ME]=>3
-Hmmm j'ai pas vraiment le choix quoi
+je n’ai même pas d’arme pour me battre,
 
-[FRANCK]=>6
-C'est qui comprends vite le ptit gregory...
+[ME]=>3
+je les ai perdus dans la tempête
+
+[FRANCK]=>5
+Pas de problème, il y a un sabre un peu plus au sud d’ici
+
+[FRANCK]=>4
+il vous suffit d'appuyer sur 'E'
+
+[FRANCK]=>4
+pour interagir avec n'importe quel objet
+
+[ME]=>4
+C'est vrai qu'une arme me serait bien utile

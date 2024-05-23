@@ -402,4 +402,39 @@ dialogue_t *get_current_dialogue(pirate_quest_t *game);
 //teleportation of players and npc dialogue features
 int dialogue_npc(pirate_quest_t *game);
 
+typedef struct node_t {
+    vector2i_t pos;
+    int g;
+    int h;
+    int f;
+    struct node_t *parent;
+} node_t;
+
+typedef struct {
+    node_t *current;
+    node_t **open_list;
+    int *open_size;
+    node_t **closed_list;
+    int closed_size;
+    vector2i_t end;
+} process_neighbors_builder_t;
+
+typedef struct {
+    node_t *current;
+    vector2i_t neighbor_pos;
+    int tentative_g;
+    vector2i_t end;
+    node_t **open_list;
+    int *open_size;
+    int in_open;
+} create_add_neighbor_builder_t;
+
+typedef struct {
+    int s;
+    int closed_size;
+    int current_index;
+    node_t *current;
+    node_t *cl[MAP_HEIGHT * MAP_WIDTH];
+} path_finding_builder_t;
+
 #endif /* PIRATE_QUEST_H */

@@ -151,14 +151,17 @@ int is_corner(pirate_quest_t *game)
 
 void update_key_pressed(pirate_quest_t *game)
 {
+    float delta_time = 5.6 * game->camera->zoom / 2.5;
+    float delta_time_d = 8 * game->camera->zoom / 2.5;
+
     if (game->dialogue_service->is_dialogue_playing)
         return;
     if (sfKeyboard_isKeyPressed(game->settings->down))
-        go_down(game, is_corner(game) ? 5.6 : 8);
+        go_down(game, is_corner(game) ? delta_time : delta_time_d);
     if (sfKeyboard_isKeyPressed(game->settings->up))
-        go_up(game, is_corner(game) ? 5.6 : 8);
+        go_up(game, is_corner(game) ? delta_time : delta_time_d);
     if (sfKeyboard_isKeyPressed(game->settings->left))
-        go_left(game, is_corner(game) ? 5.6 : 8);
+        go_left(game, is_corner(game) ? delta_time : delta_time_d);
     if (sfKeyboard_isKeyPressed(game->settings->right))
-        go_right(game, is_corner(game) ? 5.6 : 8);
+        go_right(game, is_corner(game) ? delta_time : delta_time_d);
 }

@@ -197,7 +197,7 @@ struct pirate_quest_s {
     sfFont *font;
     sound_impl_t *sounds;
     dialogue_impl_t *dialogues;
-    item_texture_t *item_texture[TOTAL_ITEM];
+    item_texture_t item_texture[TOTAL_ITEM];
     inv_bar_t *inv_bar;
     interlocutor_impl_t *interlocutors;
     dialogue_box_t *dialogue_box;
@@ -439,5 +439,12 @@ typedef struct {
     node_t *current;
     node_t *cl[MAP_HEIGHT * MAP_WIDTH];
 } path_finding_builder_t;
+
+// inventory
+void init_inv(pirate_quest_t *game);
+void draw_inv(pirate_quest_t *game);
+int add_item(pirate_quest_t *game, int item);
+int is_item(pirate_quest_t *game, int item);
+int remove_item(pirate_quest_t *game, int item);
 
 #endif /* PIRATE_QUEST_H */

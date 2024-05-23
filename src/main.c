@@ -89,6 +89,7 @@ static void update2(pirate_quest_t *game)
     for (int i = 0; i < LAYER_COUNT; i++)
         for (int y = 0; y < RENDER_HEIGHT; y++)
             draw_front_tiles_object(game, i, y);
+    draw_inv(game);
     update_main_menu(game);
     show_buttons(game);
 }
@@ -133,6 +134,7 @@ static int init_game(pirate_quest_t *game)
     init_squares(game);
     game->player = init_player(game);
     init_splash_screen(game);
+    init_inv(game);
     return 0;
 }
 

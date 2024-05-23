@@ -14,8 +14,13 @@ event_listener_t event_listener[] = {
     {sfEvtKeyReleased, &key_released_event},
     {sfEvtMouseMoved, &button_event},
     {sfEvtMouseButtonPressed, &button_event},
-    {sfEvtMouseButtonReleased, &button_event}
+    {sfEvtMouseButtonReleased, &button_event},
+    {sfEvtKeyReleased, &cave_telep},
+    {sfEvtKeyReleased, &beach_telep},
+    {sfEvtKeyReleased, &tavern_telep},
+    {sfEvtKeyReleased, &dialogue_npc},
 };
+
 int events_size = {sizeof(event_listener) / sizeof(event_listener_t)};
 
 void fire_event(pirate_quest_t *game,

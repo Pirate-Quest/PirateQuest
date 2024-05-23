@@ -35,7 +35,8 @@ player_t *init_player(pirate_quest_t *game)
     player->sprite = sfSprite_create();
     sfSprite_setOrigin(player->sprite, (sfVector2f){64, 64 + 15});
     sfSprite_setTexture(player->sprite, player->texture, sfTrue);
-    sfSprite_setScale(player->sprite, (sfVector2f){2, 2});
+    sfSprite_setScale(player->sprite, (sfVector2f){2 * game->camera->zoom
+    / 2.5, 2 * game->camera->zoom / 2.5});
     sfSprite_setTextureRect(player->sprite, player->rect);
     sfSprite_setPosition(player->sprite, player->pos);
     player->task = register_task(
@@ -47,9 +48,6 @@ player_t *init_player(pirate_quest_t *game)
 
 int update_player(pirate_quest_t *game)
 {
-    if (player_is_in_square(game, 46, 70) && game->dialogue_service->
-        is_dialogue_playing == 0 && sfKeyboard_isKeyPressed(sfKeyE))
-        play_dialogue(game, get_dialogue(game, FIRST_NPC), 0);
     if (game->player->is_moving == 0
         || game->dialogue_service->is_dialogue_playing) {
         game->player->rect.left = 0;

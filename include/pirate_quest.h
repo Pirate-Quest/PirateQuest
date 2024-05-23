@@ -400,6 +400,9 @@ dialogue_impl_t *get_dialogue(pirate_quest_t *game, dialogue_enum_t dialogue);
 dialogue_t *get_current_dialogue(pirate_quest_t *game);
 
 //teleportation of players and npc dialogue features
-int dialogue_npc(pirate_quest_t *game);
+void dialogue_npc(sfEvent event, pirate_quest_t *game);
+void tavern_telep(sfEvent event, pirate_quest_t *game);
+void beach_telep(sfEvent event, pirate_quest_t *game);
+void cave_telep(sfEvent event, pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */

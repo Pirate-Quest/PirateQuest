@@ -5,9 +5,6 @@
 ** dialogue_npc.c
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "../../include/pirate_quest.h"
 
 

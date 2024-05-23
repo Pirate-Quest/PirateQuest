@@ -7,6 +7,12 @@
 
 #include "../../../include/pirate_quest.h"
 
+int show_game_menu_btns(pirate_quest_t *game,
+    const button_builder_t *_, button_t *__)
+{
+    return game->current_gui == GAME_MENU && game->state == GAME_STATE_PLAYING;
+}
+
 void init_game_menu(pirate_quest_t *game)
 {
     resolution_t res = get_resolution(game);

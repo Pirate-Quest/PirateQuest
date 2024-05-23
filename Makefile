@@ -32,6 +32,7 @@ SRCS_FILE	=	src/main.c							\
 				src/game/game_phase.c				\
 				src/game/game_save.c				\
 				src/gui/button/button_registry.c	\
+				src/gui/button/game_menu_buttons.c	\
 				src/gui/interface/back_button.c		\
 				src/gui/interface/main_menu.c		\
 				src/gui/interface/game_menu.c		\

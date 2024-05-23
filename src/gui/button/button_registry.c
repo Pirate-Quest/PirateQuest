@@ -96,6 +96,50 @@ const button_builder_t buttons[] = {
         .scale = 0.5,
         .callback = &back_btn_event,
         .show_btn = &show_back_btn
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){600, 200, 401, 174},
+        .text = "Resume",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.6,
+        .callback = &game_menu_resume,
+        .show_btn = &show_game_menu_btns
+    },
+        {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){600, 300, 401, 174},
+        .text = "Save",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.6,
+        .callback = &game_menu_save,
+        .show_btn = &show_game_menu_btns
+    },
+        {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){600, 400, 401, 174},
+        .text = "Settings",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.6,
+        .callback = &game_menu_settings,
+        .show_btn = &show_game_menu_btns
+    },
+        {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){600, 500, 401, 174},
+        .text = "Exit",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.6,
+        .callback = &game_menu_exit,
+        .show_btn = &show_game_menu_btns
     }
 };
 

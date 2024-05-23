@@ -282,10 +282,22 @@ int show_save_menu_btns(pirate_quest_t *game,
 void save_menu_btns_event(pirate_quest_t *game,
     const button_builder_t *button, button_t *_);
 
-// gui/interface/game_menu
+// gui/interface/game_menu.c
+int show_game_menu_btns(pirate_quest_t *game,
+    const button_builder_t *_, button_t *__);
 void init_game_menu(pirate_quest_t *game);
 void input_game_menu(pirate_quest_t *game);
 void show_game_menu(pirate_quest_t *game);
+
+// gui/button/game_menu_button.c
+void game_menu_resume(pirate_quest_t *game,
+    const button_builder_t *button, button_t *_);
+void game_menu_save(pirate_quest_t *game,
+    const button_builder_t *button, button_t *_);
+void game_menu_settings(pirate_quest_t *game,
+    const button_builder_t *button, button_t *_);
+void game_menu_exit(pirate_quest_t *game,
+    const button_builder_t *button, button_t *_);
 
 // game/game_save.c
 void load_game(pirate_quest_t *game, char *id);

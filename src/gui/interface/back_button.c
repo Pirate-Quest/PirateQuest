@@ -10,7 +10,7 @@
 int show_back_btn(pirate_quest_t *game,
     const button_builder_t *_, button_t *__)
 {
-    return game->state == MAIN_MENU && game->current_gui != GAME_STATE_MENU;
+    return game->current_gui == MAIN_MENU && game->state != GAME_STATE_MENU;
 }
 
 void back_btn_event(pirate_quest_t *game,

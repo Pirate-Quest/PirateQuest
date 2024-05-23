@@ -113,6 +113,7 @@ static void update(pirate_quest_t *game)
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
     update_key_pressed(game);
+    show_game_menu(game);
 }
 
 static int init_game(pirate_quest_t *game)
@@ -128,6 +129,7 @@ static int init_game(pirate_quest_t *game)
     init_sound(game);
     init_icon(game->window);
     init_main_menu(game);
+    init_game_menu(game);
     init_buttons(game);
     init_collisions(game);
     init_layers();

@@ -20,9 +20,11 @@
 typedef struct pirate_quest_s pirate_quest_t;
 
 typedef enum {
+    IN_GAME,
     MAIN_MENU,
     SAVE_MENU,
-    SETTINGS_MENU,
+    GAME_MENU,
+    SETTINGS_MENU
 } current_gui_t;
 
 typedef enum {
@@ -171,6 +173,7 @@ struct pirate_quest_s {
     game_state_t state;
     current_gui_t current_gui;
     main_menu_t *main_menu;
+    main_menu_t *game_menu;
     render_window_t *window;
     camera_t *camera;
     square_t square;
@@ -278,6 +281,11 @@ int show_save_menu_btns(pirate_quest_t *game,
     const button_builder_t *_, button_t *__);
 void save_menu_btns_event(pirate_quest_t *game,
     const button_builder_t *button, button_t *_);
+
+// gui/interface/game_menu
+void init_game_menu(pirate_quest_t *game);
+void input_game_menu(pirate_quest_t *game);
+void show_game_menu(pirate_quest_t *game);
 
 // game/game_save.c
 void load_game(pirate_quest_t *game, char *id);

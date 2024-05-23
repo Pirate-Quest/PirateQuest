@@ -34,6 +34,7 @@ SRCS_FILE	=	src/main.c							\
 				src/gui/button/button_registry.c	\
 				src/gui/interface/back_button.c		\
 				src/gui/interface/main_menu.c		\
+				src/gui/interface/game_menu.c		\
 				src/gui/interface/save_menu.c		\
 				src/map/collision.c					\
 				src/map/map_layers.c				\

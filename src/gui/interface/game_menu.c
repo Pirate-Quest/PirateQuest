@@ -16,6 +16,7 @@ int show_game_menu_btns(pirate_quest_t *game,
 void init_game_menu(pirate_quest_t *game)
 {
     resolution_t res = get_resolution(game);
+    const float scale = 0.3;
 
     game->game_menu = malloc(sizeof(main_menu_t));
     game->game_menu->background = sfSprite_create();
@@ -24,9 +25,8 @@ void init_game_menu(pirate_quest_t *game)
     sfSprite_setTexture(game->game_menu->background,
         game->game_menu->background_texture, sfTrue);
     sfSprite_setPosition(game->game_menu->background,
-        (sfVector2f){res.width / 4, 0});
-    sfSprite_setScale(game->game_menu->background, (sfVector2f){
-        (float) res.width / 3840, (float) res.height / 2160});
+        (sfVector2f){(res.width / 2) - 1987 * scale / 2, (res.height / 2) - 2323 * scale / 2});
+    sfSprite_setScale(game->game_menu->background, (sfVector2f){scale, scale});
 }
 
 void input_game_menu(pirate_quest_t *game)

@@ -105,7 +105,7 @@ const button_builder_t buttons[] = {
         .text_size = 40,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.6,
-        .callback = &game_menu_resume,
+        .callback = &game_menu_resume_event,
         .show_btn = &show_game_menu_btns
     },
         {
@@ -116,7 +116,7 @@ const button_builder_t buttons[] = {
         .text_size = 40,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.6,
-        .callback = &game_menu_save,
+        .callback = &game_menu_save_event,
         .show_btn = &show_game_menu_btns
     },
         {
@@ -127,7 +127,7 @@ const button_builder_t buttons[] = {
         .text_size = 40,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.6,
-        .callback = &game_menu_settings,
+        .callback = &game_menu_settings_event,
         .show_btn = &show_game_menu_btns
     },
         {
@@ -138,7 +138,7 @@ const button_builder_t buttons[] = {
         .text_size = 40,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.6,
-        .callback = &game_menu_exit,
+        .callback = &game_menu_exit_event,
         .show_btn = &show_game_menu_btns
     }
 };

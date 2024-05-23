@@ -25,7 +25,8 @@ const inventory_item_registry_t inventory_item_registry[] = {
 static void set_texture(pirate_quest_t *game)
 {
     for (int i = 0; i < TOTAL_ITEM; i++){
-        game->item_texture[i].name = my_strdup(inventory_item_registry[i].name);
+        game->item_texture[i].name =
+            my_strdup(inventory_item_registry[i].name);
         game->item_texture[i].texture =
             sfTexture_createFromFile(inventory_item_registry[i].path, NULL);
     }
@@ -75,7 +76,8 @@ static void init_slot(pirate_quest_t *game, int i)
         game->camera->zoom * 1,
         game->camera->zoom * 1});
     sfSprite_setPosition(game->inv_bar->slots[i], (sfVector2f){2 *
-        game->camera->zoom + (i * 128), get_resolution(game).height - 33 * game->camera->zoom});
+        game->camera->zoom + (i * 128),
+        get_resolution(game).height - 33 * game->camera->zoom});
     game->inv_bar->slots_id[i] = NONE_ITEM;
 }
 
@@ -92,7 +94,8 @@ void init_inv(pirate_quest_t *game)
         game->camera->zoom * 1,
         game->camera->zoom * 1});
     sfSprite_setPosition(game->inv_bar->sprite_bar, (sfVector2f){2 *
-        game->camera->zoom, get_resolution(game).height - 35.5 * game->camera->zoom});
+        game->camera->zoom,
+        get_resolution(game).height - 35.5 * game->camera->zoom});
     for (int i = 0; i < SLOT_COUNT; i++){
         init_slot(game, i);
     }
@@ -100,8 +103,10 @@ void init_inv(pirate_quest_t *game)
 
 void draw_inv(pirate_quest_t *game)
 {
-    sfRenderWindow_drawSprite(game->window->window, game->inv_bar->sprite_bar, NULL);
+    sfRenderWindow_drawSprite(game->window->window,
+        game->inv_bar->sprite_bar, NULL);
     for (int i = 0; i < SLOT_COUNT; i++){
-        sfRenderWindow_drawSprite(game->window->window, game->inv_bar->slots[i], NULL);
+        sfRenderWindow_drawSprite(game->window->window,
+            game->inv_bar->slots[i], NULL);
     }
 }

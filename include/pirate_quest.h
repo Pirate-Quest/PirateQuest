@@ -197,7 +197,7 @@ struct pirate_quest_s {
     sfFont *font;
     sound_impl_t *sounds;
     dialogue_impl_t *dialogues;
-    item_texture_t *item_texture[TOTAL_ITEM];
+    item_texture_t item_texture[TOTAL_ITEM];
     inv_bar_t *inv_bar;
     interlocutor_impl_t *interlocutors;
     dialogue_box_t *dialogue_box;
@@ -422,5 +422,47 @@ void beach_telep(sfEvent event, pirate_quest_t *game);
 void cave_telep(sfEvent event, pirate_quest_t *game);
 void dialogue_npc_two(sfEvent event, pirate_quest_t *game);
 void dialogue_npc_three(sfEvent event, pirate_quest_t *game);
+
+typedef struct node_t {
+    vector2i_t pos;
+    int g;
+    int h;
+    int f;
+    struct node_t *parent;
+} node_t;
+
+typedef struct {
+    node_t *current;
+    node_t **open_list;
+    int *open_size;
+    node_t **closed_list;
+    int closed_size;
+    vector2i_t end;
+} process_neighbors_builder_t;
+
+typedef struct {
+    node_t *current;
+    vector2i_t neighbor_pos;
+    int tentative_g;
+    vector2i_t end;
+    node_t **open_list;
+    int *open_size;
+    int in_open;
+} create_add_neighbor_builder_t;
+
+typedef struct {
+    int s;
+    int closed_size;
+    int current_index;
+    node_t *current;
+    node_t *cl[MAP_HEIGHT * MAP_WIDTH];
+} path_finding_builder_t;
+
+// inventory
+void init_inv(pirate_quest_t *game);
+void draw_inv(pirate_quest_t *game);
+int add_item(pirate_quest_t *game, int item);
+int is_item(pirate_quest_t *game, int item);
+int remove_item(pirate_quest_t *game, int item);
 
 #endif /* PIRATE_QUEST_H */

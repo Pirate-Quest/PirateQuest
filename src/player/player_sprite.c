@@ -36,7 +36,7 @@ player_t *init_player(pirate_quest_t *game)
     sfSprite_setOrigin(player->sprite, (sfVector2f){64, 64 + 15});
     sfSprite_setTexture(player->sprite, player->texture, sfTrue);
     sfSprite_setScale(player->sprite, (sfVector2f){2 * game->camera->zoom
-    / 2.5, 2 * game->camera->zoom / 2.5});
+        / 2.5, 2 * game->camera->zoom / 2.5});
     sfSprite_setTextureRect(player->sprite, player->rect);
     sfSprite_setPosition(player->sprite, player->pos);
     player->task = register_task(

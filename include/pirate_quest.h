@@ -314,6 +314,14 @@ typedef enum {
     ASTORA,
     TUTO,
     MAYOR,
+    SANDRINE,
+    MICHEL,
+    DOUGLAS,
+    MARIE,
+    JULIE,
+    GROGNON,
+    OTIS,
+    GUARDE,
 } dialogue_interlocutor_t;
 
 typedef struct interlocutor_builder_s {
@@ -347,6 +355,14 @@ typedef enum {
     COMMAND,
     MAYOR_DG,
     SOLO_SWORD,
+    FIRST_WOMEN,
+    MICH,
+    DOUGLA,
+    MARI,
+    GRE,
+    GROGN,
+    MONO,
+    GUARD,
 } dialogue_enum_t;
 
 typedef struct dialogue_builder_s {
@@ -404,5 +420,7 @@ void dialogue_npc(sfEvent event, pirate_quest_t *game);
 void tavern_telep(sfEvent event, pirate_quest_t *game);
 void beach_telep(sfEvent event, pirate_quest_t *game);
 void cave_telep(sfEvent event, pirate_quest_t *game);
+void dialogue_npc_two(sfEvent event, pirate_quest_t *game);
+void dialogue_npc_three(sfEvent event, pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */

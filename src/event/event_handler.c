@@ -19,6 +19,8 @@ event_listener_t event_listener[] = {
     {sfEvtKeyReleased, &beach_telep},
     {sfEvtKeyReleased, &tavern_telep},
     {sfEvtKeyReleased, &dialogue_npc},
+    {sfEvtKeyReleased, &dialogue_npc_two},
+    {sfEvtKeyReleased, &dialogue_npc_three},
 };
 
 int events_size = {sizeof(event_listener) / sizeof(event_listener_t)};

@@ -8,6 +8,9 @@ uwu.c
 # IntelliJ IDEA
 .idea
 
+.vscode
+.code
+
 # Prerequisites
 *.d
 

@@ -90,6 +90,7 @@ static void update2(pirate_quest_t *game)
         for (int y = 0; y < RENDER_HEIGHT; y++)
             draw_front_tiles_object(game, i, y);
     update_main_menu(game);
+    show_game_menu(game);
     dialogue_npc(game);
     show_buttons(game);
 }
@@ -113,7 +114,6 @@ static void update(pirate_quest_t *game)
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
     update_key_pressed(game);
-    show_game_menu(game);
 }
 
 static int init_game(pirate_quest_t *game)

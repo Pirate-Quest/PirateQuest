@@ -122,7 +122,7 @@ const interlocutor_builder_t interlocutors[] = {
     },
     {
         .interlocutor = GUARDE,
-        .name = "Guarde",
+        .name = "Garde",
         .file_path = "assets/sprites/ds2.png",
         .scale = 0.4,
         .origin = (sfVector2f){100.0, 0.0},
@@ -144,6 +144,7 @@ const dialogue_builder_t dialogues[] = {
     {GRE, "assets/dialogues/julie.dialogue"},
     {GROGN, "assets/dialogues/grognon.dialogue"},
     {GUARD, "assets/dialogues/guard.dialogue"},
+    {CHEST, "assets/dialogues/chest.dialogue"},
 };
 
 const int intrlcutors = sizeof(interlocutors) / sizeof(interlocutor_builder_t);

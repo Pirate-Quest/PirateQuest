@@ -19,7 +19,8 @@ const inventory_item_registry_t inventory_item_registry[] = {
     {KEY_ITEM, "Key", "assets/item/key.png"},
     {LETTER_ITEM, "Letter", "assets/item/letter.png"},
     {PLANK_ITEM, "Plank", "assets/item/plank.png"},
-    {TUTO_SWORD_ITEM, "Tuto_sword", "assets/item/tuto_sword.png"}
+    {TUTO_SWORD_ITEM, "Tuto_sword", "assets/item/tuto_sword.png"},
+    {SAIL_ITEM, "Sail", "assets/item/sail.png"}
 };
 
 static void set_texture(pirate_quest_t *game)

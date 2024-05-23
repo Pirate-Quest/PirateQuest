@@ -96,7 +96,7 @@ static void update2(pirate_quest_t *game)
 
 static void update(pirate_quest_t *game)
 {
-    if (sfClock_getElapsedTime(game->timer).microseconds < 4000000) {
+    if (sfClock_getElapsedTime(game->timer).microseconds < 2000000) {
         draw_splash_screen(game);
         return;
     }

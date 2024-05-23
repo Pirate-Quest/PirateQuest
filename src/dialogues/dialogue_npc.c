@@ -7,27 +7,13 @@
 
 #include "../../include/pirate_quest.h"
 
-
-void cave_telep(sfEvent event, pirate_quest_t *game)
-{
-    if (player_is_in_square_rect(game, (sfVector2i)
-    {72, 70}, (sfVector2i) {72, 71}) && event.key.code == sfKeyE) {
-        game->camera->map_position.x = 151;
-        game->camera->map_position.y = 32;
-    }
-    if (player_is_in_square_rect(game, (sfVector2i)
-    {151, 30}, (sfVector2i) {151, 31}) && event.key.code == sfKeyE) {
-        game->camera->map_position.x = 72;
-        game->camera->map_position.y = 72;
-    }
-}
-
 void beach_telep(sfEvent event, pirate_quest_t *game)
 {
     if (player_is_in_square_rect(game, (sfVector2i)
     {169, 18}, (sfVector2i) {169, 20}) && event.key.code == sfKeyE) {
+        game->camera->pos_in_tile = (sfVector2f){0, 0};
         game->camera->map_position.x = 86;
-        game->camera->map_position.y = 70;
+        game->camera->map_position.y = 69;
     }
 }
 
@@ -35,23 +21,28 @@ void tavern_telep(sfEvent event, pirate_quest_t *game)
 {
     if (player_is_in_square_rect(game, (sfVector2i)
     {153, 124}, (sfVector2i) {154, 126}) && event.key.code == sfKeyE) {
-        game->camera->map_position.x = 102;
+        game->camera->pos_in_tile = (sfVector2f){0, 0};
+        game->camera->map_position.x = 103;
         game->camera->map_position.y = 22;
     }
     if (player_is_in_square_rect(game, (sfVector2i)
     {102, 22}, (sfVector2i) {103, 24}) && event.key.code == sfKeyE) {
+        game->camera->pos_in_tile = (sfVector2f){0, 0};
         game->camera->map_position.x = 154;
         game->camera->map_position.y = 126;
     }
 }
+
 void dialogue_npc(sfEvent event, pirate_quest_t *game)
 {
-    if (player_is_in_square(game, 107, 18) && game->dialogue_service->
-        is_dialogue_playing == 0 && event.key.code == sfKeyE)
-        play_dialogue(game, get_dialogue(game, MAYOR_DG), 0);
+    if (player_is_in_square_rect(game, (sfVector2i)
+    {150, 142}, (sfVector2i) {152, 143}) && event.key.code == sfKeyE)
+        play_dialogue(game, get_dialogue(game, DOUGLA), 0);
     if (player_is_in_square(game, 27, 99) && game->dialogue_service->
-        is_dialogue_playing == 0 && event.key.code == sfKeyE) {
+        is_dialogue_playing == 0 && event.key.code == sfKeyE &&
+        !is_item(game, TUTO_SWORD_ITEM)) {
         play_dialogue(game, get_dialogue(game, SOLO_SWORD), 0);
+        add_item(game, TUTO_SWORD_ITEM);
         }
     if (player_is_in_square(game, 46, 70) && game->dialogue_service->
         is_dialogue_playing == 0 && event.key.code == sfKeyE)
@@ -66,9 +57,6 @@ void dialogue_npc(sfEvent event, pirate_quest_t *game)
 
 void dialogue_npc_two(sfEvent event, pirate_quest_t *game)
 {
-    if (player_is_in_square_rect(game, (sfVector2i)
-    {150, 142}, (sfVector2i) {152, 143}) && event.key.code == sfKeyE)
-        play_dialogue(game, get_dialogue(game, DOUGLA), 0);
     if (player_is_in_square_rect(game, (sfVector2i)
     {160, 139}, (sfVector2i) {162, 141}) && event.key.code == sfKeyE)
         play_dialogue(game, get_dialogue(game, MARI), 0);
@@ -91,4 +79,17 @@ void dialogue_npc_three(sfEvent event, pirate_quest_t *game)
     if (player_is_in_square_rect(game, (sfVector2i)
     {154, 125}, (sfVector2i) {157, 126}) && event.key.code == sfKeyE)
         play_dialogue(game, get_dialogue(game, GUARD), 0);
+    if (player_is_in_square(game, 107, 18) && game->dialogue_service->
+        is_dialogue_playing == 0 && event.key.code == sfKeyE &&
+        !is_item(game, PLANK_ITEM)) {
+        play_dialogue(game, get_dialogue(game, MAYOR_DG), 0);
+        add_item(game, PLANK_ITEM);
+        }
+    if (player_is_in_square_rect(game, (sfVector2i)
+    {153, 20}, (sfVector2i) {156, 21}) && game->dialogue_service->
+    is_dialogue_playing == 0 && event.key.code == sfKeyE &&
+    !is_item(game, SAIL_ITEM)) {
+            play_dialogue(game, get_dialogue(game, CHEST), 0);
+            add_item(game, SAIL_ITEM);
+        }
 }

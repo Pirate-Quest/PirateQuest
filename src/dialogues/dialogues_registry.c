@@ -166,6 +166,7 @@ const dialogue_builder_t dialogues[] = {
     {LOC, "assets/dialogues/local.dialogue"},
     {SEN, "assets/dialogues/senil.dialogue"},
     {DESERT, "assets/dialogues/desert.dialogue"},
+    {CAVE, "assets/dialogues/cave.dialogue"},
 };
 
 const int intrlcutors = sizeof(interlocutors) / sizeof(interlocutor_builder_t);

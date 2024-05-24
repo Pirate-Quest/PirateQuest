@@ -420,6 +420,7 @@ typedef enum {
     OLD,
     SEN,
     DESERT,
+    CAVE,
 } dialogue_enum_t;
 
 typedef struct dialogue_builder_s {

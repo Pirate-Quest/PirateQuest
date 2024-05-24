@@ -48,7 +48,8 @@ void dialogue_npc(sfEvent event, pirate_quest_t *game)
         play_dialogue(game, get_dialogue(game, SOLO_SWORD), 0);
         add_item(game, TUTO_SWORD_ITEM);
         }
-    if (player_is_in_square(game, 46, 70) && game->dialogue_service->
+    if (player_is_in_square_rect(game, (sfVector2i)
+    {45, 68}, (sfVector2i) {47, 70}) && game->dialogue_service->
         is_dialogue_playing == 0 && event.key.code == sfKeyE &&
         game->dialogue_service->is_dialogue_playing == 0)
         play_dialogue(game, get_dialogue(game, FIRST_NPC), 0);

@@ -51,7 +51,8 @@ void dialogue_npc_four(sfEvent event, pirate_quest_t *game)
 {
     if (player_is_in_square_rect(game, (sfVector2i)
     {32, 173}, (sfVector2i) {41, 179}) && event.key.code == sfKeyE &&
-    is_item(game, PLANK_ITEM) && is_item(game, SAIL_ITEM))
+    is_item(game, PLANK_ITEM) && is_item(game, SAIL_ITEM)
+    && is_item(game, WHEEL_ITEM))
         play_dialogue(game, get_dialogue(game, END_GAME), 0);
     if (player_is_in_square_rect(game, (sfVector2i)
     {153, 20}, (sfVector2i) {156, 21}) && game->dialogue_service->

@@ -93,8 +93,8 @@ static void update2(pirate_quest_t *game)
     update_main_menu(game);
     update_settings_menu(game);
     show_game_menu(game);
-    show_buttons(game);
     select_music(game);
+    update_dialogue_visuals(game);
 }
 
 static void update(pirate_quest_t *game)
@@ -114,7 +114,7 @@ static void update(pirate_quest_t *game)
     if (game->state == GAME_STATE_PLAYING)
         update_enemies(game);
     update2(game);
-    update_dialogue_visuals(game);
+    show_buttons(game);
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
     update_key_pressed(game);

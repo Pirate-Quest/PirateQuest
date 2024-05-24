@@ -164,6 +164,7 @@ typedef square_tile_t *square_t[LAYER_COUNT][RENDER_HEIGHT][RENDER_WIDTH];
 typedef int collision_t[MAP_HEIGHT][MAP_WIDTH];
 typedef struct sound_impl_s sound_impl_t;
 typedef struct main_menu_s main_menu_t;
+typedef struct settings_menu_s settings_menu_t;
 typedef struct dialogue_impl_s dialogue_impl_t;
 typedef struct interlocutor_impl_s interlocutor_impl_t;
 typedef struct dialogue_box_s dialogue_box_t;
@@ -174,7 +175,7 @@ struct pirate_quest_s {
     current_gui_t current_gui;
     main_menu_t *main_menu;
     main_menu_t *game_menu;
-    main_menu_t *settings_menu;
+    settings_menu_t *settings_menu;
     render_window_t *window;
     camera_t *camera;
     square_t square;
@@ -268,6 +269,14 @@ struct main_menu_s {
     sfTexture *background_texture;
     sfSprite *background;
 };
+
+struct settings_menu_s {
+    sfTexture *splash_texture;
+    sfSprite *background;
+    sfBool listen_key;
+    int key_edit;
+};
+
 
 // gui/interface/main_menu.c
 int show_main_menu_btns(pirate_quest_t *game,

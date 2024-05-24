@@ -107,6 +107,8 @@ static void go_left(pirate_quest_t *game, float delta_time)
 
 void key_pressed_event(sfEvent event, pirate_quest_t *game)
 {
+    if (game->settings_menu->listen_key == sfTrue)
+        return;
     if (game->dialogue_service->is_dialogue_playing)
         return;
     if (event.key.code == game->settings->up
@@ -118,6 +120,10 @@ void key_pressed_event(sfEvent event, pirate_quest_t *game)
 
 void key_released_event(sfEvent event, pirate_quest_t *game)
 {
+    if (game->settings_menu->listen_key == sfTrue) {
+        game->settings_menu->key_edit = event.key.code;
+        return;
+    }
     if (game->dialogue_service->is_dialogue_playing)
         return;
     if (sfKeyboard_isKeyPressed(game->settings->up) == 1
@@ -132,7 +138,7 @@ void key_released_event(sfEvent event, pirate_quest_t *game)
         || event.key.code == game->settings->right)
         game->player->is_moving = 0;
     if (event.key.code == sfKeyEscape)
-            input_game_menu(game);
+        input_game_menu(game);
 }
 
 int is_corner(pirate_quest_t *game)
@@ -154,6 +160,8 @@ int is_corner(pirate_quest_t *game)
 
 void update_key_pressed(pirate_quest_t *game)
 {
+    if (game->settings_menu->listen_key == sfTrue)
+        return;
     if (game->dialogue_service->is_dialogue_playing)
         return;
     if (sfKeyboard_isKeyPressed(game->settings->down))

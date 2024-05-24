@@ -22,7 +22,7 @@ const music_registry_t music_registry[] = {
 
 void init_musique(pirate_quest_t *game)
 {
-    game->player->data->phase = 0;
+    game->player->data->phase = 1;
     game->music = malloc(sizeof(music_tab_t));
     for (int i = 0; i < TOTAL_MUSIC; i++){
         game->music->musics[i] =

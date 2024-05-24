@@ -27,7 +27,8 @@ void init_game_menu(pirate_quest_t *game)
     sfSprite_setTexture(game->game_menu->background,
         game->game_menu->background_texture, sfTrue);
     sfSprite_setPosition(game->game_menu->background,
-        (sfVector2f){(res.width / 2) - 1987 * scale / 2, (res.height / 2) - 2323 * scale / 2});
+        (sfVector2f){(res.width / 2) - 1987 * scale / 2,
+        (res.height / 2) - 2323 * scale / 2});
     sfSprite_setScale(game->game_menu->background, (sfVector2f){scale, scale});
 }
 

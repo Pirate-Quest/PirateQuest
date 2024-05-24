@@ -331,6 +331,9 @@ int show_back_btn(pirate_quest_t *game,
 void back_btn_event(pirate_quest_t *game,
     const button_builder_t *button, button_t *_);
 
+// settings/settings_import.c
+void write_settings_index(pirate_quest_t *game, int index, sfKeyCode key);
+
 typedef enum {
     UNKNOWN,
     ME,

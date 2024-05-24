@@ -20,7 +20,6 @@ void game_menu_save_event(pirate_quest_t *game,
 {
     if (button->text == NULL)
         return;
-    // TODO save function
 }
 
 void game_menu_settings_event(pirate_quest_t *game,

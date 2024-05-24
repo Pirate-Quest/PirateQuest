@@ -6,6 +6,7 @@
 */
 
 #include "../../../include/pirate_quest.h"
+#include "../../../include/settings.h"
 
 int show_settings_menu_btns(pirate_quest_t *game,
     const button_builder_t *_, button_t *__)
@@ -25,7 +26,7 @@ void change_setting(pirate_quest_t *game, sfKeyCode new_key)
         game->settings_menu->index_key = -1;
         return;
     }
-    printf("KEY CODE : %d\n", new_key);
+    write_settings_index(game, game->settings_menu->index_key, new_key);
     game->settings_menu->listen_key = sfFalse;
     game->settings_menu->index_key = -1;
 }
@@ -41,10 +42,8 @@ static void change_key_bind(pirate_quest_t *game, int setting_nb)
 void settings_menu_btns_event(pirate_quest_t *game,
     const button_builder_t *button, button_t *_)
 {
-    printf("TEST\n");
     if (button->text == NULL)
         return;
-    printf("TEST\n");
     if (my_strcmp(button->text, "Up") == 0)
        change_key_bind(game, 1);
     if (my_strcmp(button->text, "Down") == 0)
@@ -56,7 +55,7 @@ void settings_menu_btns_event(pirate_quest_t *game,
     if (my_strcmp(button->text, "Attack") == 0)
        change_key_bind(game, 5);
     if (my_strcmp(button->text, "Resolution") == 0)
-       change_key_bind(game, 6);
+       game->settings->resolution = game->settings->resolution == 0 ? 1 : 0;
 }
 
 void init_settings_menu(pirate_quest_t *game)

@@ -94,11 +94,6 @@ typedef struct inventory_item_registry_s {
     char *path;
 } inventory_item_registry_t;
 
-typedef struct inventory_item_impl_s {
-    sfSprite *sprite;
-    int item_id;
-} inventory_item_impl_t;
-
     #define SLOT_COUNT 5
     #define TOTAL_ITEM 8
 
@@ -473,6 +468,7 @@ typedef struct dialogue_builder_s {
 
 extern const dialogue_builder_t dialogues[];
 extern const int dialogue_count;
+extern const int intrlcutors;
 
 struct dialogue_impl_s {
     dialogue_enum_t dialogue;
@@ -602,5 +598,10 @@ void draw_inv(pirate_quest_t *game);
 int add_item(pirate_quest_t *game, int item);
 int is_item(pirate_quest_t *game, int item);
 int remove_item(pirate_quest_t *game, int item);
+
+void reload_res(pirate_quest_t *game);
+void update_enemies_sprite_resolution(pirate_quest_t *game);
+void update_button_sprite_resolution(pirate_quest_t *game);
+void update_dialogue_sprites_resolution(pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */

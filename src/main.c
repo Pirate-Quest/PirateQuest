@@ -72,7 +72,7 @@ int init_splash_screen(pirate_quest_t *game)
     game->timer = sfClock_create();
     game->scr = sfSprite_create();
     sfSprite_setTexture(game->scr, splash, sfTrue);
-    sfSprite_setScale(game->main_menu->background, (sfVector2f){
+    sfSprite_setScale(game->scr, (sfVector2f){
         (float) resolution.width / 1920, (float) resolution.height / 1080});
     return 0;
 }

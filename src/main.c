@@ -91,6 +91,8 @@ static void update2(pirate_quest_t *game)
             draw_front_tiles_object(game, i, y);
     draw_inv(game);
     update_main_menu(game);
+    update_settings_menu(game);
+    show_game_menu(game);
     show_buttons(game);
     select_music(game);
 }
@@ -120,6 +122,9 @@ static void update(pirate_quest_t *game)
 
 static int init_game2(pirate_quest_t *game)
 {
+    init_layers();
+    init_squares(game);
+    game->player = init_player(game);
     init_splash_screen(game);
     init_inv(game);
     init_musique(game);
@@ -141,11 +146,10 @@ static int init_game(pirate_quest_t *game)
     init_sound(game);
     init_icon(game->window);
     init_main_menu(game);
+    init_game_menu(game);
+    init_settings_menu(game);
     init_buttons(game);
     init_collisions(game);
-    init_layers();
-    init_squares(game);
-    game->player = init_player(game);
     init_game2(game);
     return 0;
 }

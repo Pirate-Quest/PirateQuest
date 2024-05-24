@@ -42,6 +42,9 @@ void close_event(sfEvent event, pirate_quest_t *game);
 void key_pressed_event(sfEvent event, pirate_quest_t *game);
 void key_released_event(sfEvent event, pirate_quest_t *game);
 
+int is_other_pressed(pirate_quest_t *game);
+int reset_move(pirate_quest_t *game, sfEvent event);
+
 void update_key_pressed(pirate_quest_t *game);
 
 #endif /* !EVENT_H */

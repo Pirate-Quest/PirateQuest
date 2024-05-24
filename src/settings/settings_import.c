@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../../include/settings.h"
+#include "../../include/pirate_quest.h"
 
 settings_t *initialize_settings(void)
 {
@@ -74,4 +75,19 @@ void write_settings(settings_t *settings)
     fprintf(fd, "attack: %d\n", settings->attack);
     fprintf(fd, "res: %d\n", settings->resolution);
     fclose(fd);
+}
+
+void write_settings_index(pirate_quest_t *game, int index, sfKeyCode key)
+{
+    if (index == 1)
+        game->settings->up = key;
+    if (index == 2)
+        game->settings->down = key;
+    if (index == 3)
+        game->settings->left = key;
+    if (index == 4)
+        game->settings->right = key;
+    if (index == 5)
+        game->settings->attack = key;
+    write_settings(game->settings);
 }

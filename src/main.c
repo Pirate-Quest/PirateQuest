@@ -135,6 +135,7 @@ static int init_game(pirate_quest_t *game)
     game->player = init_player(game);
     init_splash_screen(game);
     init_inv(game);
+    init_musique(game);
     return 0;
 }
 

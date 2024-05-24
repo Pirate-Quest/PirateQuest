@@ -8,6 +8,7 @@
 #ifndef PIRATE_QUEST_H
     #define PIRATE_QUEST_H
 
+    #include <SFML/Audio/Types.h>
     #include <SFML/Graphics.h>
     #include <SFML/Audio.h>
     #include <stdio.h>
@@ -104,6 +105,27 @@ typedef struct inv_bar_s {
 typedef struct player_inventory_s {
     inventory_item_t slots[SLOT_COUNT];
 } player_inventory_t;
+
+typedef enum {
+    MENU_MUSIC,
+    TUTO_MUSIC,
+    TAVERN_MUSIC
+} music_t;
+
+typedef struct music_registry_s {
+    music_t item;
+    char *name;
+    char *path;
+} music_registry_t;
+
+    #define TOTAL_MUSIC 3
+
+typedef struct music_tab_s {
+    sfMusic *musics[TOTAL_MUSIC];
+} music_tab_t;
+
+void init_musique(pirate_quest_t *game);
+void music_player(pirate_quest_t *game, int music);
 
 typedef struct player_data_s {
     game_phase_t phase;
@@ -205,6 +227,7 @@ struct pirate_quest_s {
     dialogue_service_t *dialogue_service;
     sfSprite *scr;
     sfClock *timer;
+    music_tab_t *music;
 };
 
 typedef struct asset_s {

@@ -64,7 +64,8 @@ static void read_slot_params(char *line, pirate_quest_t *game)
         game->inv_bar->slots_id[4] = my_getnbr(line + 6);
 }
 
-static void read_params(char *line, player_data_t **player_data, pirate_quest_t *game)
+static void read_params(char *line, player_data_t **player_data,
+    pirate_quest_t *game)
 {
     if (my_strncmp(line, "phase=", 6) == 0)
         (*player_data)->phase = my_getnbr(line + 6);

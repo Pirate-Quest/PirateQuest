@@ -274,7 +274,8 @@ struct settings_menu_s {
     sfTexture *splash_texture;
     sfSprite *background;
     sfBool listen_key;
-    int key_edit;
+    sfKeyCode key_code;
+    int index_key;
 };
 
 
@@ -306,6 +307,7 @@ void settings_menu_btns_event(pirate_quest_t *game,
 int show_settings_menu_btns(pirate_quest_t *game,
     const button_builder_t *_, button_t *__);
 void update_settings_menu(pirate_quest_t *game);
+void change_setting(pirate_quest_t *game, sfKeyCode new_key);
 
 // gui/button/game_menu_button.c
 void game_menu_resume_event(pirate_quest_t *game,

@@ -18,17 +18,24 @@ int show_settings_menu_btns(pirate_quest_t *game,
     return 1;
 }
 
+void change_setting(pirate_quest_t *game, sfKeyCode new_key)
+{
+    if (new_key == sfKeyEscape) {
+        game->settings_menu->listen_key = sfFalse;
+        game->settings_menu->index_key = -1;
+        return;
+    }
+    printf("KEY CODE : %d\n", new_key);
+    game->settings_menu->listen_key = sfFalse;
+    game->settings_menu->index_key = -1;
+}
 
 
 static void change_key_bind(pirate_quest_t *game, int setting_nb)
 {
     // setting nb : 1 UP, 2 Down, 3 Left, 4 Right, 5 Attack, 6 Resolution
     game->settings_menu->listen_key = sfTrue;
-    if (game->settings_menu->key_edit != -1) {
-        game->settings_menu->listen_key = sfFalse;
-        game->settings_menu->key_edit = -1;
-        printf("KEY EDITED\n");
-    }
+    game->settings_menu->index_key = setting_nb;
 }
 
 void settings_menu_btns_event(pirate_quest_t *game,
@@ -58,7 +65,8 @@ void init_settings_menu(pirate_quest_t *game)
     const float scale = 0.4;
 
     game->settings_menu = malloc(sizeof(settings_menu_t));
-    game->settings_menu->key_edit = -1;
+    game->settings_menu->key_code = -1;
+    game->settings_menu->index_key = -1;
     game->settings_menu->listen_key = sfFalse;
     game->settings_menu->background = sfSprite_create();
     game->settings_menu->splash_texture = sfTexture_createFromFile(

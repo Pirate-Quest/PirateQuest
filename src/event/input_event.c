@@ -121,7 +121,7 @@ void key_pressed_event(sfEvent event, pirate_quest_t *game)
 void key_released_event(sfEvent event, pirate_quest_t *game)
 {
     if (game->settings_menu->listen_key == sfTrue) {
-        game->settings_menu->key_edit = event.key.code;
+        change_setting(game, event.key.code);
         return;
     }
     if (game->dialogue_service->is_dialogue_playing)

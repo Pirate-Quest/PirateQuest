@@ -20,7 +20,8 @@ const inventory_item_registry_t inventory_item_registry[] = {
     {LETTER_ITEM, "Letter", "assets/item/letter.png"},
     {PLANK_ITEM, "Plank", "assets/item/plank.png"},
     {TUTO_SWORD_ITEM, "Tuto_sword", "assets/item/tuto_sword.png"},
-    {SAIL_ITEM, "Sail", "assets/item/sail.png"}
+    {SAIL_ITEM, "Sail", "assets/item/sail.png"},
+    {WHEEL_ITEM, "Wheel", "assets/item/wheel.png"}
 };
 
 static void set_texture(pirate_quest_t *game)
@@ -76,7 +77,7 @@ static void init_slot(pirate_quest_t *game, int i)
         game->camera->zoom * 1});
     sfSprite_setPosition(game->inv_bar->slots[i], (sfVector2f){2 *
         game->camera->zoom + (i * 128),
-        get_resolution(game).height - 33 * game->camera->zoom});
+        get_resolution(game).height - 34 * game->camera->zoom});
     game->inv_bar->slots_id[i] = NONE_ITEM;
 }
 

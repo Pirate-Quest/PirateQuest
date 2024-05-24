@@ -42,12 +42,16 @@ void music_player(pirate_quest_t *game, int music)
 
 void select_music(pirate_quest_t *game)
 {
-    if (player_is_in_square_rect(game, (sfVector2i){134, 203}, (sfVector2i){136, 205}) && game->player->data->phase != TUTO_MUSIC)
+    if (player_is_in_square_rect(game, (sfVector2i){134, 203},
+        (sfVector2i){136, 205}) && game->player->data->phase != TUTO_MUSIC)
         music_player(game, TUTO_MUSIC);
-    if (player_is_in_square_rect(game, (sfVector2i){134, 237}, (sfVector2i){136, 239}) && game->player->data->phase != DESERT_MUSIC)
+    if (player_is_in_square_rect(game, (sfVector2i){134, 237},
+        (sfVector2i){136, 239}) && game->player->data->phase != DESERT_MUSIC)
         music_player(game, DESERT_MUSIC);
-    if (player_is_in_square_rect(game, (sfVector2i){39, 239}, (sfVector2i){41, 241}) && game->player->data->phase != DESERT_MUSIC)
+    if (player_is_in_square_rect(game, (sfVector2i){39, 239},
+        (sfVector2i){41, 241}) && game->player->data->phase != DESERT_MUSIC)
         music_player(game, DESERT_MUSIC);
-    if (player_is_in_square_rect(game, (sfVector2i){39, 225}, (sfVector2i){41, 227}) && game->player->data->phase != BOSS_MUSIC)
+    if (player_is_in_square_rect(game, (sfVector2i){39, 225},
+        (sfVector2i){41, 227}) && game->player->data->phase != BOSS_MUSIC)
         music_player(game, BOSS_MUSIC);
 }

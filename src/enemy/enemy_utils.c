@@ -49,7 +49,7 @@ static void update_enemy_position_x(pirate_quest_t *game,
 {
     if (diff_x > 0.0) {
         enemy->direction = RIGHT;
-        enemy->pos_in_tile.x += 2;
+        enemy->pos_in_tile.x += 0.8;
         if (enemy->pos_in_tile.x >= 32 * game->camera->zoom) {
             enemy->pos_in_tile.x = 0;
             enemy->square_pos.x += 1;
@@ -59,7 +59,7 @@ static void update_enemy_position_x(pirate_quest_t *game,
     }
     if (diff_x < 0.0) {
         enemy->direction = LEFT;
-        enemy->pos_in_tile.x -= 2;
+        enemy->pos_in_tile.x -= 0.8;
         if (enemy->pos_in_tile.x <= -32 * game->camera->zoom) {
             enemy->pos_in_tile.x = 0;
             enemy->square_pos.x -= 1;
@@ -72,7 +72,7 @@ static void update_enemy_position_y(pirate_quest_t *game,
     enemy_t *enemy, float diff_y)
 {
     if (diff_y > 0.0) {
-        enemy->pos_in_tile.y += 2;
+        enemy->pos_in_tile.y += 0.8;
         if (enemy->pos_in_tile.y >= 32 * game->camera->zoom) {
             enemy->pos_in_tile.y = 0;
             enemy->square_pos.y += 1;
@@ -81,7 +81,7 @@ static void update_enemy_position_y(pirate_quest_t *game,
         return;
     }
     if (diff_y < 0.0) {
-        enemy->pos_in_tile.y -= 2;
+        enemy->pos_in_tile.y -= 0.8;
         if (enemy->pos_in_tile.y <= -32 * game->camera->zoom) {
             enemy->pos_in_tile.y = 0;
             enemy->square_pos.y -= 1;

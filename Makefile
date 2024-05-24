@@ -28,6 +28,7 @@ SRCS_FILE	=	src/main.c							\
 				src/dialogues/dialogues_service.c	\
 				src/enemy/enemy.c					\
 				src/enemy/enemy_utils.c				\
+				src/enemy/enemy_utils2.c			\
 				src/event/close_event.c				\
 				src/event/event_handler.c			\
 				src/event/input_event.c				\

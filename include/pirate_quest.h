@@ -550,6 +550,9 @@ void free_enemy(void *data);
 void move_enemy(pirate_quest_t *game, enemy_t *enemy);
 void update_pos_goal(pirate_quest_t *game, enemy_t *enemy);
 
+// enemy/enemy_utils2.c
+void apply_knockback(pirate_quest_t *game, enemy_t *enemy);
+
 // inventory
 void init_inv(pirate_quest_t *game);
 void draw_inv(pirate_quest_t *game);

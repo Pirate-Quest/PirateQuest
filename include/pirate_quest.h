@@ -62,8 +62,12 @@ typedef struct task_daemon_s {
 } task_daemon_t;
 
 typedef enum {
+    MENU_PHASE,
     TUTORIAL_PHASE,
-    VILLAGE_PHASE
+    MARKET_PHASE,
+    TAVERN_PHASE,
+    DESERT_PHASE,
+    BOSS_PHASE
 } game_phase_t;
 
 typedef struct game_phase_info_s {
@@ -109,6 +113,7 @@ typedef struct player_inventory_s {
 typedef enum {
     MENU_MUSIC,
     TUTO_MUSIC,
+    MARKET_MUSIC,
     TAVERN_MUSIC,
     DESERT_MUSIC,
     BOSS_MUSIC
@@ -120,7 +125,7 @@ typedef struct music_registry_s {
     char *path;
 } music_registry_t;
 
-    #define TOTAL_MUSIC 5
+    #define TOTAL_MUSIC 6
 
 typedef struct music_tab_s {
     sfMusic *musics[TOTAL_MUSIC];

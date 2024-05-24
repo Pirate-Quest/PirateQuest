@@ -26,4 +26,5 @@ void save_menu_btns_event(pirate_quest_t *game,
         play_dialogue(game, get_dialogue(game, COMMAND), 0);
         music_player(game, TUTO_MUSIC);
     }
+    music_player(game, game->player->data->phase);
 }

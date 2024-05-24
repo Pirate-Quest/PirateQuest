@@ -109,7 +109,9 @@ typedef struct player_inventory_s {
 typedef enum {
     MENU_MUSIC,
     TUTO_MUSIC,
-    TAVERN_MUSIC
+    TAVERN_MUSIC,
+    DESERT_MUSIC,
+    BOSS_MUSIC
 } music_t;
 
 typedef struct music_registry_s {
@@ -118,7 +120,7 @@ typedef struct music_registry_s {
     char *path;
 } music_registry_t;
 
-    #define TOTAL_MUSIC 3
+    #define TOTAL_MUSIC 5
 
 typedef struct music_tab_s {
     sfMusic *musics[TOTAL_MUSIC];
@@ -126,6 +128,7 @@ typedef struct music_tab_s {
 
 void init_musique(pirate_quest_t *game);
 void music_player(pirate_quest_t *game, int music);
+void select_music(pirate_quest_t *game);
 
 typedef struct player_data_s {
     game_phase_t phase;

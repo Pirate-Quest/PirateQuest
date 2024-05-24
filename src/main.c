@@ -92,6 +92,7 @@ static void update2(pirate_quest_t *game)
     draw_inv(game);
     update_main_menu(game);
     show_buttons(game);
+    select_music(game);
 }
 
 static void update(pirate_quest_t *game)

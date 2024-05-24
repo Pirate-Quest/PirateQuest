@@ -349,7 +349,8 @@ typedef enum {
     GROGNON,
     OTIS,
     GUARDE,
-    CHEST,
+    LOCAL,
+    SENIL,
 } dialogue_interlocutor_t;
 
 typedef struct interlocutor_builder_s {
@@ -391,6 +392,13 @@ typedef enum {
     GROGN,
     MONO,
     GUARD,
+    END_GAME,
+    CHEST,
+    BEACH,
+    LOC,
+    OLD,
+    SEN,
+    DESERT,
 } dialogue_enum_t;
 
 typedef struct dialogue_builder_s {
@@ -450,6 +458,8 @@ void beach_telep(sfEvent event, pirate_quest_t *game);
 void cave_telep(sfEvent event, pirate_quest_t *game);
 void dialogue_npc_two(sfEvent event, pirate_quest_t *game);
 void dialogue_npc_three(sfEvent event, pirate_quest_t *game);
+void dialogue_npc_four(sfEvent event, pirate_quest_t *game);
+void dialogue_npc_guard(sfEvent event, pirate_quest_t *game);
 
 typedef struct node_t {
     vector2i_t pos;

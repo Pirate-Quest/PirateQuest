@@ -22,7 +22,7 @@ void tavern_telep(sfEvent event, pirate_quest_t *game)
     if (player_is_in_square_rect(game, (sfVector2i)
     {153, 124}, (sfVector2i) {154, 126}) && event.key.code == sfKeyE) {
         game->camera->pos_in_tile = (sfVector2f){0, 0};
-        game->camera->map_position.x = 103;
+        game->camera->map_position.x = 102;
         game->camera->map_position.y = 22;
         music_player(game, TAVERN_MUSIC);
     }

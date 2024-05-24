@@ -20,6 +20,10 @@ static dialogue_interlocutor_t get_speaker_enum_bis(const char *speaker)
         return GROGNON;
     if (strcmp(speaker, "GUARDE") == 0)
         return GUARDE;
+    if (strcmp(speaker, "LOCAL") == 0)
+        return LOCAL;
+    if (strcmp(speaker, "SENIL") == 0)
+        return SENIL;
     return UNKNOWN;
 }
 

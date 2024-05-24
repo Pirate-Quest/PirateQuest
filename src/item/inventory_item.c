@@ -77,6 +77,7 @@ static void init_slot(pirate_quest_t *game, int i)
     sfSprite_setPosition(game->inv_bar->slots[i], (sfVector2f){2 *
         game->camera->zoom + (i * 128),
         get_resolution(game).height - 33 * game->camera->zoom});
+    game->inv_bar->slots_id[i] = NONE_ITEM;
 }
 
 void init_inv(pirate_quest_t *game)

@@ -22,9 +22,11 @@
 typedef struct pirate_quest_s pirate_quest_t;
 
 typedef enum {
+    IN_GAME,
     MAIN_MENU,
     SAVE_MENU,
-    SETTINGS_MENU,
+    GAME_MENU,
+    SETTINGS_MENU
 } current_gui_t;
 
 typedef enum {
@@ -208,6 +210,7 @@ typedef square_tile_t *square_t[LAYER_COUNT][RENDER_HEIGHT][RENDER_WIDTH];
 typedef int collision_t[MAP_HEIGHT][MAP_WIDTH];
 typedef struct sound_impl_s sound_impl_t;
 typedef struct main_menu_s main_menu_t;
+typedef struct settings_menu_s settings_menu_t;
 typedef struct dialogue_impl_s dialogue_impl_t;
 typedef struct interlocutor_impl_s interlocutor_impl_t;
 typedef struct dialogue_box_s dialogue_box_t;
@@ -217,6 +220,8 @@ struct pirate_quest_s {
     game_state_t state;
     current_gui_t current_gui;
     main_menu_t *main_menu;
+    main_menu_t *game_menu;
+    settings_menu_t *settings_menu;
     render_window_t *window;
     camera_t *camera;
     square_t square;
@@ -328,6 +333,15 @@ struct main_menu_s {
     sfSprite *background;
 };
 
+struct settings_menu_s {
+    sfTexture *splash_texture;
+    sfSprite *background;
+    sfBool listen_key;
+    sfKeyCode key_code;
+    int index_key;
+};
+
+
 // gui/interface/main_menu.c
 int show_main_menu_btns(pirate_quest_t *game,
     const button_builder_t *_, button_t *__);
@@ -342,6 +356,32 @@ int show_save_menu_btns(pirate_quest_t *game,
 void save_menu_btns_event(pirate_quest_t *game,
     const button_builder_t *button, button_t *_);
 
+// gui/interface/game_menu.c
+int show_game_menu_btns(pirate_quest_t *game,
+    const button_builder_t *_, button_t *__);
+void init_game_menu(pirate_quest_t *game);
+void input_game_menu(pirate_quest_t *game);
+void show_game_menu(pirate_quest_t *game);
+
+// gui/interface/settings_menu.c
+void init_settings_menu(pirate_quest_t *game);
+void settings_menu_btns_event(pirate_quest_t *game,
+    const button_builder_t *button, button_t *_);
+int show_settings_menu_btns(pirate_quest_t *game,
+    const button_builder_t *_, button_t *__);
+void update_settings_menu(pirate_quest_t *game);
+void change_setting(pirate_quest_t *game, sfKeyCode new_key);
+
+// gui/button/game_menu_button.c
+void game_menu_resume_event(pirate_quest_t *game,
+    const button_builder_t *button, button_t *_);
+void game_menu_save_event(pirate_quest_t *game,
+    const button_builder_t *button, button_t *_);
+void game_menu_settings_event(pirate_quest_t *game,
+    const button_builder_t *button, button_t *_);
+void game_menu_exit_event(pirate_quest_t *game,
+    const button_builder_t *button, button_t *_);
+
 // game/game_save.c
 void load_game(pirate_quest_t *game, char *id);
 
@@ -353,6 +393,9 @@ int show_back_btn(pirate_quest_t *game,
     const button_builder_t *_, button_t *__);
 void back_btn_event(pirate_quest_t *game,
     const button_builder_t *button, button_t *_);
+
+// settings/settings_import.c
+void write_settings_index(pirate_quest_t *game, int index, sfKeyCode key);
 
 typedef enum {
     UNKNOWN,

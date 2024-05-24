@@ -31,7 +31,6 @@ void change_setting(pirate_quest_t *game, sfKeyCode new_key)
     game->settings_menu->index_key = -1;
 }
 
-
 static void change_key_bind(pirate_quest_t *game, int setting_nb)
 {
     game->settings_menu->listen_key = sfTrue;
@@ -44,15 +43,15 @@ void settings_menu_btns_event(pirate_quest_t *game,
     if (button->text == NULL)
         return;
     if (my_strcmp(button->text, "Up") == 0)
-       change_key_bind(game, 1);
+        change_key_bind(game, 1);
     if (my_strcmp(button->text, "Down") == 0)
-       change_key_bind(game, 2);
+        change_key_bind(game, 2);
     if (my_strcmp(button->text, "Left") == 0)
-       change_key_bind(game, 3);
+        change_key_bind(game, 3);
     if (my_strcmp(button->text, "Right") == 0)
-       change_key_bind(game, 4);
+        change_key_bind(game, 4);
     if (my_strcmp(button->text, "Attack") == 0)
-       change_key_bind(game, 5);
+        change_key_bind(game, 5);
     if (my_strcmp(button->text, "Resolution") == 0) {
         sfRenderWindow_destroy(game->window->window);
         game->window->window = sfRenderWindow_create(get_sfvideo_mode(
@@ -78,7 +77,8 @@ void init_settings_menu(pirate_quest_t *game)
     sfSprite_setPosition(game->settings_menu->background, (sfVector2f){
         (resolution.width / 2) - 960 * scale / 2,
         (resolution.height / 2) - 540 * scale / 2});
-    sfSprite_setScale(game->settings_menu->background, (sfVector2f){scale, scale});
+    sfSprite_setScale(game->settings_menu->background,
+        (sfVector2f){scale, scale});
 }
 
 void update_settings_menu(pirate_quest_t *game)

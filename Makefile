@@ -56,6 +56,9 @@ SRCS_FILE	=	src/main.c							\
 				src/utils/csfml_str.c				\
 				src/utils/texture_util.c			\
 				src/dialogues/dialogue_npc.c		\
+				src/item/inventory_item.c			\
+				src/dialogues/telep.c				\
+				src/music/music_player.c			\
 
 all:	$(BUILD_DIR) $(TARGET)
 

@@ -107,7 +107,37 @@ const tile_object_t tile_objects[] = {
         .id = 6607,
         .rect = (sfIntRect){224, 2048, 32 * 2, 32 * 2},
         .origin = (sfVector2f){0, 64},
-    }
+    },
+    {
+        .id = 9096,
+        .rect = (sfIntRect){3040, 2794, 32 * 4, 32 * 4},
+        .origin = (sfVector2f){32, 70},
+    },
+    {
+        .id = 9575,
+        .rect = (sfIntRect){2400, 3008, 32 * 2, 32 * 2},
+        .origin = (sfVector2f){0, 32},
+    },
+    {
+        .id = 9573,
+        .rect = (sfIntRect){2336, 3008, 32 * 2, 32 * 2},
+        .origin = (sfVector2f){0, 32},
+    },
+    {
+        .id = 8296,
+        .rect = (sfIntRect){3072, 2528, 32 * 2, 32 * 3},
+        .origin = (sfVector2f){0, 96},
+    },
+    {
+        .id = 8292,
+        .rect = (sfIntRect){2944, 2560, 32 * 3, 32 * 2},
+        .origin = (sfVector2f){0, 64},
+    },
+    {
+        .id = 8298,
+        .rect = (sfIntRect){3036, 2560, 32 * 2, 32 * 3},
+        .origin = (sfVector2f){96, 32},
+    },
 };
 
 static void draw_tile_object(pirate_quest_t *game, tile_object_t tile_object,

@@ -68,7 +68,7 @@ static int on_tick(pirate_quest_t *game, void *_, int exec_count)
     sfText_setUnicodeString(game->dialogue_box->text,
         csfml_strndup(current_dialogue->content, showed_text_length));
     play_sound(game, ZIPCLICK_SOUND);
-    game->dialogue_service->current_dialogue_text_index += 2;
+    game->dialogue_service->current_dialogue_text_index += 3;
     return 0;
 }
 
@@ -97,11 +97,6 @@ void play_dialogue(pirate_quest_t *game, dialogue_impl_t *dialogue, int i)
         .second_interval = 0.1,
         .execution_count = (dialogue->dialogues[i].time) * 10
     };
-
-    if (game->dialogue_service->is_dialogue_playing && i == 0) {
-        my_puterr("A dialogue is already playing.\n");
-        return;
-    }
     game->dialogue_service->is_dialogue_playing = 1;
     game->dialogue_service->current_dialogue = dialogue->dialogue;
     game->dialogue_service->current_dialogue_index = i;

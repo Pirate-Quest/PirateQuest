@@ -8,6 +8,7 @@
 #ifndef PIRATE_QUEST_H
     #define PIRATE_QUEST_H
 
+    #include <SFML/Audio/Types.h>
     #include <SFML/Graphics.h>
     #include <SFML/Audio.h>
     #include <stdio.h>
@@ -77,6 +78,7 @@ typedef enum {
     LETTER_ITEM,
     PLANK_ITEM,
     TUTO_SWORD_ITEM,
+    SAIL_ITEM
 } inventory_item_t;
 
 typedef struct inventory_item_registry_s {
@@ -91,7 +93,7 @@ typedef struct inventory_item_impl_s {
 } inventory_item_impl_t;
 
     #define SLOT_COUNT 5
-    #define TOTAL_ITEM 6
+    #define TOTAL_ITEM 7
 
 typedef struct inv_bar_s {
     sfTexture *texture_bar;
@@ -103,6 +105,30 @@ typedef struct inv_bar_s {
 typedef struct player_inventory_s {
     inventory_item_t slots[SLOT_COUNT];
 } player_inventory_t;
+
+typedef enum {
+    MENU_MUSIC,
+    TUTO_MUSIC,
+    TAVERN_MUSIC,
+    DESERT_MUSIC,
+    BOSS_MUSIC
+} music_t;
+
+typedef struct music_registry_s {
+    music_t item;
+    char *name;
+    char *path;
+} music_registry_t;
+
+    #define TOTAL_MUSIC 5
+
+typedef struct music_tab_s {
+    sfMusic *musics[TOTAL_MUSIC];
+} music_tab_t;
+
+void init_musique(pirate_quest_t *game);
+void music_player(pirate_quest_t *game, int music);
+void select_music(pirate_quest_t *game);
 
 typedef struct player_data_s {
     game_phase_t phase;
@@ -198,7 +224,7 @@ struct pirate_quest_s {
     sfFont *font;
     sound_impl_t *sounds;
     dialogue_impl_t *dialogues;
-    item_texture_t *item_texture[TOTAL_ITEM];
+    item_texture_t item_texture[TOTAL_ITEM];
     inv_bar_t *inv_bar;
     interlocutor_impl_t *interlocutors;
     dialogue_box_t *dialogue_box;
@@ -207,6 +233,7 @@ struct pirate_quest_s {
     sfClock *timer;
     my_list_t *enemies;
     sfTexture *enemy_texture;
+    music_tab_t *music;
 };
 
 typedef struct asset_s {
@@ -329,6 +356,16 @@ typedef enum {
     ASTORA,
     TUTO,
     MAYOR,
+    SANDRINE,
+    MICHEL,
+    DOUGLAS,
+    MARIE,
+    JULIE,
+    GROGNON,
+    OTIS,
+    GUARDE,
+    LOCAL,
+    SENIL,
 } dialogue_interlocutor_t;
 
 typedef struct interlocutor_builder_s {
@@ -362,6 +399,21 @@ typedef enum {
     COMMAND,
     MAYOR_DG,
     SOLO_SWORD,
+    FIRST_WOMEN,
+    MICH,
+    DOUGLA,
+    MARI,
+    GRE,
+    GROGN,
+    MONO,
+    GUARD,
+    END_GAME,
+    CHEST,
+    BEACH,
+    LOC,
+    OLD,
+    SEN,
+    DESERT,
 } dialogue_enum_t;
 
 typedef struct dialogue_builder_s {
@@ -419,6 +471,10 @@ void dialogue_npc(sfEvent event, pirate_quest_t *game);
 void tavern_telep(sfEvent event, pirate_quest_t *game);
 void beach_telep(sfEvent event, pirate_quest_t *game);
 void cave_telep(sfEvent event, pirate_quest_t *game);
+void dialogue_npc_two(sfEvent event, pirate_quest_t *game);
+void dialogue_npc_three(sfEvent event, pirate_quest_t *game);
+void dialogue_npc_four(sfEvent event, pirate_quest_t *game);
+void dialogue_npc_guard(sfEvent event, pirate_quest_t *game);
 
 typedef struct node_t {
     sfVector2i pos;
@@ -486,5 +542,12 @@ direction_t get_best_attack_direction(pirate_quest_t *game, enemy_t *enemy);
 void free_enemy(void *data);
 void move_enemy(pirate_quest_t *game, enemy_t *enemy);
 void update_pos_goal(pirate_quest_t *game, enemy_t *enemy);
+
+// inventory
+void init_inv(pirate_quest_t *game);
+void draw_inv(pirate_quest_t *game);
+int add_item(pirate_quest_t *game, int item);
+int is_item(pirate_quest_t *game, int item);
+int remove_item(pirate_quest_t *game, int item);
 
 #endif /* PIRATE_QUEST_H */

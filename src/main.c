@@ -89,8 +89,10 @@ static void update2(pirate_quest_t *game)
     for (int i = 0; i < LAYER_COUNT; i++)
         for (int y = 0; y < RENDER_HEIGHT; y++)
             draw_front_tiles_object(game, i, y);
+    draw_inv(game);
     update_main_menu(game);
     show_buttons(game);
+    select_music(game);
 }
 
 static void update(pirate_quest_t *game)
@@ -116,6 +118,13 @@ static void update(pirate_quest_t *game)
     update_key_pressed(game);
 }
 
+static int init_game2(pirate_quest_t *game)
+{
+    init_splash_screen(game);
+    init_inv(game);
+    init_musique(game);
+}
+
 static int init_game(pirate_quest_t *game)
 {
     game->state = GAME_STATE_MENU;
@@ -136,7 +145,7 @@ static int init_game(pirate_quest_t *game)
     init_layers();
     init_squares(game);
     game->player = init_player(game);
-    init_splash_screen(game);
+    init_game2(game);
     return 0;
 }
 

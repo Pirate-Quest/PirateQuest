@@ -107,3 +107,12 @@ void free_dialogues(dialogue_t *dialogues, int dialogue_count)
         free(dialogues[i].content);
     free(dialogues);
 }
+
+void free_interlocutors_registry(pirate_quest_t *game)
+{
+    for (int i = 0; i < intrlcutors; i++) {
+        sfTexture_destroy(game->interlocutors[i].texture);
+        sfSprite_destroy(game->interlocutors[i].sprite);
+    }
+    free(game->interlocutors);
+}

@@ -253,15 +253,6 @@ void init_interlocutors_registry(pirate_quest_t *game)
     }
 }
 
-void free_interlocutors_registry(pirate_quest_t *game)
-{
-    for (int i = 0; i < intrlcutors; i++) {
-        sfTexture_destroy(game->interlocutors[i].texture);
-        sfSprite_destroy(game->interlocutors[i].sprite);
-    }
-    free(game->interlocutors);
-}
-
 void draw_interlocutor(pirate_quest_t *game,
     dialogue_interlocutor_t interlocutor)
 {
@@ -298,4 +289,14 @@ void free_dialogues_registry(pirate_quest_t *game)
             game->dialogues[i].dialogue_count);
     }
     free(game->dialogues);
+}
+
+void update_dialogue_sprites_resolution(pirate_quest_t *game)
+{
+    for (int i = 0; i < intrlcutors; i++) {
+        set_interlocutor_position(game, i);
+        set_interlocutor_scale(game, i);
+        set_interlocutor_name(game, i);
+        set_interlocutor_name_bg(game, i);
+    }
 }

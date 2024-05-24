@@ -50,6 +50,7 @@ SRCS_FILE	=	src/main.c							\
 				src/player/player_combat.c			\
 				src/player/player_sprite.c			\
 				src/render/render_window.c			\
+				src/render/resolution_updater.c		\
 				src/render/resolutions.c			\
 				src/scheduler/task_daemon.c			\
 				src/scheduler/task_provider.c		\

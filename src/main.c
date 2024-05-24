@@ -55,7 +55,7 @@ int init_window(pirate_quest_t *game)
         game->settings->resolution), "Pirate Quest", sfClose, NULL);
     camera->map_position = (sfVector2i){19, 69};
     camera->pos_in_tile = (sfVector2f){0.0, 0.0};
-    camera->zoom = 2.5;
+    camera->zoom = get_resolution(game).zoom;
     game->window = window;
     game->camera = camera;
     game->task_daemon = new_daemon_task();
@@ -89,16 +89,18 @@ static void update2(pirate_quest_t *game)
     for (int i = 0; i < LAYER_COUNT; i++)
         for (int y = 0; y < RENDER_HEIGHT; y++)
             draw_front_tiles_object(game, i, y);
+    draw_inv(game);
     update_main_menu(game);
     update_settings_menu(game);
     show_game_menu(game);
     dialogue_npc(game);
     show_buttons(game);
+    select_music(game);
 }
 
 static void update(pirate_quest_t *game)
 {
-    if (sfClock_getElapsedTime(game->timer).microseconds < 4000000) {
+    if (sfClock_getElapsedTime(game->timer).microseconds < 1000000) {
         draw_splash_screen(game);
         return;
     }
@@ -110,11 +112,21 @@ static void update(pirate_quest_t *game)
         for (int y = 0; y < RENDER_HEIGHT; y++)
             draw_back_tiles_object(game, i, y);
     update_player(game);
+    if (game->state == GAME_STATE_PLAYING)
+        update_enemies(game);
     update2(game);
     update_dialogue_visuals(game);
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
     update_key_pressed(game);
+}
+
+static int init_game2(pirate_quest_t *game)
+{
+    init_splash_screen(game);
+    init_inv(game);
+    init_musique(game);
+    return 0;
 }
 
 static int init_game(pirate_quest_t *game)
@@ -124,6 +136,8 @@ static int init_game(pirate_quest_t *game)
     game->font = sfFont_createFromFile("assets/font/Caribbean.ttf");
     if (game->font == NULL)
         return 1;
+    game->enemies = my_list_create(&free_enemy);
+    game->enemy_texture = sfTexture_createFromFile("assets/enemy.png", NULL);
     init_dialogues_registry(game);
     init_interlocutors_registry(game);
     init_dialogue_box(game);
@@ -137,7 +151,7 @@ static int init_game(pirate_quest_t *game)
     init_layers();
     init_squares(game);
     game->player = init_player(game);
-    init_splash_screen(game);
+    init_game2(game);
     return 0;
 }
 

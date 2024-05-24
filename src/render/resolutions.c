@@ -9,9 +9,9 @@
 #include "../../include/pirate_quest.h"
 #include <SFML/Graphics.h>
 
-const resolution_t resolutions[3] = {
-    {.width = 1280, .height = 720, .render_width = 18, .render_height = 11},
-    {.width = 1920, .height = 1080, .render_width = 18, .render_height = 11}
+const resolution_t resolutions[2] = {
+    {.width = 1280, .height = 720, .zoom = 2.5},
+    {.width = 1920, .height = 1080, .zoom = 3.75}
 };
 
 resolution_t get_resolution(pirate_quest_t *game)

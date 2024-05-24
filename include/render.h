@@ -13,8 +13,7 @@
 typedef struct resolution_s {
     int width;
     int height;
-    int render_width;
-    int render_height;
+    float zoom;
 } resolution_t;
 
 typedef struct camera_s {

@@ -51,7 +51,7 @@ void free_dialogue_box(pirate_quest_t *game)
     free(game->dialogue_box);
 }
 
-static int on_tick(pirate_quest_t *game, hashtable_t *_, int exec_count)
+static int on_tick(pirate_quest_t *game, void *_, int exec_count)
 {
     dialogue_t *current_dialogue = get_current_dialogue(game);
     int showed_text_length =
@@ -68,11 +68,11 @@ static int on_tick(pirate_quest_t *game, hashtable_t *_, int exec_count)
     sfText_setUnicodeString(game->dialogue_box->text,
         csfml_strndup(current_dialogue->content, showed_text_length));
     play_sound(game, ZIPCLICK_SOUND);
-    game->dialogue_service->current_dialogue_text_index += 2;
+    game->dialogue_service->current_dialogue_text_index += 3;
     return 0;
 }
 
-static int on_end(pirate_quest_t *game, hashtable_t *_)
+static int on_end(pirate_quest_t *game, void *_)
 {
     dialogue_impl_t *dialogue = get_dialogue(game,
         game->dialogue_service->current_dialogue);
@@ -98,10 +98,6 @@ void play_dialogue(pirate_quest_t *game, dialogue_impl_t *dialogue, int i)
         .execution_count = (dialogue->dialogues[i].time) * 10
     };
 
-    if (game->dialogue_service->is_dialogue_playing && i == 0) {
-        my_puterr("A dialogue is already playing.\n");
-        return;
-    }
     game->dialogue_service->is_dialogue_playing = 1;
     game->dialogue_service->current_dialogue = dialogue->dialogue;
     game->dialogue_service->current_dialogue_index = i;

@@ -9,12 +9,28 @@
 
 const game_phase_info_t game_phases[] = {
     {
+        .phase = MENU_PHASE,
+        .pos_in_map = {0, 0}
+    },
+    {
         .phase = TUTORIAL_PHASE,
         .pos_in_map = {19, 69}
     },
     {
-        .phase = VILLAGE_PHASE,
+        .phase = MARKET_PHASE,
         .pos_in_map = {143, 128}
+    },
+    {
+        .phase = TAVERN_PHASE,
+        .pos_in_map = {102, 21}
+    },
+    {
+        .phase = DESERT_PHASE,
+        .pos_in_map = {135, 246}
+    },
+    {
+        .phase = BOSS_PHASE,
+        .pos_in_map = {40, 223}
     }
 };
 

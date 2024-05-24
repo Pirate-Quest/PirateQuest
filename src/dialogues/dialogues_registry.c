@@ -64,6 +64,86 @@ const interlocutor_builder_t interlocutors[] = {
         .origin = (sfVector2f){100.0, 100.0},
         .size = (sfVector2f){300.0, 362.0}
     },
+    {
+        .interlocutor = SANDRINE,
+        .name = "Sandrine",
+        .file_path = "assets/sprites/png_9.png",
+        .scale = 2,
+        .origin = (sfVector2f){100.0, 0.0},
+        .size = (sfVector2f){60.0, 70.0}
+    },
+    {
+        .interlocutor = MICHEL,
+        .name = "Michel",
+        .file_path = "assets/sprites/png_2.png",
+        .scale = 2,
+        .origin = (sfVector2f){100.0, 0.0},
+        .size = (sfVector2f){60.0, 70.0}
+    },
+    {
+        .interlocutor = DOUGLAS,
+        .name = "Douglas",
+        .file_path = "assets/sprites/farmer_2.png",
+        .scale = 0.2,
+        .origin = (sfVector2f){100.0, 0.0},
+        .size = (sfVector2f){475.0, 525.0}
+    },
+    {
+        .interlocutor = MARIE,
+        .name = "Marie",
+        .file_path = "assets/sprites/png_8.png",
+        .scale = 2,
+        .origin = (sfVector2f){100.0, 0.0},
+        .size = (sfVector2f){60.0, 70.0}
+    },
+    {
+        .interlocutor = JULIE,
+        .name = "Julie",
+        .file_path = "assets/sprites/png_7.png",
+        .scale = 2,
+        .origin = (sfVector2f){100.0, 0.0},
+        .size = (sfVector2f){60.0, 70.0}
+    },
+    {
+        .interlocutor = GROGNON,
+        .name = "Client Grognon",
+        .file_path = "assets/sprites/png_4.png",
+        .scale = 2,
+        .origin = (sfVector2f){100.0, 0.0},
+        .size = (sfVector2f){60.0, 70.0}
+    },
+    {
+        .interlocutor = OTIS,
+        .name = "Otis",
+        .file_path = "assets/sprites/png_1.png",
+        .scale = 2,
+        .origin = (sfVector2f){100.0, 0.0},
+        .size = (sfVector2f){60.0, 70.0}
+    },
+    {
+        .interlocutor = GUARDE,
+        .name = "Garde",
+        .file_path = "assets/sprites/ds2.png",
+        .scale = 0.4,
+        .origin = (sfVector2f){100.0, 0.0},
+        .size = (sfVector2f){500.0, 500.0}
+    },
+    {
+        .interlocutor = LOCAL,
+        .name = "Local",
+        .file_path = "assets/sprites/png_10.png",
+        .scale = 2,
+        .origin = (sfVector2f){100.0, 0.0},
+        .size = (sfVector2f){60.0, 70.0}
+    },
+    {
+        .interlocutor = SENIL,
+        .name = "Vieil homme",
+        .file_path = "assets/sprites/png_7.png",
+        .scale = 2,
+        .origin = (sfVector2f){100.0, 0.0},
+        .size = (sfVector2f){60.0, 70.0}
+    },
 };
 
 const dialogue_builder_t dialogues[] = {
@@ -72,6 +152,21 @@ const dialogue_builder_t dialogues[] = {
     {COMMAND, "assets/dialogues/tutorial.dialogue"},
     {MAYOR_DG, "assets/dialogues/mayor.dialogue"},
     {SOLO_SWORD, "assets/dialogues/sword.dialogue"},
+    {FIRST_WOMEN, "assets/dialogues/women_red_house.dialogue"},
+    {MICH, "assets/dialogues/michel.dialogue"},
+    {DOUGLA, "assets/dialogues/douglas.dialogue"},
+    {MARI, "assets/dialogues/marie.dialogue"},
+    {MONO, "assets/dialogues/asterix.dialogue"},
+    {GRE, "assets/dialogues/julie.dialogue"},
+    {GROGN, "assets/dialogues/grognon.dialogue"},
+    {GUARD, "assets/dialogues/guard.dialogue"},
+    {CHEST, "assets/dialogues/chest.dialogue"},
+    {END_GAME, "assets/dialogues/win.dialogue"},
+    {BEACH, "assets/dialogues/beach.dialogue"},
+    {LOC, "assets/dialogues/local.dialogue"},
+    {SEN, "assets/dialogues/senil.dialogue"},
+    {DESERT, "assets/dialogues/desert.dialogue"},
+    {CAVE, "assets/dialogues/cave.dialogue"},
 };
 
 const int intrlcutors = sizeof(interlocutors) / sizeof(interlocutor_builder_t);

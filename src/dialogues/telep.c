@@ -56,24 +56,33 @@ void dialogue_npc_four(sfEvent event, pirate_quest_t *game)
     if (player_is_in_square_rect(game, (sfVector2i)
     {153, 20}, (sfVector2i) {156, 21}) && game->dialogue_service->
     is_dialogue_playing == 0 && event.key.code == sfKeyE &&
-    !is_item(game, SAIL_ITEM))
+    !is_item(game, SAIL_ITEM)) {
             play_dialogue(game, get_dialogue(game, CHEST), 0);
-
+            add_item(game, SAIL_ITEM);
+    }
+    if (player_is_in_square_rect(game, (sfVector2i)
+    {157, 135}, (sfVector2i) {159, 136}) && event.key.code == sfKeyE
+    && game->dialogue_service->is_dialogue_playing == 0)
+        play_dialogue(game, get_dialogue(game, MICH), 0);
 }
 
 void dialogue_npc_guard(sfEvent event, pirate_quest_t *game)
 {
-    if (guard_beach(game) == 1 && event.key.code == sfKeyE)
+    if (guard_beach(game) == 1 && event.key.code == sfKeyE
+    && game->dialogue_service->is_dialogue_playing == 0)
         play_dialogue(game, get_dialogue(game, BEACH), 0);
     if (player_is_in_square_rect(game, (sfVector2i)
-    {135, 249}, (sfVector2i) {137, 251}) && event.key.code == sfKeyE)
+    {135, 249}, (sfVector2i) {137, 251}) && event.key.code == sfKeyE
+    && game->dialogue_service->is_dialogue_playing == 0)
         play_dialogue(game, get_dialogue(game, LOC), 0);
     if (player_is_in_square_rect(game, (sfVector2i)
-    {139, 255}, (sfVector2i) {141, 257}) && event.key.code == sfKeyE)
+    {139, 255}, (sfVector2i) {141, 257}) && event.key.code == sfKeyE
+    && game->dialogue_service->is_dialogue_playing == 0)
         play_dialogue(game, get_dialogue(game, SEN), 0);
     if (player_is_in_square_rect(game, (sfVector2i)
-    {36, 270}, (sfVector2i) {39, 271}) && event.key.code == sfKeyE && !is_item(game, SWORD_ITEM))
-    {
+    {36, 270}, (sfVector2i) {39, 271}) &&
+    event.key.code == sfKeyE && !is_item(game, SWORD_ITEM)
+    && game->dialogue_service->is_dialogue_playing == 0) {
         play_dialogue(game, get_dialogue(game, DESERT), 0);
         if (is_item(game, TUTO_SWORD_ITEM) == 1)
             remove_item(game, TUTO_SWORD_ITEM);

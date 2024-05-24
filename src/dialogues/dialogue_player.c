@@ -97,6 +97,7 @@ void play_dialogue(pirate_quest_t *game, dialogue_impl_t *dialogue, int i)
         .second_interval = 0.1,
         .execution_count = (dialogue->dialogues[i].time) * 10
     };
+
     game->dialogue_service->is_dialogue_playing = 1;
     game->dialogue_service->current_dialogue = dialogue->dialogue;
     game->dialogue_service->current_dialogue_index = i;

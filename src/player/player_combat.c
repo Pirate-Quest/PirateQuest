@@ -9,7 +9,7 @@
 
 void inflict_enemy_damage(pirate_quest_t *game, enemy_t *enemy, float damage)
 {
-    enemy->health -= damage * game->player->data->strength_lvl;
+    enemy->health -= damage * (game->player->data->strength_lvl + 1);
     sfSprite_setColor(enemy->sprite, sfRed);
     if (enemy->health <= 0) {
         unregister_task(game, enemy->task);

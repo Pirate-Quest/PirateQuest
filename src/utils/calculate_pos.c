@@ -6,6 +6,7 @@
 */
 
 #include <SFML/Graphics.h>
+#include <math.h>
 #include "../../include/pirate_quest.h"
 
 sfVector2f calculate_position(int x, int y, pirate_quest_t *game)
@@ -39,7 +40,8 @@ static int rect_is_in_rect(sfIntRect rect1, sfIntRect rect2)
     return 0;
 }
 
-int player_is_in_square(pirate_quest_t *game, int x, int y)
+int pos_is_in_square(pirate_quest_t *game,
+    int x, int y, sfVector2f sprite_pos)
 {
     square_tile_t *square = get_square(game, (sfVector2i){x, y});
     sfVector2f square_pos;
@@ -54,14 +56,21 @@ int player_is_in_square(pirate_quest_t *game, int x, int y)
         32 * game->camera->zoom,
         32 * game->camera->zoom
     };
-    return vector_is_in_rect(game->player->pos, squarer_rect);
+    return vector_is_in_rect(sprite_pos, squarer_rect);
+}
+
+int player_is_in_square(pirate_quest_t *game, int x, int y)
+{
+    return pos_is_in_square(game, x, y,
+        sfSprite_getPosition(game->player->sprite));
 }
 
 static int player_is_in_square_rect2(pirate_quest_t *game,
     sfVector2i pos1, sfVector2i pos2, int i)
 {
     for (int j = pos1.y; j <= pos2.y; j++) {
-        if (player_is_in_square(game, i, j))
+        if (pos_is_in_square(game, i, j,
+            sfSprite_getPosition(game->player->sprite)))
             return 1;
     }
     return 0;
@@ -75,4 +84,9 @@ int player_is_in_square_rect(pirate_quest_t *game,
             return 1;
     }
     return 0;
+}
+
+float distance_between_points(sfVector2f pos1, sfVector2f pos2)
+{
+    return sqrt(pow(pos2.x - pos1.x, 2) + pow(pos2.y - pos1.y, 2));
 }

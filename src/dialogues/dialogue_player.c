@@ -51,7 +51,7 @@ void free_dialogue_box(pirate_quest_t *game)
     free(game->dialogue_box);
 }
 
-static int on_tick(pirate_quest_t *game, hashtable_t *_, int exec_count)
+static int on_tick(pirate_quest_t *game, void *_, int exec_count)
 {
     dialogue_t *current_dialogue = get_current_dialogue(game);
     int showed_text_length =
@@ -72,7 +72,7 @@ static int on_tick(pirate_quest_t *game, hashtable_t *_, int exec_count)
     return 0;
 }
 
-static int on_end(pirate_quest_t *game, hashtable_t *_)
+static int on_end(pirate_quest_t *game, void *_)
 {
     dialogue_impl_t *dialogue = get_dialogue(game,
         game->dialogue_service->current_dialogue);

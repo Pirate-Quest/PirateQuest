@@ -14,7 +14,7 @@ const task_builder_t task = {
     .execution_count = -1
 };
 
-int on_player_tick(pirate_quest_t *game, hashtable_t *_, int exec_count)
+int on_player_tick(pirate_quest_t *game, void *_, int exec_count)
 {
     if (game->player->is_moving == 0)
         return 0;
@@ -30,6 +30,7 @@ player_t *init_player(pirate_quest_t *game)
     player->pos = (sfVector2f){get_resolution(game).width / 2,
         (get_resolution(game).height / 2) - 20};
     player->is_moving = 0;
+    player->is_attacking = 0;
     player->rect = (sfIntRect){0, 0, 128, 128};
     player->texture = sfTexture_createFromFile("assets/player.png", NULL);
     player->sprite = sfSprite_create();

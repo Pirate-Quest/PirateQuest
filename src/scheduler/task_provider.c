@@ -9,7 +9,7 @@
 #include "../../include/pirate_quest.h"
 
 task_t *register_task(pirate_quest_t *game, const task_builder_t *builder,
-    hashtable_t *data)
+    void *data)
 {
     task_t *new_task = malloc(sizeof(task_t));
 

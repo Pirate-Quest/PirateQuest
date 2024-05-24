@@ -7,14 +7,14 @@
 
 #include "../../include/pirate_quest.h"
 
-const vector2i_t directions[4] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+const sfVector2i directions[4] = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-static int heuristic(vector2i_t a, vector2i_t b)
+static int heuristic(sfVector2i a, sfVector2i b)
 {
     return abs(a.x - b.x) + abs(a.y - b.y);
 }
 
-static node_t *create_node(vector2i_t pos, int g, int h, node_t *parent)
+static node_t *create_node(sfVector2i pos, int g, int h, node_t *parent)
 {
     node_t *node = malloc(sizeof(node_t));
 
@@ -39,7 +39,7 @@ static void free_nodes(node_t *node)
     }
 }
 
-static int is_valid_pos(vector2i_t pos, pirate_quest_t *game)
+static int is_valid_pos(sfVector2i pos, pirate_quest_t *game)
 {
     if (pos.x < 0 || pos.x >= MAP_WIDTH || pos.y < 0 || pos.y >= MAP_HEIGHT)
         return 0;
@@ -48,7 +48,7 @@ static int is_valid_pos(vector2i_t pos, pirate_quest_t *game)
     return 1;
 }
 
-static int is_in_list(node_t **list, int list_size, vector2i_t pos)
+static int is_in_list(node_t **list, int list_size, sfVector2i pos)
 {
     for (int i = 0; i < list_size; i++) {
         if (list[i] && list[i]->pos.x == pos.x && list[i]->pos.y == pos.y)
@@ -90,12 +90,12 @@ node_t *create_and_add_neighbor(create_add_neighbor_builder_t *builder)
 void process_neighbors(process_neighbors_builder_t *builder,
     pirate_quest_t *game)
 {
-    vector2i_t n_pos;
+    sfVector2i n_pos;
     int tentative_g;
     int in_open;
 
     for (int i = 0; i < 4; i++) {
-        n_pos = (vector2i_t) {builder->current->pos.x + directions[i].x,
+        n_pos = (sfVector2i) {builder->current->pos.x + directions[i].x,
             builder->current->pos.y + directions[i].y};
         if (!is_valid_pos(n_pos, game)
             || is_in_list(builder->closed_list, builder->closed_size, n_pos))
@@ -110,14 +110,14 @@ void process_neighbors(process_neighbors_builder_t *builder,
     }
 }
 
-vector2i_t *build_path(node_t *current)
+sfVector2i *build_path(node_t *current)
 {
     int path_length = 0;
-    vector2i_t *path = NULL;
+    sfVector2i *path = NULL;
 
     for (node_t *node = current; node; node = node->parent)
         path_length++;
-    path = malloc(sizeof(vector2i_t) * path_length);
+    path = malloc(sizeof(sfVector2i) * path_length);
     if (!path) {
         free_nodes(current);
         return NULL;
@@ -130,7 +130,7 @@ vector2i_t *build_path(node_t *current)
     return path;
 }
 
-vector2i_t *find_path(pirate_quest_t *g, vector2i_t start, vector2i_t end)
+sfVector2i *find_path(pirate_quest_t *g, sfVector2i start, sfVector2i end)
 {
     node_t *open_list[MAP_HEIGHT * MAP_WIDTH] = {NULL};
     path_finding_builder_t builder = {0, 0, 0, NULL, {NULL}};

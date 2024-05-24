@@ -14,8 +14,19 @@ const resolution_t resolutions[2] = {
     {.width = 1920, .height = 1080, .zoom = 3.75}
 };
 
+static float get_zoom(sfVector2u v)
+{
+    return resolutions[0].zoom * (v.x / 1280.0);
+}
+
 resolution_t get_resolution(pirate_quest_t *game)
 {
+    if (game->settings->resolution == 2)
+        return ((resolution_t) {
+            sfRenderWindow_getSize(game->window->window).x,
+            sfRenderWindow_getSize(game->window->window).y,
+            get_zoom(sfRenderWindow_getSize(game->window->window))
+        });
     return (resolutions[game->settings->resolution]);
 }
 

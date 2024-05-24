@@ -53,11 +53,6 @@ void settings_menu_btns_event(pirate_quest_t *game,
     if (my_strcmp(button->text, "Attack") == 0)
         change_key_bind(game, 5);
     if (my_strcmp(button->text, "Resolution") == 0) {
-        sfRenderWindow_destroy(game->window->window);
-        game->settings->resolution = game->settings->resolution == 0 ? 1 : 0;
-        game->window->window = sfRenderWindow_create(get_sfvideo_mode(
-        game->settings->resolution), "Pirate Quest", sfClose, NULL);
-        game->camera->zoom = get_resolution(game).zoom;
         reload_res(game);
     }
 }

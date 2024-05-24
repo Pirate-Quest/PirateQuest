@@ -68,11 +68,26 @@ void reload_sprites_resolution(pirate_quest_t *game)
         - 32 * 2.5 * game->camera->zoom});
 }
 
+static void update_window(pirate_quest_t *game)
+{
+    sfUint32 style;
+
+    sfRenderWindow_destroy(game->window->window);
+    game->settings->resolution = game->settings->resolution == 2 ? 0 :
+        game->settings->resolution + 1;
+    style = (game->settings->resolution == 2 ? sfFullscreen : sfClose);
+    game->window->window = sfRenderWindow_create(get_sfvideo_mode(
+        game->settings->resolution), "Pirate Quest", style, NULL);
+    game->camera->zoom = get_resolution(game).zoom;
+    write_settings(game->settings);
+}
+
 void reload_res(pirate_quest_t *game)
 {
     resolution_t resolution = get_resolution(game);
     const float scale = 0.4;
 
+    update_window(game);
     game->camera->pos_in_tile = (sfVector2f){0, 0};
     sfRenderWindow_setFramerateLimit(game->window->window, 120);
     reload_inv_sprites_resolution(game);
@@ -82,8 +97,8 @@ void reload_res(pirate_quest_t *game)
     sfSprite_setScale(game->main_menu->background, (sfVector2f){
         (float) resolution.width / 1920, (float) resolution.height / 1080});
     sfSprite_setPosition(game->settings_menu->background, (sfVector2f){
-            (resolution.width / 2) - 960 * scale / 2,
-            (resolution.height / 2) - 540 * scale / 2});
+        (resolution.width / 2) - 960 * scale / 2,
+        (resolution.height / 2) - 540 * scale / 2});
     reload_sprites_resolution(game);
     update_dialogue_sprites_resolution(game);
     game->current_gui = IN_GAME;

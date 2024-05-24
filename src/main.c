@@ -46,17 +46,15 @@ int init_window(pirate_quest_t *game)
     camera_t *camera = malloc(sizeof(camera_t));
 
     game->settings = import_settings();
-    if (window == NULL || camera == NULL || game->settings == NULL) {
-        my_puterr("Error: Could not allocate memory for window."
-            " or settings.\n");
+    if (window == NULL || camera == NULL || game->settings == NULL)
         return FALSE;
-    }
     window->window = sfRenderWindow_create(get_sfvideo_mode(
-        game->settings->resolution), "Pirate Quest", sfClose, NULL);
+        game->settings->resolution), "Pirate Quest",
+        (game->settings->resolution == 2 ? sfFullscreen : sfClose), NULL);
+    game->window = window;
     camera->map_position = (sfVector2i){19, 69};
     camera->pos_in_tile = (sfVector2f){0.0, 0.0};
     camera->zoom = get_resolution(game).zoom;
-    game->window = window;
     game->camera = camera;
     game->task_daemon = new_daemon_task();
     game->tasks = my_list_create(&free_task);

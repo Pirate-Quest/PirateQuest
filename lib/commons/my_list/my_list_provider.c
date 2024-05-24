@@ -38,5 +38,7 @@ void my_list_destroy(my_list_t *list)
 
 int my_list_size(my_list_t *list)
 {
+    if (list == NULL)
+        return 0;
     return list->size;
 }

@@ -10,6 +10,23 @@
 #include <string.h>
 #include "../../include/pirate_quest.h"
 
+static dialogue_interlocutor_t get_speaker_enum_bis(const char *speaker)
+{
+    if (strcmp(speaker, "JULIE") == 0)
+        return JULIE;
+    if (strcmp(speaker, "OTIS") == 0)
+        return OTIS;
+    if (strcmp(speaker, "GROGNON") == 0)
+        return GROGNON;
+    if (strcmp(speaker, "GUARDE") == 0)
+        return GUARDE;
+    if (strcmp(speaker, "LOCAL") == 0)
+        return LOCAL;
+    if (strcmp(speaker, "SENIL") == 0)
+        return SENIL;
+    return UNKNOWN;
+}
+
 static dialogue_interlocutor_t get_speaker_enum(const char *speaker)
 {
     if (strcmp(speaker, "ME") == 0)
@@ -18,13 +35,19 @@ static dialogue_interlocutor_t get_speaker_enum(const char *speaker)
         return ANA;
     if (strcmp(speaker, "FRANCK") == 0)
         return FRANCK;
-    if (strcmp(speaker, "ASTORA") == 0)
-        return ASTORA;
     if (strcmp(speaker, "TUTO") == 0)
         return TUTO;
     if (strcmp(speaker, "MAYOR") == 0)
         return MAYOR;
-    return UNKNOWN;
+    if (strcmp(speaker, "SANDRINE") == 0)
+        return SANDRINE;
+    if (strcmp(speaker, "MICHEL") == 0)
+        return MICHEL;
+    if (strcmp(speaker, "DOUGLAS") == 0)
+        return DOUGLAS;
+    if (strcmp(speaker, "MARIE") == 0)
+        return MARIE;
+    return get_speaker_enum_bis(speaker);
 }
 
 static dialogue_t *realloc_dialogues(dialogue_t *dialogues, int dialogue_count)

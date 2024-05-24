@@ -25,7 +25,7 @@ void init_square_sprite(int i, sfVector2i loc, pirate_quest_t *game,
         get_layers()[i].offset)
     );
     sfSprite_setScale(game->square[i][loc.y][loc.x]->sprite,
-        (sfVector2f){2.5, 2.5});
+        (sfVector2f){game->camera->zoom, game->camera->zoom});
 }
 
 static void init_square(pirate_quest_t *game, int i, sfTexture *texture)

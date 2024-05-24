@@ -1,0 +1,44 @@
+[ME]=>4
+Oyé mon brave, on ma dit que vous pouviez m'aider ?
+
+[LOCAL]=>3
+C'est à quel sujet ?
+
+[ME]=>3
+Et bien j'avais un bateau et ...
+
+[LOCAL]=>3
+UN BATEAU ???
+
+[ME]=>1
+Oui ??
+
+[LOCAL]=>2
+C'est donc vous
+
+[ME]=>3
+Vous pourriez être un peu moins énigmatique ?
+
+[LOCAL]=>3
+Oui pardon, c'est vous qui avez fait naufrage non loin d'ici
+
+[LOCAL]=>3
+Le Maire à réussi à récuperer une portion de votre bateau,
+
+[LOCAL]=>3
+Malheureusement un malfrat vous en a voler un bout
+
+[ME]=>3
+Ohh le gredin, où ça ???
+
+[LOCAL]=>2
+Tout à l'ouest de l'île,
+
+[LOCAL]=>4
+il y'a un pontons sur la rive nord qui vous mènera à lui
+
+[LOCAL]=>4
+Soyez prudent, le désert est dangereux
+
+[LOCAL]=>3
+Beaucoup d'entre nous y ont péris

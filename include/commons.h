@@ -66,10 +66,10 @@ int my_list_size(my_list_t *list);
 int my_list_contains(my_list_t *list, void *value);
 char *my_itoa(int nb);
 
-typedef struct vector_s {
+typedef struct vector2i_t {
     int x;
     int y;
-} vector_t;
+} vector2i_t;
 
 typedef enum {
     UP,

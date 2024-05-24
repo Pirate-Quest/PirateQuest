@@ -71,15 +71,12 @@ int add_item(pirate_quest_t *game, int item)
 static void init_slot(pirate_quest_t *game, int i)
 {
     game->inv_bar->slots[i] = sfSprite_create();
-    sfSprite_setTexture(game->inv_bar->slots[i],
-        game->item_texture[0].texture, sfFalse);
     sfSprite_setScale(game->inv_bar->slots[i], (sfVector2f){
         game->camera->zoom * 1,
         game->camera->zoom * 1});
     sfSprite_setPosition(game->inv_bar->slots[i], (sfVector2f){2 *
         game->camera->zoom + (i * 128),
         get_resolution(game).height - 33 * game->camera->zoom});
-    game->inv_bar->slots_id[i] = NONE_ITEM;
 }
 
 void init_inv(pirate_quest_t *game)
@@ -107,6 +104,8 @@ void draw_inv(pirate_quest_t *game)
     sfRenderWindow_drawSprite(game->window->window,
         game->inv_bar->sprite_bar, NULL);
     for (int i = 0; i < SLOT_COUNT; i++){
+        sfSprite_setTexture(game->inv_bar->slots[i],
+            game->item_texture[game->inv_bar->slots_id[i]].texture, sfFalse);
         sfRenderWindow_drawSprite(game->window->window,
             game->inv_bar->slots[i], NULL);
     }

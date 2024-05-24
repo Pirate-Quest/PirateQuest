@@ -32,6 +32,7 @@ SRCS_FILE	=	src/main.c							\
 				src/event/close_event.c				\
 				src/event/event_handler.c			\
 				src/event/input_event.c				\
+				src/event/input_event2.c			\
 				src/game/game_phase.c				\
 				src/game/game_save.c				\
 				src/gui/button/button_registry.c	\

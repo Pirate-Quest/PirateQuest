@@ -34,7 +34,6 @@ void change_setting(pirate_quest_t *game, sfKeyCode new_key)
 
 static void change_key_bind(pirate_quest_t *game, int setting_nb)
 {
-    // setting nb : 1 UP, 2 Down, 3 Left, 4 Right, 5 Attack, 6 Resolution
     game->settings_menu->listen_key = sfTrue;
     game->settings_menu->index_key = setting_nb;
 }
@@ -54,8 +53,12 @@ void settings_menu_btns_event(pirate_quest_t *game,
        change_key_bind(game, 4);
     if (my_strcmp(button->text, "Attack") == 0)
        change_key_bind(game, 5);
-    if (my_strcmp(button->text, "Resolution") == 0)
-       game->settings->resolution = game->settings->resolution == 0 ? 1 : 0;
+    if (my_strcmp(button->text, "Resolution") == 0) {
+        sfRenderWindow_destroy(game->window->window);
+        game->window->window = sfRenderWindow_create(get_sfvideo_mode(
+        game->settings->resolution), "Pirate Quest", sfClose, NULL);
+        game->settings->resolution = game->settings->resolution == 0 ? 1 : 0;
+    }
 }
 
 void init_settings_menu(pirate_quest_t *game)

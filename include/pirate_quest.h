@@ -62,8 +62,12 @@ typedef struct task_daemon_s {
 } task_daemon_t;
 
 typedef enum {
+    MENU_PHASE,
     TUTORIAL_PHASE,
-    VILLAGE_PHASE
+    MARKET_PHASE,
+    TAVERN_PHASE,
+    DESERT_PHASE,
+    BOSS_PHASE
 } game_phase_t;
 
 typedef struct game_phase_info_s {
@@ -109,6 +113,7 @@ typedef struct player_inventory_s {
 typedef enum {
     MENU_MUSIC,
     TUTO_MUSIC,
+    MARKET_MUSIC,
     TAVERN_MUSIC,
     DESERT_MUSIC,
     BOSS_MUSIC
@@ -120,7 +125,7 @@ typedef struct music_registry_s {
     char *path;
 } music_registry_t;
 
-    #define TOTAL_MUSIC 5
+    #define TOTAL_MUSIC 6
 
 typedef struct music_tab_s {
     sfMusic *musics[TOTAL_MUSIC];
@@ -542,6 +547,9 @@ direction_t get_best_attack_direction(pirate_quest_t *game, enemy_t *enemy);
 void free_enemy(void *data);
 void move_enemy(pirate_quest_t *game, enemy_t *enemy);
 void update_pos_goal(pirate_quest_t *game, enemy_t *enemy);
+
+// enemy/enemy_utils2.c
+void apply_knockback(pirate_quest_t *game, enemy_t *enemy);
 
 // inventory
 void init_inv(pirate_quest_t *game);

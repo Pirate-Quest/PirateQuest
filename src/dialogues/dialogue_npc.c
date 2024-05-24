@@ -31,7 +31,7 @@ void tavern_telep(sfEvent event, pirate_quest_t *game)
         game->camera->pos_in_tile = (sfVector2f){0, 0};
         game->camera->map_position.x = 154;
         game->camera->map_position.y = 126;
-        music_player(game, TUTO_MUSIC);
+        music_player(game, MARKET_MUSIC);
     }
 }
 

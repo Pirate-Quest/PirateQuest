@@ -120,6 +120,12 @@ void key_released_event(sfEvent event, pirate_quest_t *game)
 {
     if (game->dialogue_service->is_dialogue_playing)
         return;
+    if (event.key.code == sfKeySpace) {
+        game->player->is_moving = 0;
+        game->player->is_attacking = 1;
+        attack_enemies(game, 10);
+        return;
+    }
     if (sfKeyboard_isKeyPressed(game->settings->up) == 1
         || sfKeyboard_isKeyPressed(game->settings->down) == 1
         || sfKeyboard_isKeyPressed(game->settings->left) == 1

@@ -34,23 +34,23 @@ typedef enum {
 } game_state_t;
 
 typedef struct task_s {
-    int (*on_tick)(pirate_quest_t *, hashtable_t *, int);
-    int (*on_end)(pirate_quest_t *, hashtable_t *);
+    int (*on_tick)(pirate_quest_t *, void *, int);
+    int (*on_end)(pirate_quest_t *, void *);
     double second_interval;
     int execution_count;
-    hashtable_t *data;
+    void *data;
 } task_t;
 
 typedef struct task_builder_s {
-    int (*on_tick)(pirate_quest_t *, hashtable_t *, int);
-    int (*on_end)(pirate_quest_t *, hashtable_t *);
+    int (*on_tick)(pirate_quest_t *, void *, int);
+    int (*on_end)(pirate_quest_t *, void *);
     double second_interval;
     int execution_count;
 } task_builder_t;
 
 // scheduler/*.c
 task_t *register_task(pirate_quest_t *game, const task_builder_t *builder,
-    hashtable_t *data);
+    void *data);
 void unregister_task(pirate_quest_t *game, task_t *task);
 void free_task(void *data);
 void update_tasks(pirate_quest_t *game);
@@ -143,6 +143,7 @@ typedef struct player_s {
     sfSprite *sprite;
     sfVector2f pos;
     int is_moving;
+    int is_attacking;
     sfVector2f size;
     sfIntRect rect;
     sfTexture *texture;
@@ -230,6 +231,8 @@ struct pirate_quest_s {
     dialogue_service_t *dialogue_service;
     sfSprite *scr;
     sfClock *timer;
+    my_list_t *enemies;
+    sfTexture *enemy_texture;
     music_tab_t *music;
 };
 
@@ -253,10 +256,16 @@ square_tile_t *get_square(pirate_quest_t *game, sfVector2i pos);
 player_t *init_player(pirate_quest_t *game);
 void update_direction(player_t *player, direction_t direction);
 int update_player(pirate_quest_t *game);
-int on_player_tick(pirate_quest_t *game, hashtable_t *_, int exec_count);
+int on_player_tick(pirate_quest_t *game, void *_, int exec_count);
+
+typedef struct enemy_s enemy_t;
+
+// player/player_combat.c
+void inflict_enemy_damage(pirate_quest_t *game, enemy_t *enemy, float damage);
+void attack_enemies(pirate_quest_t *game, float damage);
 
 // utils/texture_util.c
-void move_rect(sfIntRect *rect, int offset, int start, int max_value);
+int move_rect(sfIntRect *rect, int offset, int start, int max_value);
 
 // utils/csfml_str.c
 sfUint32 *csfml_strndup(sfUint32 *str, int n);
@@ -268,9 +277,15 @@ void utf8_to_32(const char *begin, const char *end, sfUint32 *output);
 
 // utils/calculate_pos.c
 sfVector2f calculate_position(int x, int y, pirate_quest_t *game);
-int player_is_in_square(pirate_quest_t *game, int x, int y);
+int pos_is_in_square(pirate_quest_t *game,
+    int x, int y, sfVector2f sprite_pos);
 int player_is_in_square_rect(pirate_quest_t *game,
     sfVector2i pos1, sfVector2i pos2);
+int player_is_in_square(pirate_quest_t *game, int x, int y);
+float distance_between_points(sfVector2f pos1, sfVector2f pos2);
+
+// utils/square_tile_from_pos.c
+square_tile_t *get_square_from_pos(pirate_quest_t *game, sfVector2f pos);
 
 // map/collision.c
 void init_collisions(pirate_quest_t *game);
@@ -462,7 +477,7 @@ void dialogue_npc_four(sfEvent event, pirate_quest_t *game);
 void dialogue_npc_guard(sfEvent event, pirate_quest_t *game);
 
 typedef struct node_t {
-    vector2i_t pos;
+    sfVector2i pos;
     int g;
     int h;
     int f;
@@ -475,14 +490,14 @@ typedef struct {
     int *open_size;
     node_t **closed_list;
     int closed_size;
-    vector2i_t end;
+    sfVector2i end;
 } process_neighbors_builder_t;
 
 typedef struct {
     node_t *current;
-    vector2i_t neighbor_pos;
+    sfVector2i neighbor_pos;
     int tentative_g;
-    vector2i_t end;
+    sfVector2i end;
     node_t **open_list;
     int *open_size;
     int in_open;
@@ -495,6 +510,38 @@ typedef struct {
     node_t *current;
     node_t *cl[MAP_HEIGHT * MAP_WIDTH];
 } path_finding_builder_t;
+
+// algorithm/path_finding.c
+sfVector2i *find_path(pirate_quest_t *g, sfVector2i start, sfVector2i end);
+
+struct enemy_s {
+    sfSprite *sprite;
+    sfVector2i square_pos;
+    sfVector2f pos_in_tile;
+    sfVector2f pos;
+    sfVector2i pos_goal;
+    sfVector2f pos_in_tile_goal;
+    sfVector2i super_pos_goal;
+    int is_moving;
+    int attacking;
+    sfVector2f size;
+    sfIntRect rect;
+    direction_t direction;
+    task_t *task;
+    float health;
+};
+
+// enemy/enemy.c
+int on_enemy_tick(pirate_quest_t *game, void *data, int _);
+void update_enemy_direction(enemy_t *enemy, direction_t direction);
+void update_enemies(pirate_quest_t *game);
+
+// enemy/enemy_utils.c
+sfVector2i get_random_pos(pirate_quest_t *game);
+direction_t get_best_attack_direction(pirate_quest_t *game, enemy_t *enemy);
+void free_enemy(void *data);
+void move_enemy(pirate_quest_t *game, enemy_t *enemy);
+void update_pos_goal(pirate_quest_t *game, enemy_t *enemy);
 
 // inventory
 void init_inv(pirate_quest_t *game);

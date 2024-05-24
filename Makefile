@@ -26,6 +26,8 @@ SRCS_FILE	=	src/main.c							\
 				src/dialogues/dialogues_registry.c	\
 				src/dialogues/dialogue_player.c		\
 				src/dialogues/dialogues_service.c	\
+				src/enemy/enemy.c					\
+				src/enemy/enemy_utils.c				\
 				src/event/close_event.c				\
 				src/event/event_handler.c			\
 				src/event/input_event.c				\
@@ -40,6 +42,7 @@ SRCS_FILE	=	src/main.c							\
 				src/map/rect_from_id.c				\
 				src/map/tiles_manager.c				\
 				src/object/tile_object.c			\
+				src/player/player_combat.c			\
 				src/player/player_sprite.c			\
 				src/render/render_window.c			\
 				src/render/resolutions.c			\
@@ -49,6 +52,7 @@ SRCS_FILE	=	src/main.c							\
 				src/sound/sound_registry.c			\
 				src/utils/calculate_pos.c			\
 				src/utils/utf8_to_32.c				\
+				src/utils/square_tile_from_pos.c	\
 				src/utils/csfml_str.c				\
 				src/utils/texture_util.c			\
 				src/dialogues/dialogue_npc.c		\

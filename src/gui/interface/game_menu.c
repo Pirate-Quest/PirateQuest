@@ -10,7 +10,9 @@
 int show_game_menu_btns(pirate_quest_t *game,
     const button_builder_t *_, button_t *__)
 {
-    return game->current_gui == GAME_MENU && game->state == GAME_STATE_PLAYING;
+    if (game->current_gui != GAME_MENU || game->state != GAME_STATE_PLAYING)
+        return 0;
+    return 1;
 }
 
 void init_game_menu(pirate_quest_t *game)
@@ -31,18 +33,18 @@ void init_game_menu(pirate_quest_t *game)
 
 void input_game_menu(pirate_quest_t *game)
 {
+    if (game->state != GAME_STATE_PLAYING)
+        return;
     if (game->current_gui == GAME_MENU)
         game->current_gui = IN_GAME;
-    else
+    if (game->current_gui == IN_GAME)
         game->current_gui = GAME_MENU;
 }
 
 void show_game_menu(pirate_quest_t *game)
 {
-    printf("game->current_gui state : %d\n", game->current_gui);
     if (!game->game_menu || game->current_gui != GAME_MENU)
         return;
-    printf("GAME MENU\n");
     sfRenderWindow_drawSprite(game->window->window,
         game->game_menu->background, NULL);
 }

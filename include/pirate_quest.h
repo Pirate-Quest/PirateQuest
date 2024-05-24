@@ -174,6 +174,7 @@ struct pirate_quest_s {
     current_gui_t current_gui;
     main_menu_t *main_menu;
     main_menu_t *game_menu;
+    main_menu_t *settings_menu;
     render_window_t *window;
     camera_t *camera;
     square_t square;
@@ -288,6 +289,14 @@ int show_game_menu_btns(pirate_quest_t *game,
 void init_game_menu(pirate_quest_t *game);
 void input_game_menu(pirate_quest_t *game);
 void show_game_menu(pirate_quest_t *game);
+
+// gui/interface/settings_menu.c
+void init_settings_menu(pirate_quest_t *game);
+void settings_menu_btns_event(pirate_quest_t *game,
+    const button_builder_t *button, button_t *_);
+int show_settings_menu_btns(pirate_quest_t *game,
+    const button_builder_t *_, button_t *__);
+void update_settings_menu(pirate_quest_t *game);
 
 // gui/button/game_menu_button.c
 void game_menu_resume_event(pirate_quest_t *game,

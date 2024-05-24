@@ -108,7 +108,7 @@ const button_builder_t buttons[] = {
         .callback = &game_menu_resume_event,
         .show_btn = &show_game_menu_btns
     },
-        {
+    {
         .path = "assets/button/basic_btn.png",
         .rect = (sfIntRect){600, 300, 401, 174},
         .text = "Save",
@@ -119,7 +119,7 @@ const button_builder_t buttons[] = {
         .callback = &game_menu_save_event,
         .show_btn = &show_game_menu_btns
     },
-        {
+    {
         .path = "assets/button/basic_btn.png",
         .rect = (sfIntRect){600, 400, 401, 174},
         .text = "Settings",
@@ -130,7 +130,7 @@ const button_builder_t buttons[] = {
         .callback = &game_menu_settings_event,
         .show_btn = &show_game_menu_btns
     },
-        {
+    {
         .path = "assets/button/basic_btn.png",
         .rect = (sfIntRect){600, 500, 401, 174},
         .text = "Exit",
@@ -140,6 +140,72 @@ const button_builder_t buttons[] = {
         .scale = 0.6,
         .callback = &game_menu_exit_event,
         .show_btn = &show_game_menu_btns
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){600, 100, 401, 174},
+        .text = "Up",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.6,
+        .callback = &settings_menu_btns_event,
+        .show_btn = &show_settings_menu_btns
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){600, 200, 401, 174},
+        .text = "Down",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.6,
+        .callback = &settings_menu_btns_event,
+        .show_btn = &show_settings_menu_btns
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){600, 300, 401, 174},
+        .text = "Left",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.6,
+        .callback = &settings_menu_btns_event,
+        .show_btn = &show_settings_menu_btns
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){600, 400, 401, 174},
+        .text = "Right",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.6,
+        .callback = &settings_menu_btns_event,
+        .show_btn = &show_settings_menu_btns
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){600, 500, 401, 174},
+        .text = "Attack",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.6,
+        .callback = &settings_menu_btns_event,
+        .show_btn = &show_settings_menu_btns
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){600, 600, 401, 174},
+        .text = "Resolution",
+        .text_pos = (sfVector2f){25, 15},
+        .text_size = 40,
+        .text_color = (sfColor){255, 255, 255, 255},
+        .scale = 0.6,
+        .callback = &settings_menu_btns_event,
+        .show_btn = &show_settings_menu_btns
     }
 };
 

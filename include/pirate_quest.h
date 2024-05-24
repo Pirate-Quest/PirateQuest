@@ -82,7 +82,8 @@ typedef enum {
     LETTER_ITEM,
     PLANK_ITEM,
     TUTO_SWORD_ITEM,
-    SAIL_ITEM
+    SAIL_ITEM,
+    WHEEL_ITEM
 } inventory_item_t;
 
 typedef struct inventory_item_registry_s {
@@ -97,7 +98,7 @@ typedef struct inventory_item_impl_s {
 } inventory_item_impl_t;
 
     #define SLOT_COUNT 5
-    #define TOTAL_ITEM 7
+    #define TOTAL_ITEM 8
 
 typedef struct inv_bar_s {
     sfTexture *texture_bar;

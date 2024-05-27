@@ -49,6 +49,7 @@ SRCS_FILE	=	src/main.c							\
 				src/object/tile_object.c			\
 				src/player/player_combat.c			\
 				src/player/player_sprite.c			\
+				src/render/interact_box.c			\
 				src/render/render_window.c			\
 				src/render/resolution_updater.c		\
 				src/render/resolutions.c			\

@@ -18,6 +18,8 @@ int on_enemy_tick(pirate_quest_t *game, void *data, int _)
 {
     enemy_t *enemy = (enemy_t *)data;
 
+    if (game->dialogue_service->is_dialogue_playing)
+        return 0;
     if (sfSprite_getColor(enemy->sprite).r == 255)
         sfSprite_setColor(enemy->sprite, sfWhite);
     if (enemy->is_moving == 0) {
@@ -130,13 +132,34 @@ int update_enemy(pirate_quest_t *game, enemy_t *enemy)
     return 0;
 }
 
+static void draw_enemies(pirate_quest_t *game)
+{
+    my_list_node_t *node;
+    my_list_node_t *temp;
+
+    if (my_list_size(game->enemies) < 1)
+        return;
+    node = game->enemies->head;
+    while (node) {
+        temp = node;
+        node = node->next;
+        if ((enemy_t *)temp->data == NULL
+        || ((enemy_t *)temp->data)->sprite == NULL)
+            continue;
+        sfRenderWindow_drawSprite(game->window->window,
+            ((enemy_t *)temp->data)->sprite, NULL);
+    }
+}
+
 void update_enemies(pirate_quest_t *game)
 {
     my_list_node_t *node;
     my_list_node_t *temp;
 
-    if (game->enemies == NULL)
+    if (game->dialogue_service->is_dialogue_playing) {
+        draw_enemies(game);
         return;
+    }
     while (my_list_size(game->enemies) < 1)
         init_enemy(game);
     if (my_list_size(game->enemies) < 1)

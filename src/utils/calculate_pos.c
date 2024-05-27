@@ -61,8 +61,12 @@ int pos_is_in_square(pirate_quest_t *game,
 
 int player_is_in_square(pirate_quest_t *game, int x, int y)
 {
-    return pos_is_in_square(game, x, y,
-        sfSprite_getPosition(game->player->sprite));
+    if (pos_is_in_square(game, x, y,
+        sfSprite_getPosition(game->player->sprite))) {
+        game->have_interaction = 1;
+        return 1;
+    }
+    return 0;
 }
 
 static int player_is_in_square_rect2(pirate_quest_t *game,
@@ -70,8 +74,10 @@ static int player_is_in_square_rect2(pirate_quest_t *game,
 {
     for (int j = pos1.y; j <= pos2.y; j++) {
         if (pos_is_in_square(game, i, j,
-            sfSprite_getPosition(game->player->sprite)))
+            sfSprite_getPosition(game->player->sprite))) {
+            game->have_interaction = 1;
             return 1;
+        }
     }
     return 0;
 }

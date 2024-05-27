@@ -210,6 +210,7 @@ typedef struct dialogue_impl_s dialogue_impl_t;
 typedef struct interlocutor_impl_s interlocutor_impl_t;
 typedef struct dialogue_box_s dialogue_box_t;
 typedef struct dialogue_service_s dialogue_service_t;
+typedef struct interact_box_s interact_box_t;
 
 struct pirate_quest_s {
     game_state_t state;
@@ -240,6 +241,8 @@ struct pirate_quest_s {
     my_list_t *enemies;
     sfTexture *enemy_texture;
     music_tab_t *music;
+    interact_box_t *interact_box;
+    int have_interaction;
 };
 
 typedef struct asset_s {
@@ -499,6 +502,7 @@ void free_interlocutors_registry(pirate_quest_t *game);
 void draw_interlocutor(pirate_quest_t *game, dialogue_interlocutor_t i);
 void init_dialogues_registry(pirate_quest_t *game);
 void free_dialogues_registry(pirate_quest_t *game);
+void update_dialogue_sprites_resolution(pirate_quest_t *game);
 
     #define IS_DIALOGUE_PLAYING(g) ((g)->dialogue_service->is_dialogue_playing)
 
@@ -591,6 +595,7 @@ void update_pos_goal(pirate_quest_t *game, enemy_t *enemy);
 
 // enemy/enemy_utils2.c
 void apply_knockback(pirate_quest_t *game, enemy_t *enemy);
+void update_enemies_sprite_resolution(pirate_quest_t *game);
 
 // inventory
 void init_inv(pirate_quest_t *game);
@@ -599,9 +604,18 @@ int add_item(pirate_quest_t *game, int item);
 int is_item(pirate_quest_t *game, int item);
 int remove_item(pirate_quest_t *game, int item);
 
+// render/resolution_updater.c
 void reload_res(pirate_quest_t *game);
-void update_enemies_sprite_resolution(pirate_quest_t *game);
-void update_button_sprite_resolution(pirate_quest_t *game);
-void update_dialogue_sprites_resolution(pirate_quest_t *game);
+
+struct interact_box_s {
+    sfText *text; // = "Click "E" to interact"
+    sfRectangleShape *text_bg;
+};
+
+// src/render/interact_box.c
+void init_interact_box(pirate_quest_t *game);
+void free_interact_box(pirate_quest_t *game);
+void draw_interact_box(pirate_quest_t *game);
+void update_interact_box_resolution(pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */

@@ -16,6 +16,7 @@ void free_game(pirate_quest_t *game)
     free_dialogues_registry(game);
     free_interlocutors_registry(game);
     free_dialogue_box(game);
+    free_interact_box(game);
     destroy_sounds(game);
     sfTexture_destroy(game->tileset);
     if (game->camera != NULL)
@@ -93,6 +94,12 @@ static void update2(pirate_quest_t *game)
     show_game_menu(game);
     select_music(game);
     update_dialogue_visuals(game);
+    if (game->have_interaction != 0) {
+        draw_interact_box(game);
+        game->have_interaction++;
+        if (game->have_interaction > 85)
+            game->have_interaction = 0;
+    }
 }
 
 static void update(pirate_quest_t *game)
@@ -126,6 +133,7 @@ static int init_game2(pirate_quest_t *game)
     init_splash_screen(game);
     init_inv(game);
     init_musique(game);
+    init_interact_box(game);
     return 0;
 }
 

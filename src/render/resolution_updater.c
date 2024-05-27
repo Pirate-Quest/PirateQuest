@@ -94,6 +94,7 @@ void reload_res(pirate_quest_t *game)
     reload_square_res(game);
     update_player_sprite_resolution(game);
     update_enemies_sprite_resolution(game);
+    update_interact_box_resolution(game);
     sfSprite_setScale(game->main_menu->background, (sfVector2f){
         (float) resolution.width / 1920, (float) resolution.height / 1080});
     sfSprite_setPosition(game->settings_menu->background, (sfVector2f){

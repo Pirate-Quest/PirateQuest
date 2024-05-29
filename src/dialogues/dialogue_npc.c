@@ -10,12 +10,23 @@
 void beach_telep(sfEvent event, pirate_quest_t *game)
 {
     if (player_is_in_square_rect(game, (sfVector2i)
-    {169, 18}, (sfVector2i) {169, 20}) && event.key.code == sfKeyE) {
+    {169, 18}, (sfVector2i) {169, 20}) && event.key.code == sfKeyE &&
+    (is_item(game, KEY_ITEM) == 1)) {
         game->camera->pos_in_tile = (sfVector2f){0, 0};
         game->camera->map_position.x = 86;
         game->camera->map_position.y = 69;
     }
 }
+/*
+    if (player_is_in_square_rect(game, (sfVector2i)
+    {45, 68}, (sfVector2i) {47, 70}) && game->dialogue_service->
+    is_dialogue_playing == 0 && event.key.code == sfKeyE &&
+    !is_item(game, KEY_ITEM) && (is_alive(RAT) == 0))
+    && game->dialogue_service->is_dialogue_playing == 0) {
+            play_dialogue(game, get_dialogue(game, CAVE), 0);
+            add_item(game, KEY_ITEM);
+        }
+*/
 
 void tavern_telep(sfEvent event, pirate_quest_t *game)
 {
@@ -51,7 +62,7 @@ void dialogue_npc(sfEvent event, pirate_quest_t *game)
     if (player_is_in_square_rect(game, (sfVector2i)
     {45, 68}, (sfVector2i) {47, 70}) && game->dialogue_service->
         is_dialogue_playing == 0 && event.key.code == sfKeyE &&
-        game->dialogue_service->is_dialogue_playing == 0)
+        (is_item(game, TUTO_SWORD_ITEM) == 0))
         play_dialogue(game, get_dialogue(game, FIRST_NPC), 0);
     if (player_is_in_square_rect(game, (sfVector2i)
     {152, 135}, (sfVector2i) {153, 136}) && event.key.code == sfKeyE

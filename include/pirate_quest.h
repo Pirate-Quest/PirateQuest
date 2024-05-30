@@ -695,5 +695,6 @@ int show_upgrade_lvl_btn(pirate_quest_t *game,
 // xp/healthbar.c
 void init_healthbar(pirate_quest_t *game, xp_gui_t *xp_gui);
 void draw_healthbar(pirate_quest_t *game);
+void update_healthbar(pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */

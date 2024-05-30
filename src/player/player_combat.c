@@ -54,6 +54,7 @@ void inflict_player_damage(pirate_quest_t *game, float damage)
         game->player->health = 0;
         game->camera->pos_in_tile = (sfVector2f) {0, 0};
         game->camera->map_position = pos;
+        update_healthbar(game);
     }
 }
 

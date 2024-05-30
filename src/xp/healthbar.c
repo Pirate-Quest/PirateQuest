@@ -23,7 +23,7 @@ void init_healthbar(pirate_quest_t *game, xp_gui_t *xp_gui)
         (sfVector2f){550, 10});
 }
 
-static void update_healthbar(pirate_quest_t *game)
+void update_healthbar(pirate_quest_t *game)
 {
     sfRectangleShape_setSize(game->xp_gui->health_bar,
         (sfVector2f){game->player->health * 2, 40});

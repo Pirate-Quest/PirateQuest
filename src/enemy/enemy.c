@@ -34,11 +34,13 @@ int on_enemy_tick(pirate_quest_t *game, void *data, int _)
     return 0;
 }
 
-static void init_enemy_sprite(pirate_quest_t *game, enemy_t *enemy)
+static void init_enemy_sprite(pirate_quest_t *game,
+    enemy_t *enemy, enemy_type_t type)
 {
     enemy->sprite = sfSprite_create();
     sfSprite_setOrigin(enemy->sprite, (sfVector2f){32, 32 + 15});
     sfSprite_setTexture(enemy->sprite, game->enemy_texture, sfTrue);
+    apply_stats_from_type(enemy, type);
     sfSprite_setScale(enemy->sprite, (sfVector2f){2 * game->camera->zoom
         / 2.5, 2 * game->camera->zoom / 2.5});
     sfSprite_setTextureRect(enemy->sprite, enemy->rect);
@@ -58,10 +60,9 @@ enemy_t *init_enemy(pirate_quest_t *game, enemy_type_t type)
     e->is_moving = 0;
     e->attacking = 0;
     e->rect = (sfIntRect){0, 0, 64, 64};
-    init_enemy_sprite(game, e);
+    init_enemy_sprite(game, e, type);
     e->task = register_task(game, &enemy_task, e);
     e->direction = RIGHT;
-    apply_stats_from_type(e, type);
     my_list_add(game->enemies, e);
     return e;
 }

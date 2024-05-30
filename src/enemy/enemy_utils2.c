@@ -18,8 +18,6 @@ void apply_stats_from_type(enemy_t *enemy, enemy_type_t type)
     }
     if (type == RAT) {
         enemy->health = 200;
-        sfSprite_setTexture(enemy->sprite,
-            sfTexture_createFromFile("assets/super_rat.png", NULL), sfTrue);
     }
 }
 
@@ -64,7 +62,7 @@ void fill_enemies(pirate_quest_t *game)
     while (my_list_size(game->enemies) < get_enemy_count_from_phase(game)) {
         if (game->player->data->phase == CAVERN_PHASE
             && game->player->data->have_killed_rat)
-            continue;
+            return;
         init_enemy(game, get_enemy_type_from_phase(game));
     }
 }

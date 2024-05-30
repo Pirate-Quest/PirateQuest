@@ -17,6 +17,7 @@ void beach_telep(sfEvent event, pirate_quest_t *game)
         game->camera->map_position.y = 69;
     }
 }
+
 /*
     if (player_is_in_square_rect(game, (sfVector2i)
     {45, 68}, (sfVector2i) {47, 70}) && game->dialogue_service->
@@ -27,7 +28,6 @@ void beach_telep(sfEvent event, pirate_quest_t *game)
             add_item(game, KEY_ITEM);
         }
 */
-
 void tavern_telep(sfEvent event, pirate_quest_t *game)
 {
     if (player_is_in_square_rect(game, (sfVector2i)

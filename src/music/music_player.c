@@ -38,7 +38,8 @@ void music_player(pirate_quest_t *game, int music)
         sfMusic_stop(game->music->musics[i]);
     }
     game->player->data->phase = music;
-    sfMusic_play(game->music->musics[music]);
+    if (music >= 0 && music < TOTAL_MUSIC)
+        sfMusic_play(game->music->musics[music]);
 }
 
 void select_music(pirate_quest_t *game)

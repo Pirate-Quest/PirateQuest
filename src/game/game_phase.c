@@ -40,7 +40,7 @@ const game_phase_info_t game_phases[] = {
     },
     {
         .phase = BOSS_PHASE,
-        .pos_in_map = {40, 223},
+        .pos_in_map = {40, 208},
         .enemy_count = 1,
         .enemy_type = BOSS
     },

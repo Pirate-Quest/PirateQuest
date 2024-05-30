@@ -38,12 +38,14 @@ void cave_telep(sfEvent event, pirate_quest_t *game)
         game->camera->pos_in_tile = (sfVector2f){0, 0};
         game->camera->map_position.x = 151;
         game->camera->map_position.y = 31;
+        game->player->data->phase = CAVERN_PHASE;
     }
     if (player_is_in_square_rect(game, (sfVector2i)
     {151, 30}, (sfVector2i) {151, 31}) && event.key.code == sfKeyE) {
         game->camera->pos_in_tile = (sfVector2f){0, 0};
         game->camera->map_position.x = 72;
         game->camera->map_position.y = 71;
+        game->player->data->phase = TUTORIAL_PHASE;
     }
 }
 

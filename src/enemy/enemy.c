@@ -24,7 +24,8 @@ int on_enemy_tick(pirate_quest_t *game, void *data, int _)
         sfSprite_setColor(enemy->sprite, sfWhite);
     if (enemy->is_moving == 0) {
         enemy->direction = get_best_attack_direction(game, enemy);
-        move_rect(&enemy->rect, 192, 192, 192 * 6);
+        if (move_rect(&enemy->rect, 192, 192, 192 * 6) == 1)
+            inflict_player_damage(game, 10);
         sfSprite_setTextureRect(enemy->sprite, enemy->rect);
         return 0;
     }
@@ -44,26 +45,25 @@ static void init_enemy_sprite(pirate_quest_t *game, enemy_t *enemy)
     sfSprite_setPosition(enemy->sprite, enemy->pos);
 }
 
-enemy_t *init_enemy(pirate_quest_t *game)
+enemy_t *init_enemy(pirate_quest_t *game, enemy_type_t type)
 {
-    enemy_t *enemy = malloc(sizeof(enemy_t));
+    enemy_t *e = malloc(sizeof(enemy_t));
 
-    enemy->square_pos = get_random_pos(game);
-    enemy->pos_in_tile = (sfVector2f){0, 0};
-    enemy->pos = sfSprite_getPosition(
-        get_square(game, enemy->square_pos)->sprite);
-    enemy->super_pos_goal = (sfVector2i){-1, -1};
-    enemy->pos_goal = (sfVector2i){-1, -1};
-    update_pos_goal(game, enemy);
-    enemy->is_moving = 0;
-    enemy->attacking = 0;
-    enemy->rect = (sfIntRect){0, 0, 64, 64};
-    init_enemy_sprite(game, enemy);
-    enemy->task = register_task(game, &enemy_task, enemy);
-    enemy->direction = RIGHT;
-    enemy->health = 100;
-    my_list_add(game->enemies, enemy);
-    return enemy;
+    e->square_pos = get_random_pos(game);
+    e->pos_in_tile = (sfVector2f){0, 0};
+    e->pos = sfSprite_getPosition(get_square(game, e->square_pos)->sprite);
+    e->super_pos_goal = (sfVector2i){-1, -1};
+    e->pos_goal = (sfVector2i){-1, -1};
+    update_pos_goal(game, e);
+    e->is_moving = 0;
+    e->attacking = 0;
+    e->rect = (sfIntRect){0, 0, 64, 64};
+    init_enemy_sprite(game, e);
+    e->task = register_task(game, &enemy_task, e);
+    e->direction = RIGHT;
+    apply_stats_from_type(e, type);
+    my_list_add(game->enemies, e);
+    return e;
 }
 
 static void update_attack(pirate_quest_t *game, enemy_t *enemy)
@@ -160,8 +160,7 @@ void update_enemies(pirate_quest_t *game)
         draw_enemies(game);
         return;
     }
-    while (my_list_size(game->enemies) < 1)
-        init_enemy(game);
+    fill_enemies(game);
     if (my_list_size(game->enemies) < 1)
         return;
     node = game->enemies->head;

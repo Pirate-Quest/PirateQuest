@@ -16,9 +16,10 @@ const task_builder_t task = {
 
 int on_player_tick(pirate_quest_t *game, void *_, int exec_count)
 {
-    if (game->player->is_attacking && game->player->is_moving) {
+    if (sfSprite_getColor(game->player->sprite).r == 255)
+        sfSprite_setColor(game->player->sprite, sfWhite);
+    if (game->player->is_attacking && game->player->is_moving)
         game->player->is_attacking = 0;
-    }
     if (game->player->is_attacking == 1) {
         game->player->rect.top = (game->player->direction + 4) * 128 + 46 * 64;
         if (move_rect(&game->player->rect, 128, 0, 128 * 6) == 1) {
@@ -37,14 +38,22 @@ int on_player_tick(pirate_quest_t *game, void *_, int exec_count)
     return 0;
 }
 
+static sfVector2f get_pos(pirate_quest_t *game)
+{
+    return (sfVector2f){
+        get_resolution(game).width / 2,
+        (get_resolution(game).height / 2) - 20
+    };
+}
+
 player_t *init_player(pirate_quest_t *game)
 {
     player_t *player = malloc(sizeof(player_t));
 
-    player->pos = (sfVector2f){get_resolution(game).width / 2,
-        (get_resolution(game).height / 2) - 20};
+    player->pos = get_pos(game);
     player->is_moving = 0;
     player->is_attacking = 0;
+    player->health = 100;
     player->rect = (sfIntRect){0, (DOWN * 128) + 46 * 64, 128, 128};
     player->texture = sfTexture_createFromFile("assets/player.png", NULL);
     player->sprite = sfSprite_create();

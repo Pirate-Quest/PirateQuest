@@ -6,7 +6,6 @@
 */
 
 #include "../../include/pirate_quest.h"
-#include <math.h>
 
 void inflict_enemy_damage(pirate_quest_t *game, enemy_t *enemy, float damage)
 {
@@ -17,8 +16,31 @@ void inflict_enemy_damage(pirate_quest_t *game, enemy_t *enemy, float damage)
     sfSprite_setColor(enemy->sprite, sfRed);
     apply_knockback(game, enemy);
     if (enemy->health <= 0) {
+        if (enemy->type == RAT) {
+            game->player->data->have_killed_rat = 1;
+            save_game(game, game->save);
+        }
+        if (enemy->type == BOSS) {
+            game->player->data->have_killed_boss = 1;
+            save_game(game, game->save);
+        }
         unregister_task(game, enemy->task);
         my_list_remove(game->enemies, enemy);
+        add_xp(game, 15);
+        enemy->health = 0;
+    }
+}
+
+void inflict_player_damage(pirate_quest_t *game, float damage)
+{
+    sfVector2i pos = get_pos_from_phase(game->player->data->phase);
+
+    game->player->health -= damage * (game->player->data->resistance_lvl + 1);
+    sfSprite_setColor(game->player->sprite, sfRed);
+    if (game->player->health <= 0) {
+        game->player->health = 0;
+        game->camera->pos_in_tile = (sfVector2f) {0, 0};
+        game->camera->map_position = pos;
     }
 }
 

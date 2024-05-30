@@ -17,7 +17,7 @@ void apply_stats_from_type(enemy_t *enemy, enemy_type_t type)
         enemy->health = 500;
     }
     if (type == RAT) {
-        enemy->health = 200;
+        enemy->health = 70;
     }
 }
 

@@ -16,7 +16,6 @@
     #include "render.h"
     #include "map.h"
     #include "settings.h"
-    #include "gamerules.h"
     #include "item.h"
 
 typedef struct pirate_quest_s pirate_quest_t;
@@ -26,7 +25,8 @@ typedef enum {
     MAIN_MENU,
     SAVE_MENU,
     GAME_MENU,
-    SETTINGS_MENU
+    SETTINGS_MENU,
+    UPGRADE_MENU
 } current_gui_t;
 
 typedef enum {
@@ -69,12 +69,21 @@ typedef enum {
     MARKET_PHASE,
     TAVERN_PHASE,
     DESERT_PHASE,
-    BOSS_PHASE
+    BOSS_PHASE,
+    CAVERN_PHASE
 } game_phase_t;
+
+typedef enum {
+    BASIC,
+    RAT,
+    BOSS
+} enemy_type_t;
 
 typedef struct game_phase_info_s {
     game_phase_t phase;
     sfVector2i pos_in_map;
+    int enemy_count;
+    enemy_type_t enemy_type;
 } game_phase_info_t;
 
 typedef enum {
@@ -133,13 +142,20 @@ void init_musique(pirate_quest_t *game);
 void music_player(pirate_quest_t *game, int music);
 void select_music(pirate_quest_t *game);
 
+typedef struct player_xp_s {
+    unsigned int current_lvl;
+    unsigned int current_xp;
+} player_xp_t;
+
 typedef struct player_data_s {
     game_phase_t phase;
     player_xp_t xp;
     player_inventory_t inventory;
     int resistance_lvl;
     int strength_lvl;
-    int speed_lvl;
+    int upgrade_points;
+    int have_killed_boss;
+    int have_killed_rat;
 } player_data_t;
 
 typedef struct player_s {
@@ -153,6 +169,7 @@ typedef struct player_s {
     direction_t direction;
     task_t *task;
     player_data_t *data;
+    int health;
 } player_t;
 
 typedef struct button_s button_t;
@@ -211,9 +228,12 @@ typedef struct interlocutor_impl_s interlocutor_impl_t;
 typedef struct dialogue_box_s dialogue_box_t;
 typedef struct dialogue_service_s dialogue_service_t;
 typedef struct interact_box_s interact_box_t;
+typedef struct xp_gui_s xp_gui_t;
+typedef struct xp_upgrade_gui_s xp_upgrade_gui_t;
 
 struct pirate_quest_s {
     game_state_t state;
+    char *save;
     current_gui_t current_gui;
     main_menu_t *main_menu;
     main_menu_t *game_menu;
@@ -243,6 +263,8 @@ struct pirate_quest_s {
     music_tab_t *music;
     interact_box_t *interact_box;
     int have_interaction;
+    xp_gui_t *xp_gui;
+    xp_upgrade_gui_t *xp_upgrade_gui;
 };
 
 typedef struct asset_s {
@@ -272,6 +294,7 @@ typedef struct enemy_s enemy_t;
 // player/player_combat.c
 void inflict_enemy_damage(pirate_quest_t *game, enemy_t *enemy, float damage);
 void attack_enemies(pirate_quest_t *game, float damage);
+void inflict_player_damage(pirate_quest_t *game, float damage);
 
 // utils/texture_util.c
 int move_rect(sfIntRect *rect, int offset, int start, int max_value);
@@ -381,10 +404,13 @@ void game_menu_exit_event(pirate_quest_t *game,
     const button_builder_t *button, button_t *_);
 
 // game/game_save.c
+void save_game(pirate_quest_t *game, char *id);
 void load_game(pirate_quest_t *game, char *id);
 
 // game/game_phase.c
 sfVector2i get_pos_from_phase(game_phase_t phase);
+int get_enemy_count_from_phase(pirate_quest_t *game);
+enemy_type_t get_enemy_type_from_phase(pirate_quest_t *game);
 
 // gui/interface/back_button.c
 int show_back_btn(pirate_quest_t *game,
@@ -579,12 +605,14 @@ struct enemy_s {
     direction_t direction;
     task_t *task;
     float health;
+    enemy_type_t type;
 };
 
 // enemy/enemy.c
 int on_enemy_tick(pirate_quest_t *game, void *data, int _);
 void update_enemy_direction(enemy_t *enemy, direction_t direction);
 void update_enemies(pirate_quest_t *game);
+enemy_t *init_enemy(pirate_quest_t *game, enemy_type_t type);
 
 // enemy/enemy_utils.c
 sfVector2i get_random_pos(pirate_quest_t *game);
@@ -594,8 +622,10 @@ void move_enemy(pirate_quest_t *game, enemy_t *enemy);
 void update_pos_goal(pirate_quest_t *game, enemy_t *enemy);
 
 // enemy/enemy_utils2.c
+void apply_stats_from_type(enemy_t *enemy, enemy_type_t type);
 void apply_knockback(pirate_quest_t *game, enemy_t *enemy);
 void update_enemies_sprite_resolution(pirate_quest_t *game);
+void fill_enemies(pirate_quest_t *game);
 
 // inventory
 void init_inv(pirate_quest_t *game);
@@ -617,5 +647,53 @@ void init_interact_box(pirate_quest_t *game);
 void free_interact_box(pirate_quest_t *game);
 void draw_interact_box(pirate_quest_t *game);
 void update_interact_box_resolution(pirate_quest_t *game);
+
+    #define XP_GAP 100
+
+// xp/xp_manager.c
+void add_xp(pirate_quest_t *game, unsigned int amount);
+
+struct xp_gui_s {
+    sfFont *font;
+    sfRectangleShape *xp_bar;
+    sfRectangleShape *xp_bar_bg;
+    sfText *xp_text;
+    sfText *lvl_text;
+    sfRectangleShape *lvl_bg;
+    sfText *upgrade_points;
+    sfRectangleShape *health_bar;
+    sfRectangleShape *health_bar_bg;
+};
+
+// xp/xp_gui.c
+void init_xp_gui(pirate_quest_t *game);
+void update_xp_gui(pirate_quest_t *game);
+void draw_xp_gui(pirate_quest_t *game);
+void upgrade_btn_event(pirate_quest_t *game,
+    const button_builder_t *button_builder, button_t *button);
+int show_upgrade_btn(pirate_quest_t *game,
+    const button_builder_t *button_builder, button_t *button);
+
+struct xp_upgrade_gui_s {
+    sfText *upgrade_points;
+    sfText *resistance_upgrade;
+    sfSprite *resistance_upgrade_sprite;
+    sfText *strength_upgrade;
+    sfSprite *strength_upgrade_sprite;
+};
+
+// xp/xp_upgrade_gui.c
+void init_xp_upgrade_gui(pirate_quest_t *game);
+void draw_xp_upgrade_gui(pirate_quest_t *game);
+void upgrade_btn_lvl_event1(pirate_quest_t *game,
+    const button_builder_t *button_builder, button_t *button);
+void upgrade_btn_lvl_event2(pirate_quest_t *game,
+    const button_builder_t *button_builder, button_t *button);
+int show_upgrade_lvl_btn(pirate_quest_t *game,
+    const button_builder_t *_, button_t *__);
+
+// xp/healthbar.c
+void init_healthbar(pirate_quest_t *game, xp_gui_t *xp_gui);
+void draw_healthbar(pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */

@@ -38,12 +38,14 @@ void cave_telep(sfEvent event, pirate_quest_t *game)
         game->camera->pos_in_tile = (sfVector2f){0, 0};
         game->camera->map_position.x = 151;
         game->camera->map_position.y = 31;
+        game->player->data->phase = CAVERN_PHASE;
     }
     if (player_is_in_square_rect(game, (sfVector2i)
     {151, 30}, (sfVector2i) {151, 31}) && event.key.code == sfKeyE) {
         game->camera->pos_in_tile = (sfVector2f){0, 0};
         game->camera->map_position.x = 72;
         game->camera->map_position.y = 71;
+        game->player->data->phase = TUTORIAL_PHASE;
     }
 }
 
@@ -52,8 +54,11 @@ void dialogue_npc_four(sfEvent event, pirate_quest_t *game)
     if (player_is_in_square_rect(game, (sfVector2i)
     {32, 173}, (sfVector2i) {41, 179}) && event.key.code == sfKeyE &&
     is_item(game, PLANK_ITEM) && is_item(game, SAIL_ITEM)
-    && is_item(game, WHEEL_ITEM))
+    && is_item(game, WHEEL_ITEM)) {
         play_dialogue(game, get_dialogue(game, END_GAME), 0);
+        game->current_gui = MAIN_MENU;
+        game->state = GAME_STATE_MENU;
+    }
     if (player_is_in_square_rect(game, (sfVector2i)
     {153, 20}, (sfVector2i) {156, 21}) && game->dialogue_service->
     is_dialogue_playing == 0 && event.key.code == sfKeyE &&

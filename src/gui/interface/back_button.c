@@ -11,7 +11,8 @@ int show_back_btn(pirate_quest_t *game,
     const button_builder_t *_, button_t *__)
 {
     return (game->current_gui == SAVE_MENU ||
-        game->current_gui == SETTINGS_MENU);
+        game->current_gui == SETTINGS_MENU ||
+        game->current_gui == UPGRADE_MENU);
 }
 
 void back_btn_event(pirate_quest_t *game,
@@ -23,6 +24,8 @@ void back_btn_event(pirate_quest_t *game,
         game->current_gui = MAIN_MENU;
         return;
     }
+    if (game->current_gui == UPGRADE_MENU)
+        game->current_gui = IN_GAME;
     if (game->current_gui == SETTINGS_MENU)
         game->current_gui = GAME_MENU;
     if (game->current_gui == SAVE_MENU)

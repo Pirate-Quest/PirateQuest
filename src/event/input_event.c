@@ -43,6 +43,7 @@ static void go_down(pirate_quest_t *game, float delta_time)
         get_resolution(game).height / 2};
 
     update_direction(game->player, DOWN);
+    game->player->is_moving = 1;
     if (is_colid_block(game, (sfVector2f){pos.x, pos.y + (offset + 4)},
         (sfVector2i){0, 0}) != -1) {
         return;
@@ -61,6 +62,7 @@ static void go_up(pirate_quest_t *game, float delta_time)
         get_resolution(game).height / 2};
 
     update_direction(game->player, UP);
+    game->player->is_moving = 1;
     if (is_colid_block(game, (sfVector2f){pos.x, (pos.y - 4)},
         (sfVector2i){0, 0}) != -1)
         return;
@@ -78,6 +80,7 @@ static void go_right(pirate_quest_t *game, float delta_time)
         get_resolution(game).height / 2};
 
     update_direction(game->player, RIGHT);
+    game->player->is_moving = 1;
     if (is_colid_block(game, (sfVector2f){pos.x - (offset - 4), pos.y},
         (sfVector2i){0, 0}) != -1)
         return;
@@ -95,6 +98,7 @@ static void go_left(pirate_quest_t *game, float delta_time)
         get_resolution(game).height / 2};
 
     update_direction(game->player, LEFT);
+    game->player->is_moving = 1;
     if (is_colid_block(game, (sfVector2f){pos.x + (offset - 4), pos.y},
         (sfVector2i){0, 0}) != -1)
         return;
@@ -107,9 +111,9 @@ static void go_left(pirate_quest_t *game, float delta_time)
 
 void key_pressed_event(sfEvent event, pirate_quest_t *game)
 {
-    if (game->settings_menu->listen_key == sfTrue)
-        return;
-    if (game->dialogue_service->is_dialogue_playing)
+    if (game->settings_menu->listen_key == sfTrue
+        || game->dialogue_service->is_dialogue_playing
+        || game->player->is_attacking)
         return;
     if (event.key.code == game->settings->up
         || event.key.code == game->settings->down
@@ -124,12 +128,13 @@ void key_released_event(sfEvent event, pirate_quest_t *game)
         change_setting(game, event.key.code);
         return;
     }
-    if (game->dialogue_service->is_dialogue_playing)
+    if (game->dialogue_service->is_dialogue_playing
+        || game->player->is_attacking)
         return;
     if (event.key.code == sfKeySpace) {
         game->player->is_moving = 0;
         game->player->is_attacking = 1;
-        attack_enemies(game, 10);
+        attack_enemies(game, 25);
         return;
     }
     if (is_other_pressed(game))
@@ -162,9 +167,9 @@ void update_key_pressed(pirate_quest_t *game)
     float delta_time = 5.6 * game->camera->zoom / 2.5;
     float delta_time_d = 8 * game->camera->zoom / 2.5;
 
-    if (game->settings_menu->listen_key == sfTrue)
-        return;
-    if (game->dialogue_service->is_dialogue_playing)
+    if (game->settings_menu->listen_key == sfTrue
+    || game->dialogue_service->is_dialogue_playing
+    || game->player->is_attacking)
         return;
     if (sfKeyboard_isKeyPressed(game->settings->down))
         go_down(game, is_corner(game) ? delta_time : delta_time_d);

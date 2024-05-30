@@ -1,5 +1,5 @@
 [FRANCK]=>3
-Bonjour très chère aventurier,
+Bonjour très cher aventurier,
 
 [FRANCK]=>4
 Comment allez vous en cette belle après-midi ?
@@ -23,7 +23,7 @@ mais je suis sûr qu'un aventurier tel que vous
 , pourra s'en occuper sans problème.
 
 [ME]=>5
-Je viens de vous dire que... Bon laissez     tomber
+Je viens de vous dire que... Bon laissez tomber
 
 [ME]=>3
 je n’ai même pas d’arme pour me battre,
@@ -33,6 +33,9 @@ je les ai perdus dans la tempête
 
 [FRANCK]=>5
 Pas de problème, il y a un sabre un peu plus au sud d’ici
+
+[FRANCK]=>5
+Suivez les chemins en pierre ils mènent a vos objectifs
 
 [FRANCK]=>4
 il vous suffit d'appuyer sur 'E'

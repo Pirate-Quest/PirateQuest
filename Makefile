@@ -22,10 +22,12 @@ OBJS			=	$(addprefix $(BUILD_DIR)/, $(SRCS_FILE:.c=.o))
 
 SRCS_FILE	=	src/main.c							\
 				src/algorithm/path_finding.c		\
+				src/dialogues/dialogue_npc.c		\
 				src/dialogues/dialogues_parser.c	\
 				src/dialogues/dialogues_registry.c	\
 				src/dialogues/dialogue_player.c		\
 				src/dialogues/dialogues_service.c	\
+				src/dialogues/telep.c				\
 				src/enemy/enemy.c					\
 				src/enemy/enemy_utils.c				\
 				src/enemy/enemy_utils2.c			\
@@ -42,10 +44,12 @@ SRCS_FILE	=	src/main.c							\
 				src/gui/interface/game_menu.c		\
 				src/gui/interface/save_menu.c		\
 				src/gui/interface/settings_menu.c	\
+				src/item/inventory_item.c			\
 				src/map/collision.c					\
 				src/map/map_layers.c				\
 				src/map/rect_from_id.c				\
 				src/map/tiles_manager.c				\
+				src/music/music_player.c			\
 				src/object/tile_object.c			\
 				src/player/player_combat.c			\
 				src/player/player_sprite.c			\
@@ -62,10 +66,10 @@ SRCS_FILE	=	src/main.c							\
 				src/utils/square_tile_from_pos.c	\
 				src/utils/csfml_str.c				\
 				src/utils/texture_util.c			\
-				src/dialogues/dialogue_npc.c		\
-				src/item/inventory_item.c			\
-				src/dialogues/telep.c				\
-				src/music/music_player.c			\
+				src/xp/healthbar.c					\
+				src/xp/xp_manager.c					\
+				src/xp/xp_gui.c						\
+				src/xp/xp_upgrade_gui.c				\
 
 all:	$(BUILD_DIR) $(TARGET)
 

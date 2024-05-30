@@ -27,6 +27,7 @@ void free_game(pirate_quest_t *game)
     }
     if (game->settings != NULL)
         free(game->settings);
+    free(game->save);
 }
 
 static task_daemon_t *new_daemon_task(void)
@@ -85,6 +86,8 @@ void draw_splash_screen(pirate_quest_t *game)
 
 static void update2(pirate_quest_t *game)
 {
+    if (game->state == GAME_STATE_PLAYING)
+        update_enemies(game);
     for (int i = 0; i < LAYER_COUNT; i++)
         for (int y = 0; y < RENDER_HEIGHT; y++)
             draw_front_tiles_object(game, i, y);
@@ -100,6 +103,7 @@ static void update2(pirate_quest_t *game)
         if (game->have_interaction > 85)
             game->have_interaction = 0;
     }
+    draw_xp_upgrade_gui(game);
 }
 
 static void update(pirate_quest_t *game)
@@ -116,10 +120,10 @@ static void update(pirate_quest_t *game)
         for (int y = 0; y < RENDER_HEIGHT; y++)
             draw_back_tiles_object(game, i, y);
     update_player(game);
-    if (game->state == GAME_STATE_PLAYING)
-        update_enemies(game);
     update2(game);
     show_buttons(game);
+    update_xp_gui(game);
+    draw_xp_gui(game);
     sfRenderWindow_display(game->window->window);
     update_tasks(game);
     update_key_pressed(game);
@@ -134,6 +138,9 @@ static int init_game2(pirate_quest_t *game)
     init_inv(game);
     init_musique(game);
     init_interact_box(game);
+    init_xp_gui(game);
+    update_xp_gui(game);
+    init_xp_upgrade_gui(game);
     return 0;
 }
 

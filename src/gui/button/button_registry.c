@@ -143,7 +143,7 @@ const button_builder_t buttons[] = {
     },
     {
         .path = "assets/button/basic_btn.png",
-        .rect = (sfIntRect){600, 100, 401, 174},
+        .rect = (sfIntRect){600, 200, 401, 174},
         .text = "Up",
         .text_pos = (sfVector2f){25, 15},
         .text_size = 30,
@@ -154,7 +154,7 @@ const button_builder_t buttons[] = {
     },
     {
         .path = "assets/button/basic_btn.png",
-        .rect = (sfIntRect){600, 200, 401, 174},
+        .rect = (sfIntRect){600, 275, 401, 174},
         .text = "Down",
         .text_pos = (sfVector2f){25, 15},
         .text_size = 30,
@@ -165,7 +165,7 @@ const button_builder_t buttons[] = {
     },
     {
         .path = "assets/button/basic_btn.png",
-        .rect = (sfIntRect){600, 300, 401, 174},
+        .rect = (sfIntRect){600, 350, 401, 174},
         .text = "Left",
         .text_pos = (sfVector2f){25, 15},
         .text_size = 30,
@@ -176,7 +176,7 @@ const button_builder_t buttons[] = {
     },
     {
         .path = "assets/button/basic_btn.png",
-        .rect = (sfIntRect){600, 400, 401, 174},
+        .rect = (sfIntRect){600, 425, 401, 174},
         .text = "Right",
         .text_pos = (sfVector2f){25, 15},
         .text_size = 30,
@@ -189,8 +189,8 @@ const button_builder_t buttons[] = {
         .path = "assets/button/basic_btn.png",
         .rect = (sfIntRect){600, 500, 401, 174},
         .text = "Attack",
-        .text_pos = (sfVector2f){25, 15},
-        .text_size = 30,
+        .text_pos = (sfVector2f){15, 15},
+        .text_size = 27,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.4,
         .callback = &settings_menu_btns_event,
@@ -198,14 +198,47 @@ const button_builder_t buttons[] = {
     },
     {
         .path = "assets/button/basic_btn.png",
-        .rect = (sfIntRect){600, 600, 401, 174},
+        .rect = (sfIntRect){600, 575, 401, 174},
         .text = "Resolution",
-        .text_pos = (sfVector2f){25, 15},
-        .text_size = 30,
+        .text_pos = (sfVector2f){15, 18},
+        .text_size = 20,
         .text_color = (sfColor){255, 255, 255, 255},
         .scale = 0.4,
         .callback = &settings_menu_btns_event,
         .show_btn = &show_settings_menu_btns
+    },
+    {
+        .path = "assets/button/basic_btn.png",
+        .rect = (sfIntRect){20, 60, 401, 174},
+        .text = "",
+        .text_pos = (sfVector2f){0, 0},
+        .text_size = 25,
+        .text_color = (sfColor){0, 0, 0, 0},
+        .scale = 0.4,
+        .callback = &upgrade_btn_event,
+        .show_btn = &show_upgrade_btn
+    },
+    {
+        .path = "assets/button/little_btn.png",
+        .rect = (sfIntRect){810, 330, 360, 360},
+        .text = "",
+        .text_pos = (sfVector2f){0, 0},
+        .text_size = 25,
+        .text_color = (sfColor){0, 0, 0, 0},
+        .scale = 0.2,
+        .callback = &upgrade_btn_lvl_event1,
+        .show_btn = &show_upgrade_lvl_btn
+    },
+    {
+        .path = "assets/button/little_btn.png",
+        .rect = (sfIntRect){810, 480, 360, 360},
+        .text = "",
+        .text_pos = (sfVector2f){0, 0},
+        .text_size = 25,
+        .text_color = (sfColor){0, 0, 0, 0},
+        .scale = 0.2,
+        .callback = &upgrade_btn_lvl_event2,
+        .show_btn = &show_upgrade_lvl_btn
     }
 };
 

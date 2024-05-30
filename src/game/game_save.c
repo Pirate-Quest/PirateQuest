@@ -18,7 +18,9 @@ void init_as_default(pirate_quest_t *game)
         {NONE_ITEM, NONE_ITEM, NONE_ITEM, NONE_ITEM, NONE_ITEM};
     game->player->data->resistance_lvl = 0;
     game->player->data->strength_lvl = 0;
-    game->player->data->speed_lvl = 0;
+    game->player->data->upgrade_points = 0;
+    game->player->data->have_killed_boss = 0;
+    game->player->data->have_killed_rat = 0;
 }
 
 void save_game(pirate_quest_t *game, char *id)
@@ -33,7 +35,9 @@ void save_game(pirate_quest_t *game, char *id)
     fprintf(file, "current_xp=%d\n", player_data->xp.current_xp);
     fprintf(file, "resistance_lvl=%d\n", player_data->resistance_lvl);
     fprintf(file, "strength_lvl=%d\n", player_data->strength_lvl);
-    fprintf(file, "speed_lvl=%d\n", player_data->speed_lvl);
+    fprintf(file, "upgrade_points=%d\n", player_data->upgrade_points);
+    fprintf(file, "have_killed_boss=%d\n", player_data->have_killed_boss);
+    fprintf(file, "have_killed_rat=%d\n", player_data->have_killed_rat);
     for (int i = 0; i < SLOT_COUNT; i++)
         fprintf(file, "slot%d=%d\n", i, game->inv_bar->slots_id[i]);
     fclose(file);
@@ -77,21 +81,13 @@ static void read_params(char *line, player_data_t **player_data,
         (*player_data)->resistance_lvl = my_getnbr(line + 15);
     if (my_strncmp(line, "strength_lvl=", 13) == 0)
         (*player_data)->strength_lvl = my_getnbr(line + 13);
-    if (my_strncmp(line, "speed_lvl=", 10) == 0)
-        (*player_data)->speed_lvl = my_getnbr(line + 10);
+    if (my_strncmp(line, "upgrade_points=", 15) == 0)
+        (*player_data)->upgrade_points = my_getnbr(line + 15);
+    if (my_strncmp(line, "have_killed_boss=", 17) == 0)
+        (*player_data)->upgrade_points = my_getnbr(line + 17);
+    if (my_strncmp(line, "have_killed_rat=", 16) == 0)
+        (*player_data)->upgrade_points = my_getnbr(line + 16);
     read_slot_params(line, game);
-}
-
-void print_player_data(player_data_t *player_data)
-{
-    printf("phase=%d\n", player_data->phase);
-    printf("current_lvl=%d\n", player_data->xp.current_lvl);
-    printf("current_xp=%d\n", player_data->xp.current_xp);
-    printf("resistance_lvl=%d\n", player_data->resistance_lvl);
-    printf("strength_lvl=%d\n", player_data->strength_lvl);
-    printf("speed_lvl=%d\n", player_data->speed_lvl);
-    for (int i = 0; i < SLOT_COUNT; i++)
-        printf("slot%d=%d\n", i, player_data->inventory.slots[i]);
 }
 
 void load_game(pirate_quest_t *game, char *id)
@@ -102,6 +98,7 @@ void load_game(pirate_quest_t *game, char *id)
     size_t len = 0;
     ssize_t read;
 
+    game->save = my_strdup(id);
     init_as_default(game);
     if (!file) {
         save_game(game, id);

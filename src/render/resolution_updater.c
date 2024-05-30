@@ -84,10 +84,10 @@ static void update_window(pirate_quest_t *game)
 
 void reload_res(pirate_quest_t *game)
 {
-    resolution_t resolution = get_resolution(game);
-    const float scale = 0.4;
+    resolution_t resolution;
 
     update_window(game);
+    resolution = get_resolution(game);
     game->camera->pos_in_tile = (sfVector2f){0, 0};
     sfRenderWindow_setFramerateLimit(game->window->window, 120);
     reload_inv_sprites_resolution(game);
@@ -97,10 +97,6 @@ void reload_res(pirate_quest_t *game)
     update_interact_box_resolution(game);
     sfSprite_setScale(game->main_menu->background, (sfVector2f){
         (float) resolution.width / 1920, (float) resolution.height / 1080});
-    sfSprite_setPosition(game->settings_menu->background, (sfVector2f){
-        (resolution.width / 2) - 960 * scale / 2,
-        (resolution.height / 2) - 540 * scale / 2});
     reload_sprites_resolution(game);
     update_dialogue_sprites_resolution(game);
-    game->current_gui = IN_GAME;
 }

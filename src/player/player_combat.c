@@ -7,6 +7,19 @@
 
 #include "../../include/pirate_quest.h"
 
+static void kill_bos(pirate_quest_t *game)
+{
+    game->player->data->have_killed_boss = 1;
+    save_game(game, game->save);
+    add_item(game, WHEEL_ITEM);
+}
+
+static void kill_rat(pirate_quest_t *game)
+{
+    game->player->data->have_killed_rat = 1;
+    save_game(game, game->save);
+}
+
 void inflict_enemy_damage(pirate_quest_t *game, enemy_t *enemy, float damage)
 {
     game->player->is_attacking = 1;
@@ -17,12 +30,12 @@ void inflict_enemy_damage(pirate_quest_t *game, enemy_t *enemy, float damage)
     apply_knockback(game, enemy);
     if (enemy->health <= 0) {
         if (enemy->type == RAT) {
-            game->player->data->have_killed_rat = 1;
-            save_game(game, game->save);
+            kill_rat(game);
+            return;
         }
         if (enemy->type == BOSS) {
-            game->player->data->have_killed_boss = 1;
-            save_game(game, game->save);
+            kill_bos(game);
+            return;
         }
         unregister_task(game, enemy->task);
         my_list_remove(game->enemies, enemy);
@@ -35,7 +48,7 @@ void inflict_player_damage(pirate_quest_t *game, float damage)
 {
     sfVector2i pos = get_pos_from_phase(game->player->data->phase);
 
-    game->player->health -= damage * (game->player->data->resistance_lvl + 1);
+    game->player->health -= damage / (game->player->data->resistance_lvl + 1);
     sfSprite_setColor(game->player->sprite, sfRed);
     if (game->player->health <= 0) {
         game->player->health = 0;

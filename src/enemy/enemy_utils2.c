@@ -63,6 +63,9 @@ void fill_enemies(pirate_quest_t *game)
         if (game->player->data->phase == CAVERN_PHASE
             && game->player->data->have_killed_rat)
             return;
+        if (game->player->data->phase == BOSS_PHASE
+            && game->player->data->have_killed_boss)
+            return;
         init_enemy(game, get_enemy_type_from_phase(game));
     }
 }

@@ -66,6 +66,7 @@ SRCS_FILE	=	src/main.c							\
 				src/utils/square_tile_from_pos.c	\
 				src/utils/csfml_str.c				\
 				src/utils/texture_util.c			\
+				src/xp/healthbar.c					\
 				src/xp/xp_manager.c					\
 				src/xp/xp_gui.c						\
 				src/xp/xp_upgrade_gui.c				\

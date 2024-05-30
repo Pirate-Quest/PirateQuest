@@ -38,6 +38,7 @@ void init_xp_gui(pirate_quest_t *game)
 {
     xp_gui_t *xp_gui = malloc(sizeof(xp_gui_t));
 
+    init_healthbar(game, xp_gui);
     xp_gui->font = sfFont_createFromFile("assets/font/Roboto.ttf");
     xp_gui->xp_text = sfText_create();
     init_xp_bar(xp_gui);
@@ -93,6 +94,7 @@ void draw_xp_gui(pirate_quest_t *game)
 
     if (game->state != GAME_STATE_PLAYING)
         return;
+    draw_healthbar(game);
     sfRenderWindow_drawRectangleShape(window, xp_gui->xp_bar_bg, NULL);
     sfRenderWindow_drawRectangleShape(window, xp_gui->xp_bar, NULL);
     sfRenderWindow_drawRectangleShape(window, xp_gui->lvl_bg, NULL);

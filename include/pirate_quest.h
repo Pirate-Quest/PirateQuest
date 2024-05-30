@@ -661,6 +661,8 @@ struct xp_gui_s {
     sfText *lvl_text;
     sfRectangleShape *lvl_bg;
     sfText *upgrade_points;
+    sfRectangleShape *health_bar;
+    sfRectangleShape *health_bar_bg;
 };
 
 // xp/xp_gui.c
@@ -689,5 +691,9 @@ void upgrade_btn_lvl_event2(pirate_quest_t *game,
     const button_builder_t *button_builder, button_t *button);
 int show_upgrade_lvl_btn(pirate_quest_t *game,
     const button_builder_t *_, button_t *__);
+
+// xp/healthbar.c
+void init_healthbar(pirate_quest_t *game, xp_gui_t *xp_gui);
+void draw_healthbar(pirate_quest_t *game);
 
 #endif /* PIRATE_QUEST_H */
